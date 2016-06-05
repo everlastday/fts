@@ -96,5 +96,36 @@
         });
 
 
+        $('.photo-gallery .img-action a').on('click', function (e) {
+            e.preventDefault();
+
+
+            var link  = $(this);
+            var delete_link = $(this).attr("href");
+            var id_value = link.data('id');
+
+
+            $.ajax({
+                url: delete_link,
+                type: 'POST',
+                dataType: 'json',
+                data: {id: id_value},
+                success: function (data) {
+                    if(data.result == 1) {
+                        link.parents('li').fadeOut();
+                    }
+
+                }
+            });
+
+        });
+
+
+        // Fancybox activation
+       $(".fancybox").fancybox();
+
+
+
+
 
 });

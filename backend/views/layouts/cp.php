@@ -146,7 +146,7 @@ FtsAsset::register($this);
                  'gallery' => [
                      'title' => 'Галерея',
                      'items' => [
-                         'cp/photo-gallery' => 'Фотографії галереї',
+                         'gallery' => 'Фотографії галереї',
                          'cp/photo-groups' => 'Фотографії по групам',
                      ]
                  ],
