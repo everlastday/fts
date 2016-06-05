@@ -8,13 +8,13 @@ $this->title = 'Головна FTS';
     <div class="fts-slider section full-width">
         <div class="slider">
             <ul class="slides">
-                <li class="slide">
+                  <li class="slide">
                     <div class="slide-caption"></div>
                     <a href="#"><img src="uploads/slides/slide1.jpg" alt=""></a>
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide6.jpg" alt="">
+                    <img src="uploads/slides/slide2.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
@@ -26,15 +26,15 @@ $this->title = 'Головна FTS';
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide9.jpg" alt="">
+                    <img src="uploads/slides/slide5.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide18.jpg" alt="">
+                    <img src="uploads/slides/slide6.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide21.jpg" alt="">
+                    <img src="uploads/slides/slide7.jpg" alt="">
                 </li>
             </ul>
         </div>

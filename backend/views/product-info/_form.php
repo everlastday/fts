@@ -22,6 +22,8 @@ EditorAsset::register($this);
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class' => 'xlarge'])->label('Назва')?>
 
+    <?= $form->field($model, 'colors_url')->textInput(['maxlength' => true, 'class' => 'xlarge'])->label('Ссилка на взірці кольорів') ?>
+
     <?//= $form->field($model, 'image')->textInput(['maxlength' => true, 'class' => 'xlarge'])?>
 
     <?= $form->field($model, 'file')->fileInput()->label('Зображення')  ?>

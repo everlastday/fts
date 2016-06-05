@@ -39,7 +39,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'product/<id:\w+>'=>'product/index/',
+                'product/<id:[\w-]+>'=>'product/index/',
                 'page/<id:[\w-]+>'=>'page/index/',
             ],
         ],

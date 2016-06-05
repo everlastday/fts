@@ -39,7 +39,7 @@ class ProductInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['params', 'info'], 'string'],
+            [['params', 'info', 'colors_url'], 'string'],
             [['category_id'], 'integer'],
             [['url', 'name', 'product_image'], 'string', 'max' => 255],
             [['url'], 'unique'],
@@ -60,6 +60,7 @@ class ProductInfo extends \yii\db\ActiveRecord
             'params' => 'Params',
             'info' => 'Info',
             'category_id' => 'Category ID',
+            'colors_url' => 'Colors Url',
         ];
     }
 
@@ -79,7 +80,14 @@ class ProductInfo extends \yii\db\ActiveRecord
             if(!empty($this->file)) {
 
                 $path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/product_info_images/';
-                $filename =  date('ymdHis'). '_' . $this->file->baseName . '.' . $this->file->extension;
+
+                if(isset($this->url) and ! empty($this->url)) {
+                    $filename =  date('ymdHis'). '_' . $this->url . '.' . $this->file->extension;
+                } else {
+                    $filename =  date('ymdHis'). '_' . $this->file->baseName . '.' . $this->file->extension;
+                }
+
+
 
                 $this->file->saveAs($path_to_frontend . $filename);
 
@@ -103,6 +111,12 @@ class ProductInfo extends \yii\db\ActiveRecord
 
                 $width = 65;
                 $height = round($width/$ratio);
+
+                $width_original = 500;
+                $height_original = round($width_original/$ratio);
+
+                Image::thumbnail($path_to_frontend . $filename, $width_original, $height_original)
+                     ->save($path_to_frontend  . $filename);
 
                 Image::thumbnail($path_to_frontend . $filename, $width, $height)
                              ->save($path_to_frontend .  'small_' . $filename);

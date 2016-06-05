@@ -25,7 +25,7 @@ $this->title = 'Штукатурка акрилова';
 
             </div>
             <div>
-                <a class="btn-grey" href="/page/gallery-marmure">Взірці кольорів</a>
+                <a class="btn-grey" href="/page/gallery-akryll">Взірці кольорів</a>
             </div>
 
         </div>

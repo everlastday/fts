@@ -6,33 +6,30 @@ $this->title = 'Головна FTS';
     <div class="fts-slider section full-width">
         <div class="slider">
             <ul class="slides">
+               <li class="slide">
+                    <div class="slide-caption"></div>
+                    <a href="#"><img src="uploads/slides/slider1.jpg" alt=""></a>
+                </li>
+                
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <a href="#"><img src="uploads/slides/slide1.jpg" alt=""></a>
+                    <img src="uploads/slides/slider3.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide6.jpg" alt="">
+                    <img src="uploads/slides/slider4.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide3.jpg" alt="">
+                    <img src="uploads/slides/slider5.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide4.jpg" alt="">
+                    <img src="uploads/slides/slider6.jpg" alt="">
                 </li>
                 <li class="slide">
                     <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide9.jpg" alt="">
-                </li>
-                <li class="slide">
-                    <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide18.jpg" alt="">
-                </li>
-                <li class="slide">
-                    <div class="slide-caption"></div>
-                    <img src="uploads/slides/slide21.jpg" alt="">
+                    <img src="uploads/slides/slider7.jpg" alt="">
                 </li>
             </ul>
         </div>

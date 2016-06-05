@@ -66,9 +66,9 @@ $this->params['breadcrumbs'] = [
                 <td class="right-border"><?=$val['category_name']?></td>
                 <td>
                 <?php if($val['status'] == 1): ?>
-                    <img class="status" src="<?= Url::to('images/status-in-stock.png');?>"/>
+                    <img class="status" src="<?= Yii::$app->request->getBaseUrl() . '/images/status-in-stock.png'?>" />
                 <?php else: ?>
-                    <img class="status" src="<?= Url::to('images/status-out.png');?>"/>
+                    <img class="status" src="<?= Yii::$app->request->getBaseUrl() . '/images/status-out.png'?>"/>
                 <? endif; ?>
                 </td>
             </tr>

@@ -40,9 +40,9 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input class="action_box" value="<?=$val['id']?>" type="checkbox"></td>
             <td class="right-border"><?=$val['id']?></td>
             <td class="right-border"><?=(isset($val['product_image']) and !empty($val['product_image'])) ?  '<img class="small_product_image" src="'. $image_url . 'small_' . $val['product_image'] . '" />' : ''?>
-            <td class="right-border"><a target="_blank" class="product_link_to_site" href="<?=str_replace('admin.', '', Yii::$app->request->hostInfo) . '/product/' . $val['url']  ?>"><?=$val['name']?></a></td>
-            <td><img src="<?=Url::to('images/status-in-stock.png')?>" /></td>
-            <td><img src="<?=Url::to('images/status-in-stock.png')?>" /></td>
+            <td class="right-border"><a target="_blank" class="product_link_to_site" href="<?= Yii::$app->request->hostInfo . '/product/' . $val['url']  ?>"><?=$val['name']?></a></td>
+            <td><img src="<?= Yii::$app->request->getBaseUrl() . '/images/status-in-stock.png'?>" /></td>
+            <td><img src="<?= Yii::$app->request->getBaseUrl() . '/images/status-in-stock.png'?>" /></td>
             <td><?=$val['category']['category_name']?></td>
         </tr>
         <?php endforeach ?>

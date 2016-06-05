@@ -35,36 +35,39 @@ FtsAsset::register($this);
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <div id="wrapper">
-    <div class="top-menu">
-        <div class="container">
-            <div class="fts-search">
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Пошук">
-                    </div>
-                    <button type="submit" class="btn btn-search">
-                        <span class="fts-search-ico">&nbsp;</span>
-                    </button>
-                </form>
-            </div>
-            <ul class="top-buttons">
-                <li><a href="#">Вхід</a></li>
-                <li><a class="cart-button" href="#"><span>28</span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="toggle-top-button">
-        <span class="down"></span>
-    </div>
+    <!--<div class="top-menu">-->
+    <!--    <div class="container">-->
+    <!--        <div class="fts-search">-->
+    <!--            <form class="navbar-form navbar-left" role="search">-->
+    <!--                <div class="form-group">-->
+    <!--                    <input type="text" class="form-control" placeholder="Пошук">-->
+    <!--                </div>-->
+    <!--                <button type="submit" class="btn btn-search">-->
+    <!--                    <span class="fts-search-ico">&nbsp;</span>-->
+    <!--                </button>-->
+    <!--            </form>-->
+    <!--        </div>-->
+    <!--        <ul class="top-buttons">-->
+    <!--            <li><a href="#">Вхід</a></li>-->
+    <!--            <li><a class="cart-button" href="#"><span>28</span></a></li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <!--</div>-->
+    <!--<div class="toggle-top-button">-->
+    <!--    <span class="down"></span>-->
+    <!--</div>-->
 
     <header class="clearfix">
-        <div class="fts-logo">
-            <a href="<?=Yii::$app->request->hostInfo?>" class="fts-logo-img">
-                <img src="/images/fts-logo.png" alt="" title="">
-            </a>
+        <div class="container">
+            <div class="fts-logo">
+                <a href="<?=Yii::$app->request->hostInfo?>" class="fts-logo-img">
+                    <img src="/images/fts-logo.png" alt="" title="">
+                </a>
 
+            </div>
+            <img class="slogan" src="/images/main-slogan.png" alt="">
         </div>
-        <img class="slogan" src="/images/main-slogan.png" alt="">
+
 
     </header>
 
@@ -76,14 +79,14 @@ FtsAsset::register($this);
                         <div class="fts-submenu-container">
                             <ul>
                                 <li><a href="">STRUCTURE LINE</a></li>
-                                <li><a href="/page/product-card-akryl">Акрилова</a></li>
-                                <li><a href="/page/product-card-silicone">Силіконова</a></li>
+                                <li><a href="/product/product-card-akryl">Акрилова</a></li>
+                                <li><a href="/product/product-card-silicone">Силіконова</a></li>
 
                             </ul>
                             <ul>
                                 <li><a href="#">STONE LINE</a></li>
-                                <li><a href="/page/product-card-marmure">Мозаїчна DECOR</a></li>
-                                <li><a href="/page/product-card-decor">Мозаїчна MARMURE</a></li>
+                                <li><a href="/product/product-card-decor">Мозаїчна DECOR</a></li>
+                                <li><a href="/product/product-card-marmure">Мозаїчна MARMURE</a></li>
 
                             </ul>
                         </div>
@@ -96,13 +99,13 @@ FtsAsset::register($this);
                         <div class="fts-submenu-container">
                             <ul>
                                 <li><a href="">QUARTZ LINE</a></li>
-                                <li><a href="/page/product-card-quartzline-acryl">Акриловий</a></li>
-                                <li><a href="/page/product-card-quartzline-silicone">Силіконовий</a></li>
+                                <li><a href="/product/product-card-quartzline-acryl">Акриловий</a></li>
+                                <li><a href="/product/product-card-quartzline-silicone">Силіконовий</a></li>
 
                             </ul>
                             <ul>
                                 <li><a href="">Грунт</a></li>
-                                <li><a href="/page/product-card-grunt-glybokyi">Глибокого проникнення</a></li>
+                                <li><a href="/product/product-card-grunt-glybokyi">Глибокого проникнення</a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,21 +116,33 @@ FtsAsset::register($this);
                         <div class="fts-submenu-container">
                             <ul>
                                 <li><a href="">FASADE LUXE</a></li>
-                                <li><a href="/page/product-card-facade-acryl">Акрилова</a></li>
-                                <li><a href="/page/product-card-facade-silicone">Силіконова</a></li>
+                                <li><a href="/product/product-card-facade-acryl">Акрилова</a></li>
+                                <li><a href="/product/product-card-facade-silicone">Силіконова</a></li>
 
                             </ul>
                             <ul>
                                 <li><a href="#">CLASSIC</a></li>
-                                <li><a href="/page/product-card-facade-acryl">Акрилова</a></li>
-                                <li><a href="/page/product-card-facade-silicone">Силіконова</a></li>
+                                <li><a href="/product/product-card-classic-acryl">Інтер'єрна фарба</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li><a href="/page/product-card-zaglushka">Заглушка</a>
+                <li><a href="/page/cap">Заглушка</a>
 
                 </li>
+                <li><a href="#">Клей</a>
+                    <div class="fts-submenu-bg">
+                        <div class="fts-submenu-container">
+                            <ul>
+                                <li><a href="">TERMO</a></li>
+                                <li><a href="/product/product-card-termo-1">TERMO 1</a></li>
+                                <li><a href="/product/product-card-termo-2">TERMO 2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+
             </ul>
             <ul class="fts-products-menu">
                 <li><a href="/page/about">Про нас</a>
@@ -166,16 +181,16 @@ FtsAsset::register($this);
                 <ul class="fts-contacts">
                     <li class="contacts"><a href="/page/contacts">Контакти</a></li>
                     <li class="email">e-mail: office@fts.ua - тел: (03433) 43 0 43</li>
-                    <li class="feedback"><a href="#">Напиши нам</a></li>
+                    <!--<li class="feedback"><a href="#">Напиши нам</a></li>-->
                 </ul>
-                <ul class="fts-social">
-                    <li><a class="google" href="#google">google</a></li>
-                    <li><a class="vk" href="#vk">vk</a></li>
-                    <li><a class="facebook" href="#fb">facebook</a></li>
-                </ul>
+                <!--<ul class="fts-social">-->
+                <!--    <li><a class="google" href="#google">google</a></li>-->
+                <!--    <li><a class="vk" href="#vk">vk</a></li>-->
+                <!--    <li><a class="facebook" href="#fb">facebook</a></li>-->
+                <!--</ul>-->
             </div>
         </div>
-        <div class="footer-main">
+        <div class="footer-main"  style="display: none">
             <div class="container">
                 <ul>
                     <li><a href="/page/product-card-akryl">Штукатурка</a></li>
@@ -183,11 +198,11 @@ FtsAsset::register($this);
                     <li><a href="/page/product-card-quartzline-acryl">Фарба</a></li>
                     <li><a href="#">Матеріали</a></li>
                 </ul>
-                <ul>
-                    <li><a href="#">Топ продаж</a></li>
-                    <li><a href="#">Акція</a></li>
-                    <li><a href="#">Весь товар</a></li>
-                </ul>
+                <!--<ul>-->
+                <!--    <li><a href="#">Топ продаж</a></li>-->
+                <!--    <li><a href="#">Акція</a></li>-->
+                <!--    <li><a href="#">Весь товар</a></li>-->
+                <!--</ul>-->
                 <ul>
                     <li><a href="/page/product-card-akryl">STRUCTURE LINE</a></li>
                     <li><a href="/page/product-card-marmure">STONE LINE</a></li>
@@ -207,25 +222,25 @@ FtsAsset::register($this);
 
                 <div class="fts-map">
                     <p>Наше місцезнаходження</p>
-                    <a href=""><img src="/images/map.jpg" alt=""></a>
+                    <a href="<?=Yii::$app->request->hostInfo?>/page/contacts"><img src="/images/map.jpg" alt=""></a>
 
                 </div>
             </div>
         </div>
-        <div class="fts-copyrights">
+        <div class="fts-copyrights" style="display: none">
             <div class="container">
-                <ul class="fts-copyright-menu">
-                    <li><a class="lng" href="">Мова</a></li>
-                    <li><a href="">Конфенденційність</a></li>
-                    <li><a href="">Умови використання</a></li>
-                    <li><a href="">Карта сайту</a></li>
-                </ul>
+                <!--<ul class="fts-copyright-menu">-->
+                <!--    <li><a class="lng" href="">Мова</a></li>-->
+                <!--    <li><a href="">Конфенденційність</a></li>-->
+                <!--    <li><a href="">Умови використання</a></li>-->
+                <!--    <li><a href="">Карта сайту</a></li>-->
+                <!--</ul>-->
                 <p class="copyright">Copyright © <?= date('Y') ?>. All Rights Reserved.</p>
-                <div class="fts-footer-logo">
-                    <a href="#">
-                        <img src="/images/fts-logo-small.png" alt="">
-                    </a>
-                </div>
+                <!--<div class="fts-footer-logo">-->
+                <!--    <a href="#">-->
+                <!--        <img src="/images/fts-logo-small.png" alt="">-->
+                <!--    </a>-->
+                <!--</div>-->
             </div>
         </div>
 
