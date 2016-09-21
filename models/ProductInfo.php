@@ -79,7 +79,7 @@ class ProductInfo extends \yii\db\ActiveRecord
 
             if(!empty($this->file)) {
 
-                $path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/product_info_images/';
+                $path_to_frontend = Yii::getAlias('@webroot/uploads/product_info_images/');  //realpath(Yii::$app->basePath) . '/uploads/product_info_images/';
 
                 if(isset($this->url) and ! empty($this->url)) {
                     $filename =  date('ymdHis'). '_' . $this->url . '.' . $this->file->extension;

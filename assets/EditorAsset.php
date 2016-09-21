@@ -18,7 +18,7 @@ class EditorAsset extends AssetBundle
     ];
     public $js = [
         '//cdn.tinymce.com/4/tinymce.min.js',
-        'js/tinymce_activate.js',
+        '/js/tinymce_activate.js',
     ];
     public $depends = [
         //'yii\web\YiiAsset',
