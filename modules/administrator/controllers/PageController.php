@@ -1,9 +1,9 @@
 <?php
 
-namespace backend\controllers;
+namespace app\modules\administrator\controllers;
 
 use Yii;
-use common\models\Pages;
+use app\models\Pages;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -13,42 +13,42 @@ use yii\filters\AccessControl;
 /**
  * PageController implements the CRUD actions for Pages model.
  */
-class PageController extends Controller
+class PageController extends DefaultController
 {
-    public $layout = 'cp';
-
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow'   => true,
-                    ],
-                    [
-                        'actions' => [
-                            'logout',
-                            'index',
-                            'create',
-                            'update',
-                            'delete',
-                        ],
-                        'allow'   => true,
-                        'roles'   => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+	//public $layout = 'cp';
+	//
+	//
+	//public function behaviors()
+	//{
+	//    return [
+	//        'access' => [
+	//            'class' => AccessControl::className(),
+	//            'rules' => [
+	//                [
+	//                    'actions' => ['login', 'error'],
+	//                    'allow'   => true,
+	//                ],
+	//                [
+	//                    'actions' => [
+	//                        'logout',
+	//                        'index',
+	//                        'create',
+	//                        'update',
+	//                        'delete',
+	//                    ],
+	//                    'allow'   => true,
+	//                    'roles'   => ['@'],
+	//                ],
+	//            ],
+	//        ],
+	//        'verbs' => [
+	//            'class' => VerbFilter::className(),
+	//            'actions' => [
+	//                'delete' => ['post'],
+	//            ],
+	//        ],
+	//    ];
+	//}
 
     /**
      * Lists all Pages models.

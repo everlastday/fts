@@ -2,11 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use \backend\assets\EditorAsset;
+use app\assets\EditorAsset;
 EditorAsset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Pages */
+/* @var $model app\models\Pages */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

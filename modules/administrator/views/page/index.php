@@ -1,6 +1,7 @@
 <?php
 //
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Адмінка - Менеджер сторінок';
 $this->params['breadcrumbs'] = [
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'] = [
                 </td>
                 <td class="right-border"><?=$val['id']?></td>
                 <td class="right-border">
-                    <a target="_blank" class="product_link_to_site" href="<?=str_replace('admin.', '', Yii::$app->request->hostInfo) . '/page/' . $val['url']  ?>"><?=$val['title']?></a>
+                    <a target="_blank" class="product_link_to_site" href="<?=Url::to('/page/' . $val['url']) ?>"><?=$val['title']?></a>
                 </td>
                 <!--<td class="right-border">--><?//=$val['url']?><!--</td>-->
             </tr>
