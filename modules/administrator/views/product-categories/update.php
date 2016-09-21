@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ProductCategories */
+/* @var $model app\models\ProductCategories */
 
 $this->title = 'Обновити назву категорії: ' . ' ' . $model->id;
 
