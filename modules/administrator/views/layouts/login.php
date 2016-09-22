@@ -1,9 +1,9 @@
 <?php
 
-use backend\assets\FtsAsset;
+use app\assets\AdminAsset;
 use yii\helpers\Html;
 
-FtsAsset::register($this);
+AdminAsset::register($this);
 
 $this->beginPage() ?>
 <!doctype html>
@@ -41,7 +41,8 @@ $this->beginPage() ?>
         </div>
     </div>
 
- <?=$content ?>
+
+	<?=$content ?>
 
 </div><!-- wrapper -->
 

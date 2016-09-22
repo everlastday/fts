@@ -36,7 +36,7 @@ AdminAsset::register($this);
 
                 <li><a href="<?=str_replace('admin.', '', Yii::$app->request->hostInfo) ?>">На сайт</a></li>
                 <li><?=
-                    Html::beginForm(['/cp/logout'], 'post')
+                    Html::beginForm(['cp/logout'], 'post')
                     . Html::submitButton(
                     'Вихід (' . Yii::$app->user->identity->username . ')')
                     . Html::endForm()
@@ -146,7 +146,7 @@ AdminAsset::register($this);
                  'gallery' => [
                      'title' => 'Галерея',
                      'items' => [
-                         'gallery' => 'Фотографії галереї',
+                         'gallery/index' => 'Фотографії галереї',
                          'cp/photo-groups' => 'Фотографії по групам',
                      ]
                  ],

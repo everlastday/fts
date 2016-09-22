@@ -75,7 +75,11 @@ class CpController extends DefaultController
 
     public function actionLogin()
     {
-        $this->layout = 'login';
+        $this->layout = "login";
+
+
+
+
         if ( ! \Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -83,6 +87,8 @@ class CpController extends DefaultController
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+
+
             return $this->render('login', [
                 'model' => $model,
             ]);
