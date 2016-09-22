@@ -22,27 +22,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>001.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -52,27 +52,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>002.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -82,27 +82,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>003.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -112,27 +112,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>004.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -142,27 +142,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>005.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -172,27 +172,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>006.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -202,27 +202,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>007.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -232,27 +232,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>008.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>
@@ -262,27 +262,27 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input type="checkbox"></td>
             <td class="right-border">1</td>
             <td class="right-border gallery-table-img">
-                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/ex5.jpg">
+                <img src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/ex5.jpg">
             </td>
             <td>009.jpg</td>
             <td>
                 <a href="#add">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-add.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-add.png"
                          alt="Добавити" title="Добавити" />
                 </a>
             </td>
             <td>
                 <a href="#edit">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-edit.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-edit.png"
                          alt="Змінити" title="Змінити" />
                 </a>
             </td>
             <td>
                 <a href="#delete">
                     <img class="status"
-                         src="<?=Yii::$app->request->getBaseUrl()?>/images/status-out.png"
+                         src="<?=Yii::$app->request->getBaseUrl()?>/images/admin/status-out.png"
                          alt="Видалити" title="Видалити" />
                 </a>
             </td>

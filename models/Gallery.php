@@ -57,7 +57,8 @@ class Gallery extends \yii\db\ActiveRecord
 
             if(!empty($this->file)) {
 
-                $path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
+	            $path_to_frontend = Yii::getAlias('@webroot/uploads/gallerys/');
+                //$path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
 
                 $filename =  date('ymdHis'). '_' . $this->file->baseName . '.' . $this->file->extension;
 

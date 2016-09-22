@@ -1,9 +1,9 @@
 <?php
 
-namespace backend\controllers;
+namespace app\modules\administrator\controllers;
 
 use Yii;
-use common\models\Gallery;
+use app\models\Gallery;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,21 +14,21 @@ use yii\web\UploadedFile;
 /**
  * GalleryController implements the CRUD actions for Gallery model.
  */
-class GalleryController extends Controller
+class GalleryController extends DefaultController
 {
-    public $layout = 'cp';
-
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+    //public $layout = 'cp';
+    //
+    //public function behaviors()
+    //{
+    //    return [
+    //        'verbs' => [
+    //            'class' => VerbFilter::className(),
+    //            'actions' => [
+    //                'delete' => ['post'],
+    //            ],
+    //        ],
+    //    ];
+    //}
 
     /**
      * Lists all Gallery models.
@@ -119,7 +119,8 @@ class GalleryController extends Controller
 
                 $model = $this->findModel($post['id']);
 
-                $path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
+	            $path_to_frontend = Yii::getAlias('@webroot/uploads/gallerys/');
+	            //$path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
 
                 if(isset($model->img) and !empty($model->img)) {
 

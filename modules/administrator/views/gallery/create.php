@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Gallery */
+/* @var $model app\models\Gallery */
 
 $this->title = 'Create Gallery';
 $this->params['breadcrumbs'][] = ['label' => 'Додати фото', 'url' => ['index']];
