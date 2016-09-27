@@ -75,8 +75,12 @@ class LoginForm extends Model {
 	public function login() {
 		if ( $this->rememberMe ) {
 			$u = $this->getUser();
-			$u->generateAuthKey();
-			$u->save();
+
+			if(!empty($u)) {
+				$u->generateAuthKey();
+				$u->save();
+			}
+
 		}
 		if ( $this->validate() ) {
 			return Yii::$app->user->login( $this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0 );
@@ -89,8 +93,11 @@ class LoginForm extends Model {
 		if ( $this->validate() && User::isUserAdmin( $this->username ) ) {
 			if ( $this->rememberMe ) {
 				$u = $this->getUser();
-				$u->generateAuthKey();
-				$u->save();
+
+				if(!empty($u)) {
+					$u->generateAuthKey();
+					$u->save();
+				}
 			}
 
 			return Yii::$app->user->login( $this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0 );
@@ -110,7 +117,13 @@ class LoginForm extends Model {
 	 */
 	public function getUser() {
 		if ( $this->_user === false ) {
-			$this->_user = User::findByUsername( $this->username );
+			if ( strpos( $this->username, '@' ) !== false ) {
+				$this->_user = User::findOne([ 'email' => $this->username,  'status' => User::STATUS_ACTIVE ] );
+			} else {
+				//Otherwise we search using the username
+				$this->_user = User::findByUsername( $this->username );
+			}
+			//$this->_user = User::findByUsername( $this->username );
 		}
 
 		return $this->_user;

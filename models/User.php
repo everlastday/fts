@@ -32,6 +32,7 @@ class User extends ActiveRecord implements IdentityInterface
 	const ROLE_ADMIN = 10;
 
 	public $new_password;
+	public $password_repeat;
 
 
 	/**
@@ -42,6 +43,11 @@ class User extends ActiveRecord implements IdentityInterface
 		return '{{%user}}';
 	}
 
+
+	public function test() {
+		echo $this->scenario; die();
+	}
+
 	/**
 	 * @inheritdoc
 	 */
@@ -49,6 +55,15 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return [
 			TimestampBehavior::className(),
+		];
+	}
+
+
+	public function scenarios()
+	{
+		return [
+			'client' => ['username', 'name', 'new_password', 'phone', 'email', 'address', 'surname', 'password_repeat'  ],
+			'default' => ['username', 'name', 'new_password', 'phone', 'email', 'address', 'surname', 'status', 'role', ],
 		];
 	}
 
@@ -68,7 +83,14 @@ class User extends ActiveRecord implements IdentityInterface
 			['status', 'default', 'value' => self::STATUS_ACTIVE],
 			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 			['role', 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
-			['new_password', 'string', 'min' => 6,'tooShort' => 'Поле «{attribute}» має містити мінімум {min} символів.'],
+
+			['new_password', 'string', 'min' => 6,'tooShort' => 'Поле «{attribute}» має містити мінімум {min} символів.', 'on' => 'client'],
+
+			['new_password', 'custom_function_validation', 'on' => 'client'],
+			['password_repeat', 'compare', 'compareAttribute'=>'new_password', 'message'=>"Паролі не збігаються", 'on' => 'client' ],
+
+			//['password', 'required', 'message' => 'Пароль обов\'язковий для заповнення'],
+			//['password', 'string', 'min' => 6],
 
 			['email', 'filter', 'filter' => 'trim'],
 			['email', 'email', 'message'=>"Необхідно заповнити «{attribute}»"],
@@ -93,6 +115,7 @@ class User extends ActiveRecord implements IdentityInterface
 			'surname' => 'Прізвище',
 			'address' => 'Адреса',
 			'phone' => 'Телефон',
+		    'new_password' => 'Новий пароль',
 		];
 	}
 
@@ -239,7 +262,15 @@ class User extends ActiveRecord implements IdentityInterface
 		}
 	}
 
+	public function custom_function_validation($attribute, $params) {
 
+		if(!empty($this->new_password) and empty($this->password_repeat)) {
+			$this->addError( 'password_repeat', 'Необхідно повторити пароль');
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
 
 

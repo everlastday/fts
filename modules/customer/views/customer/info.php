@@ -1,53 +1,56 @@
+<?php
+use yii\bootstrap\ActiveForm;
+use borales\extensions\phoneInput\PhoneInput;
+?>
+
 <div class="content-area client">
 	<div class="details-container">
 		<div class="detail-title">
 			<h3>ОСОБИСТА ІНФОРМАЦІЯ</h3>
 		</div>
 		<div class="detail-body client">
-			<form action="">
+			<?php $form = ActiveForm::begin([
+				'id' => 'user-login-form',
+				'enableClientValidation' => true,
+				'enableAjaxValidation' => true,]); ?>
 				<div class="field">
-					<label for="fio">Ім'я:</label>
-					<input class="large" type="text" name="fio" value="Іван Іванович" />
+					<?=$form->field($model, 'username')->textInput(['class' => 'large'])?>
+				</div>
+
+				<div class="field">
+					<?=$form->field($model, 'name')->textInput(['class' => 'large'])?>
 				</div>
 				<div class="field">
-					<label for="address">Країна:</label>
-					<input class="large" type="text" name="address" value="Україна" />
+					<?=$form->field($model, 'surname')->textInput(['class' => 'large'])?>
 				</div>
 				<div class="field">
-					<label for="password">Область:</label>
-					<input class="large" type="text" name="password" value="Ів-Франківська" />
+					<?=$form->field($model, 'phone', ['enableAjaxValidation' => true])->label('Телефон *')->widget(PhoneInput::className(), [
+					'jsOptions' => [
+						'initialCountry' => ['ua'],
+						'nationalMode' => false,
+					]]); ?>
 				</div>
 				<div class="field">
-					<label for="password">Район:</label>
-					<input class="large" type="text" name="password" value="Коломийський" />
+					<?=$form->field($model, 'address')->textInput(['class' => 'large'])?>
 				</div>
 				<div class="field">
-					<label for="password">Місто / Село:</label>
-					<input class="large" type="text" name="password" value="Нижній Вербіж" />
+					<?=$form->field($model, 'email', ['enableAjaxValidation' => true])->textInput(['class' => 'large'])?>
 				</div>
 				<div class="field">
-					<label for="password">Вулиця, № будинку:</label>
-					<input class="normal" type="text" name="password" value="Українська 41б" />
+					<?=$form->field($model, 'new_password')->passwordInput(['class' => 'normal'])?>
 				</div>
 				<div class="field">
-					<label for="password">Пароль:</label>
-					<input class="normal" type="password" name="password" value="026f" />
+					<?=$form->field($model, 'password_repeat')->passwordInput()->label('Повторіть пароль')?>
 				</div>
-				<div class="field">
-					<label for="password">Підтвердити пароль:</label>
-					<input class="normal" type="password" name="password" value="026f" />
-				</div>
-				<div class="field">
-					<label for="email">E-mail:</label>
-					<input class="normal" type="text" name="email" value="ivan2@gmail.com" />
-				</div>
-			</form>
 
 		</div>
 
 	</div>
+	<!--<div class="btn-save">-->
+	<!--	<a data-brackets-id="2764" href="#" class="btn-details">Зберегти зміни</a>-->
+	<!--</div>-->
 	<div class="btn-save">
-		<a data-brackets-id="2764" href="#" class="btn-details">Зберегти зміни</a>
+		<button type="submit" class="btn-details">Зберегти зміни</button>
 	</div>
-
+	<?php ActiveForm::end() ?>
 </div> <!-- content area -->

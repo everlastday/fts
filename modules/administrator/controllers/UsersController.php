@@ -56,9 +56,8 @@ class UsersController extends DefaultController {
 					return ActiveForm::validate( $model );
 				}
 
-
-				//var_dump(Yii::$app->request->post()); die();
 				$model->setPassword( $model->new_password );
+				$model->generateAuthKey();
 				$model->save();
 			}
 			if ( ! empty( $model ) ) {

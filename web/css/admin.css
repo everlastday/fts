@@ -1602,3 +1602,14 @@ a.product_link_to_site {
 .intl-tel-input.allow-dropdown .flag-container {
     left: 300px;
 }
+#user-login-form {
+
+}
+#user-login-form p.help-block {
+    margin: 1px 1px 5px;
+    font-size: 12px;
+    position: relative;
+    left: 300px;
+    text-align: left;
+    line-height: 12px;
+}

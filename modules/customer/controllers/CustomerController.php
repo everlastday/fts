@@ -5,6 +5,8 @@ use app\models\SignupCustomerForm;
 use Yii;
 use app\models\LoginForm;
 use yii\bootstrap\ActiveForm;
+use app\models\User;
+use yii\web\NotFoundHttpException;
 
 class CustomerController extends DefaultController {
 
@@ -48,7 +50,36 @@ class CustomerController extends DefaultController {
 	}
 
 	public function actionInfo() {
-		return $this->render( 'info' );
+
+
+
+
+
+		$model = $this->findModel( Yii::$app->user->identity->id );
+		$model->scenario = 'client';
+
+
+		if($model->load( Yii::$app->request->post())) {
+
+			if ( Yii::$app->request->isAjax) {
+				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+				return ActiveForm::validate( $model );
+			}
+
+
+			//var_dump($model); die();
+			$model->setPassword( $model->new_password );
+			$model->generateAuthKey();
+			$model->save();
+		}
+		//
+		//
+		//var_dump(Yii::$app->user->identity->id);
+		//die();
+
+		return $this->render( 'info', [
+			'model' => $model,
+		]  );
 	}
 
 
@@ -59,6 +90,15 @@ class CustomerController extends DefaultController {
 	public function actionOrderHistory() {
 		return $this->render( 'orders-history' );
 	}
+
+	protected function findModel( $id ) {
+		if ( ( $model = User::findOne( $id ) ) !== null ) {
+			return $model;
+		} else {
+			throw new NotFoundHttpException( 'The requested page does not exist.' );
+		}
+	}
+
 
 	//public function actionSignup() {
 	//	$model = new SignupCustomerForm();
