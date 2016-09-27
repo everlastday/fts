@@ -2,9 +2,11 @@
 
 namespace app\modules\administrator\controllers;
 
+use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use app\models\User;
 
 /**
  * Default controller for the `administrator` module
@@ -31,6 +33,9 @@ class DefaultController extends Controller
 						// Для авторизованих
 						'allow' => true,
 						'roles' => ['@'],
+						'matchCallback' => function ($rule, $action) {
+							return User::isUserAdmin(Yii::$app->user->identity->username);
+						}
 					],
 				],
 			],

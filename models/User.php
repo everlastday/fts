@@ -26,6 +26,10 @@ class User extends ActiveRecord implements IdentityInterface
 	const STATUS_DELETED = 0;
 	const STATUS_ACTIVE = 10;
 
+
+	const ROLE_USER = 1;
+	const ROLE_ADMIN = 10;
+
 	public $new_password;
 
 
@@ -57,6 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
 			[['created_at'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'created_at'],
 			['status', 'default', 'value' => self::STATUS_ACTIVE],
 			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+			['role', 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
 			['new_password', 'string', 'min' => 6],
 			[['email'], 'email'],
 			[['email'], 'unique'],
@@ -194,6 +199,18 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		$this->password_reset_token = null;
 	}
+
+	public static function isUserAdmin($username)
+	{
+		if (static::findOne(['username' => $username, 'role' => self::ROLE_ADMIN]))
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
 }
 
 
