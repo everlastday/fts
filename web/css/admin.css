@@ -1599,3 +1599,6 @@ a.product_link_to_site {
     font-weight: bold;
 }
 
+.intl-tel-input.allow-dropdown .flag-container {
+    left: 300px;
+}

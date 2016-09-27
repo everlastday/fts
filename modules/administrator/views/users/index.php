@@ -31,7 +31,7 @@ $this->params[ 'breadcrumbs' ] = [
                 <td>Адмін</td>
                 <td><?=date('d.m.Y H:i', $user->updated_at)?></td>
                 <td><?=$user->id?>
-                    <a href="<?=\yii\helpers\Url::to(['users/index']) ?>" class="btn-user-details">Деталі</a>
+                    <a href="<?=\yii\helpers\Url::to(['users/' .$user->id]) ?>" class="btn-user-details">Деталі</a>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * User model
@@ -57,17 +58,45 @@ class User extends ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[['username', 'email', 'address'], 'string'],
-			[['created_at'], 'date', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'created_at'],
+			[['username', 'email', 'address', 'name', 'surname'], 'string'],
+			['username', 'unique', 'targetClass' => 'app\models\User', 'message' => 'Цей логін уже використовується.'],
+			['username', 'string', 'message' => 'test', 'min' => 2, 'max' => 255, 'tooShort' => 'Поле «{attribute}» має містити мінімум {min} символи.'],
+
+			['name', 'string', 'min' => 3, 'max' => 255, 'tooShort' => 'Поле «{attribute}» має містити мінімум {min} символи.'],
+			['name', 'filter', 'filter' => 'trim'],
+
 			['status', 'default', 'value' => self::STATUS_ACTIVE],
 			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 			['role', 'in', 'range' => [self::ROLE_USER, self::ROLE_ADMIN]],
-			['new_password', 'string', 'min' => 6],
-			[['email'], 'email'],
-			[['email'], 'unique'],
+			['new_password', 'string', 'min' => 6,'tooShort' => 'Поле «{attribute}» має містити мінімум {min} символів.'],
+
+			['email', 'filter', 'filter' => 'trim'],
+			['email', 'email', 'message'=>"Необхідно заповнити «{attribute}»"],
+			['email', 'unique', 'targetClass' => 'app\models\User', 'message' => 'Ця електронна адреса уже використовується.'],
+
+			[['phone'], 'string'],
+			[['phone'], PhoneInputValidator::className(), 'message' => 'Невірний формат поля «{attribute}».'],
+
 
 		];
 	}
+
+	public function attributeLabels()
+	{
+		return [
+			'username' => 'Логін',
+			'email' => 'Email',
+			'password' => 'Пароль',
+			'password_repeat' => 'Повторіть',
+			'captcha' => '',
+			'name' => 'Імя',
+			'surname' => 'Прізвище',
+			'address' => 'Адреса',
+			'phone' => 'Телефон',
+		];
+	}
+
+
 
 	/**
 	 * @inheritdoc
