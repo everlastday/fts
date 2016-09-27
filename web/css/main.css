@@ -2394,7 +2394,7 @@ div.galery.gallery-color a span {
     line-height: 20px;
 }
 .login-form-container .form-body .form-group {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .login-form-container .form-body .form-group input[type='text'],
 .login-form-container .form-body .form-group input[type='password'] {
@@ -2456,10 +2456,12 @@ div.galery.gallery-color a span {
 
 .form-group .help-block-error {
     position: absolute;
-    top: 20px;
+    top: 21px;
     font-size: 13px;
     left: 10px;
     color: #a94442;
+    z-index: 50;
+    line-height: 12px;
 }
 .has-success,
 .has-error {
@@ -2517,3 +2519,32 @@ div.galery.gallery-color a span {
     padding: 7px 70px 6px 18px;
 }
 /*  login form end */
+
+.intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
+    padding-right: 36px;
+    margin-right: 0;
+    width: 261px !important;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 7px;
+    padding-left: 10px;
+    outline: none;
+
+}
+
+.intl-tel-input {
+    float:right;
+
+}
+#signupcustomerform-captcha-image {
+    width: 100px;
+}
+#user-login-form p {
+    text-indent: 0px;
+
+}
+
+#user-login-form .form-group .help-block-error {
+    top: 23px;
+}

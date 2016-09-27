@@ -2,6 +2,8 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use borales\extensions\phoneInput\PhoneInput;
+use yii\captcha\Captcha;
 $this->title = 'Авторизація для клієна';
 
 ?>
@@ -62,22 +64,36 @@ $this->title = 'Авторизація для клієна';
 				<div class="registration-data">
 					Заповни анкету і отримай привілеї
 				</div>
-				<?php $register_form = ActiveForm::begin(['id' => 'user-register-form']); ?>
+				<?php $register_form = ActiveForm::begin([
+					//'action' => 'signup',
+					'id' => 'user-register-form',
+					'enableClientValidation' => true,
+					'enableAjaxValidation' => false,
+					'method' => 'POST']); ?>
 
-				<?=$register_form->field($model, 'username')->label('Прізвище')?>
-				<?=$register_form->field($model, 'username')->label('Ім’я')?>
-				<?=$register_form->field($model, 'username')->label('По батькові')?>
-				<?=$register_form->field($model, 'username')->label('Телефон')?>
-				<?=$register_form->field($model, 'username')->label('Адреса')?>
+				<?=$register_form->field($users, 'username', ['enableAjaxValidation' => true])->label('Логін *')?>
+				<?=$register_form->field($users, 'name')->label('Імя *')?>
+				<?=$register_form->field($users, 'surname')?>
+				<?=$register_form->field($users, 'phone', ['enableAjaxValidation' => true])->label('Телефон *')->widget(PhoneInput::className(), [
+					'jsOptions' => [
+						//'onlyCountries' => ['ua'],
+						'initialCountry' => ['ua'],
+					    //'setNumber' => ['1234345'],
+					    'nationalMode' => false,
+					]]); ?>
+				<?=$register_form->field($users, 'address')?>
 
 				<div class="email-pass-separator">
-					<?=$register_form->field($model, 'username')->label('Email')?>
-					<?=$register_form->field($model, 'username')->label('Пароль')?>
-					<?=$register_form->field($model, 'username')->label('Повторіть')?>
+					<?=$register_form->field($users, 'email', ['enableAjaxValidation' => true])->label('Email *')?>
+					<?=$register_form->field($users, 'password')->passwordInput()->label('Пароль *')?>
+					<?=$register_form->field($users, 'password_repeat')->passwordInput()->label('Повторіть *')?>
 				</div>
 				<div class="captcha-separator">
 					<span>Введіть число з картинки</span>
-					<?=$register_form->field($model, 'username')->label('55102')?>
+					<?=$register_form->field($users, 'captcha', ['enableAjaxValidation' => true])->label('')->widget(Captcha::className(), array(
+						'captchaAction' => '/customer/customer/captcha',
+						'options' => array('class' => 'input-medium',
+					)))?>
 				</div>
 				<div class="submit-container">
 					<?= Html::submitButton('Зареєструватись', ['class' => 'user-login-submit', 'name' => 'login-button']) ?>

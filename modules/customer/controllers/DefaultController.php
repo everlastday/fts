@@ -10,12 +10,23 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
+	//public function actions()
+	//{
+	//	return array(
+	//		'captcha' => array(
+	//			'class' => 'CCaptchaAction',
+	//			'backColor' => 0xFFFFFF,
+	//		),
+	//	);
+	//}
+
+
 	public function behaviors()
 	{
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'except' => ['login'],
+				'except' => ['login', 'signup', 'captcha'],
 				'rules' => [
 					[
 						// Для всіх
