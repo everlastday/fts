@@ -92,7 +92,8 @@ body {
 }
 
 .admin-panel-page .container {
-    height: 170.75em;
+    padding-bottom: 5em;
+    min-height: 80em;
     background-color: white;
     box-shadow: 0.144em 0.281em 0.625em rgba(0, 0, 0, 0.51);
 }

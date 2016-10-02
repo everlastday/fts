@@ -118,7 +118,10 @@ class LoginForm extends Model {
 	public function getUser() {
 		if ( $this->_user === false ) {
 			if ( strpos( $this->username, '@' ) !== false ) {
-				$this->_user = User::findOne([ 'email' => $this->username,  'status' => User::STATUS_ACTIVE ] );
+				$this->_user = User::findOne([
+					'email' => $this->username,
+					//'status' => User::STATUS_ACTIVE
+				] );
 			} else {
 				//Otherwise we search using the username
 				$this->_user = User::findByUsername( $this->username );
