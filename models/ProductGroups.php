@@ -44,10 +44,10 @@ class ProductGroups extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'group' => 'Group',
-            'product_category_id' => 'Product Category ID',
-            'type' => 'Type',
-            'price' => 'Price',
+            'group' => 'Група',
+            'product_category_id' => 'Категорія',
+            'type' => 'Маса/об\'єм',
+            'price' => 'Ціна',
         ];
     }
 

@@ -16,7 +16,9 @@ EditorAsset::register($this);
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'ftsform','enctype' => 'multipart/form-data']]); ?>
 
-    <?=Html::activeDropDownList($model, 'category_id', ArrayHelper::map(ProductCategories::find()->all(), 'id', 'category_name')) ?>
+    <?=$form->field($model, 'category_id')->dropDownList(
+	    ArrayHelper::map(ProductCategories::find()->all(), 'id', 'category_name'),
+	    ['prompt'=>'Вибрати...']) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true, 'class' => 'xlarge'])->label('Ссилка') ?>
 

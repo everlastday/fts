@@ -59,6 +59,8 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
+button:focus {outline:0;}
+
 body {
     background: url(../images/admin/bg-fts.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -980,7 +982,7 @@ input.xlarge {
 
 .background-square-grey {
     background-color: #ebebeb;
-    padding: 40px;
+    padding: 40px 40px 70px;
     /*min-height: 920px;*/
     position: relative;
 }
@@ -1572,9 +1574,9 @@ table.cart td input {
     padding: 8px;
 }
 
-.ftsform select,
+/*.ftsform select,*/
 .ftsform .form-group {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .ftsform .help-block {

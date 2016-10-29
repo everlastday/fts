@@ -126,6 +126,7 @@ AdminAsset::register($this);
                          'product-info/index' => 'Менеджер товарів',
                          'product-categories/index' => 'Категорія Товарів',
                          'page/index' => 'Менеджер сторінок',
+                         'group/index' => 'Групи'
                      ]
                  ],
                  'users' => [

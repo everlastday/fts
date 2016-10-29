@@ -54,13 +54,13 @@ class ProductInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'url' => 'Url',
-            'name' => 'Name',
-            'product_image' => 'Image',
+            'url' => 'Ссилка',
+            'name' => 'Назва',
+            'product_image' => 'Зображення',
             'params' => 'Params',
             'info' => 'Info',
-            'category_id' => 'Category ID',
-            'colors_url' => 'Colors Url',
+            'category_id' => 'Категорія',
+            'colors_url' => 'Ссилка на взірці кольорів',
         ];
     }
 
