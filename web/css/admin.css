@@ -1616,3 +1616,9 @@ a.product_link_to_site {
     text-align: left;
     line-height: 12px;
 }
+.multicheckbox label:not(.control-label) {
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 14px;
+    font-weight: 500;
+}
