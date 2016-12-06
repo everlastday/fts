@@ -1622,3 +1622,8 @@ a.product_link_to_site {
     line-height: 14px;
     font-weight: 500;
 }
+
+.photo-gallery div.img-action input.action_box {
+    position: relative;
+    right: 25px;
+}
