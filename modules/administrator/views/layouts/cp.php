@@ -85,9 +85,15 @@ AdminAsset::register($this);
                 </div>
                 <div class="top-nav-buttons">
                     <ul>
-                        <li><a class="add" href="<?=Url::toRoute(Yii::$app->controller->id . '/create') ?>">Додати</a></li>
-                        <li><a class="edit" data-update="" href="<?=Url::toRoute(Yii::$app->controller->id . '/update')?>">Змінити</a></li>
-                        <li><a class="del" href="<?=Url::toRoute(Yii::$app->controller->id . '/delete')?>">Видалити</a></li>
+
+	                    <?php
+	                        // якщо існує ссилка на галерею добавлеяєм її в адрес для кнопок в верхній панелі
+	                        $gallery_url = isset(Yii::$app->controller->actionParams['gallery_url']) ? '/' . Yii::$app->controller->actionParams['gallery_url'] : '';
+	                    ?>
+
+                        <li><a class="add" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url . '/create') ?>">Додати</a></li>
+                        <li><a class="edit" data-update="" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url. '/update')?>">Змінити</a></li>
+                        <li><a class="del" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url . '/delete')?>">Видалити</a></li>
                     </ul>
                 </div>
 
@@ -119,6 +125,11 @@ AdminAsset::register($this);
 
 
             <?php
+
+
+
+             //var_dump($gallery_menu_item); die();
+
              $menu = [
                  'products' => [
                      'title' => 'Товари',
@@ -147,8 +158,8 @@ AdminAsset::register($this);
                  'gallery' => [
                      'title' => 'Галерея',
                      'items' => [
-                         'gallery/index' => 'Фотографії галереї',
-                         'cp/photo-groups' => 'Фотографії по групам',
+                         'galleries/index' => 'Галереї',
+                         //'cp/photo-groups' => 'Фотографії по групам',
                      ]
                  ],
                  'colors' => [
@@ -163,7 +174,14 @@ AdminAsset::register($this);
              ];
 
 
+            $galleries = \app\models\Galleries::find()->all();
+            $gallery_menu_item = '';
+            foreach ($galleries as $gallery_val) {
+	            $menu['gallery']['items'] += [
+	              'gallery/' . $gallery_val->url . '/index' => $gallery_val->gallery_name,
+              ];
 
+            }
 
 
 
