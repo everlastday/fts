@@ -2,6 +2,7 @@
 
 namespace app\modules\administrator\controllers;
 
+use app\models\Galleries;
 use Yii;
 use app\models\Gallery;
 use yii\data\ActiveDataProvider;
@@ -34,14 +35,21 @@ class GalleryController extends DefaultController
      * Lists all Gallery models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($gallery_url)
     {
-        $gallery_items = Gallery::find()->asArray()->all();
+	    $galleries_id = Galleries::findOne(['url' => $gallery_url]);
 
+	    if($galleries_id !== null) {
+		    //var_dump($galleries_id->id); die();
+		    $gallery_items = Gallery::find(['id' => $galleries_id->id])->asArray()->all();
 
-        return $this->render('index', [
-            'gallery_images' => $gallery_items,
-        ]);
+		    return $this->render('index', [
+			    'gallery_images' => $gallery_items,
+		    ]);
+
+	    } else {
+		    echo 'nothing found';
+	    }
     }
 
     /**
@@ -61,23 +69,32 @@ class GalleryController extends DefaultController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($gallery_url)
     {
         $model = new Gallery();
+	    $galleries = Galleries::findOne(['url' => $gallery_url]);
+
+	    // Якщо не існує галареї - перекидуэм на таблицю з всіма галереями
+	    if($galleries == NULL) {
+	    	return $this->redirect(['galleries/index']);
+	    }
+
+	    //var_dump($galleries); die();
 
         if (Yii::$app->request->isPost) {
+	    	//var_dump(Yii::$app->request->post()); die();
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file->size !== 0) {
                 $model->upload();
             }
         }
-        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+	    	return $this->redirect(['gallery/' . $gallery_url . '/index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'gallery' => $galleries,
             ]);
         }
     }
@@ -88,15 +105,18 @@ class GalleryController extends DefaultController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $gallery_url)
     {
         $model = $this->findModel($id);
+	    $galleries = Galleries::findOne(['id' => $model->galleries_id]);
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['gallery/' . $galleries->url . '/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'gallery' => $galleries,
             ]);
         }
     }

@@ -8,7 +8,9 @@ FancyAsset::register($this);
 $this->title = 'Фотографії галереї';
 $this->params['breadcrumbs'] = [
     ['label' => 'Фотографії галереї'],
-]
+];
+$this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->controller->actionParams['gallery_url'] ;
+
 ?>
 <div class="content-area-full-width grey">
     <ul class="photo-gallery">
@@ -23,18 +25,19 @@ $this->params['breadcrumbs'] = [
 		                <!--<img src="--><?//=Yii::$app->request->hostInfo . '/uploads/gallerys/small_' . $image['img']?><!--">-->
 	                </a>
                 </div>
-                <div class="img-action"><a data-id="<?=$image['id']?>" href="<?=Url::toRoute(Yii::$app->controller->id . '/delete')?>">Видалити</a></div>
+
+                <div class="img-action"><input class="action_box" value="<?=$image['id']?>" type="checkbox"><a data-id="<?=$image['id']?>" href="<?=Url::toRoute($this->params['gallery_url'] . '/delete')?>">Видалити</a></div>
             </li>
 
         <?php endforeach; ?>
 
         <li>
             <div>
-	            <a class="gallery-photo-add" href="<?=Url::toRoute(Yii::$app->controller->id . '/create')?>">
+	            <a class="gallery-photo-add" href="<?=Url::toRoute($this->params['gallery_url']. '/create')?>">
 		            <?= Html::img('@web/images/admin/img-gallery-add.png') ?>
 	            </a>
             </div>
-            <div class="img-action add"><a href="<?=Url::toRoute(Yii::$app->controller->id . '/create')?>">Додати фотографії</a></div>
+            <div class="img-action add"><a href="<?=Url::toRoute($this->params['gallery_url'] . '/create')?>">Додати фотографії</a></div>
         </li>
     </ul>
 
