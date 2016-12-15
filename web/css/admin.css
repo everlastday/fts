@@ -477,7 +477,7 @@ table.basic th span {
     padding: 5px 10px;
     border-bottom: 1px solid #6ce1ff;
     border-top: 1px solid #6ce1ff;
-    width: 91%;
+    width: 93%;
     font-size: 16px;
     font-weight: 400;
 }
@@ -508,7 +508,7 @@ table.basic img.status {
 /* --END-- BASIC TEMPLATE FOR TABLE */
 
 table.basic.product-category th span {
-    width: 95%;
+    width: 96%;
 }
 
 /* Table admin users   */
@@ -1626,4 +1626,10 @@ a.product_link_to_site {
 .photo-gallery div.img-action input.action_box {
     position: relative;
     right: 25px;
+}
+.admin-panel-page .container:after {
+    clear: both;
+    content: "";
+    clear: both;
+    display: table;
 }
