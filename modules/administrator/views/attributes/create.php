@@ -6,16 +6,16 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductAttributes */
 
-$this->title = Yii::t('app', 'Create Product Attributes');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Attributes'), 'url' => ['index']];
+$this->title = 'Добавити атрибут';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Атрибути'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-attributes-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="content-area">
+  <div class="background-square-grey">
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
+  </div>
 </div>

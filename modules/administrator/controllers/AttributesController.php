@@ -35,12 +35,13 @@ class AttributesController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ProductAttributes::find(),
-        ]);
+
+	    $data = ProductAttributes::find()->with('productCategory')->all();
+
+
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'data' => $data,
         ]);
     }
 
@@ -66,7 +67,7 @@ class AttributesController extends Controller
         $model = new ProductAttributes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +86,7 @@ class AttributesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+	        return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -99,14 +100,30 @@ class AttributesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    //public function actionDelete($id)
+    //{
+    //    $this->findModel($id)->delete();
+    //
+    //    return $this->redirect(['index']);
+    //}
 
-        return $this->redirect(['index']);
-    }
+	public function actionDelete() {
+		if ( Yii::$app->request->isAjax ) {
 
-    /**
+			$post = Yii::$app->request->post();
+			//$this->findModel($id)->delete();
+			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
+				$items = [ 'result' => $this->findModel( $post[ 'id' ] )->delete() ];
+				\Yii::$app->response->format = 'json';
+
+				return $items;
+			}
+		}
+		//return $this->redirect(['index']);
+	}
+
+
+	/**
      * Finds the ProductAttributes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

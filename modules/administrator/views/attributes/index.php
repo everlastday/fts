@@ -1,32 +1,59 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Product Attributes');
+$this->title = 'Адмінка - Менеджер атрибутів';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-attributes-index">
+<div class="content-area">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+  <table class="basic">
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Product Attributes'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <tr>
+      <th><span>Вибір</span></th>
+      <th><span>Категорія</span></th>
+      <th><span>Тип</span></th>
+      <th><span>Значення</span></th>
+    </tr>
 
-            'id',
-            'product_category_id',
-            'attribute',
-            'attribute_values',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+
+	  <?php foreach($data as $val): ?>
+        <tr>
+          <td class="right-border"><input class="action_box" value="<?=$val['id']?>" type="checkbox"></td>
+
+          <td class="right-border"><?=$val['productCategory']['category_name']?></td>
+          <td class="right-border"><?=$val['attribute']?></td>
+          <td class="right-border">
+          <?
+            if(!empty($val['attribute_values']) and is_array($val['attribute_values'])) {
+              foreach ( $val[ 'attribute_values' ] as $attribute_value ) {
+                if(!empty($attribute_value)) {
+	                echo $attribute_value . "<br>";
+                }
+              }
+            }
+          ?>
+
+          </td>
+        </tr>
+            <?//=(isset($val['product_image']) and !empty($val['product_image'])) ? Html::img($image_url . 'small_' . $val['product_image'], ['class' => 'small_product_image']) : ''?>
+       <!--   <td class="right-border">-->
+       <!--     <a target="_blank" class="product_link_to_site" href="--><?//= Url::to('/product/' . $val['url']) ?><!--">--><?//=$val['name']?><!--</a>-->
+       <!--   </td>-->
+       <!--   <td>-->
+		<!--	  --><?//= Html::img('@web/images/admin/status-in-stock.png') ?>
+	  <!---->
+       <!--   </td>-->
+       <!--   <td>-->
+		<!--	  --><?//= Html::img('@web/images/admin/status-in-stock.png') ?>
+       <!--   </td>-->
+       <!--   <td>--><?//=$val['category']['category_name']?><!--</td>-->
+
+	  <?php endforeach ?>
+
+  </table>
 </div>
+

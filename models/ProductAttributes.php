@@ -43,9 +43,9 @@ class ProductAttributes extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_category_id' => 'Product Category ID',
-            'attribute' => 'Attribute',
-            'attribute_values' => 'Attribute Values',
+            'product_category_id' => 'Категорія',
+            'attribute' => 'Атрибут',
+            'attribute_values' => 'Значення',
         ];
     }
 
@@ -56,4 +56,30 @@ class ProductAttributes extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ProductCategories::className(), ['id' => 'product_category_id']);
     }
+
+	public function afterFind() {
+		parent::afterFind();
+		//var_dump($this); die();
+		if(!empty($this->attribute_values)) {
+			$this->attribute_values = json_decode($this->attribute_values, true);
+		}
+
+	}
+
+	public function beforeValidate() {
+
+		if(parent::beforeValidate()) {
+
+			if(isset($this->attribute_values)) {
+				$this->attribute_values = json_encode($this->attribute_values);
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
 }
