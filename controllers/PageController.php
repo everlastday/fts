@@ -28,6 +28,19 @@ class PageController extends Controller
     }
 
 
+    public function actionColor($id) {
+
+    	if($id == 1) {
+    		return $this->render('catalog');
+	    } elseif($id == 2) {
+    		return $this->render('products');
+	    } else {
+    		echo $id . 'test';
+	    }
+
+    }
+
+
     //public function actionAbout()
     //{
     //    return $this->render('about');
