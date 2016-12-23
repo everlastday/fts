@@ -25,8 +25,16 @@ use yii\helpers\ArrayHelper;
     ]); ?>
 
 	<div class="multicheckbox">
+
+    <?php
+    if(!$model->isNewRecord) {
+	    $checkedList = explode(",", $model->gallery_categories_array);
+	    $model->gallery_categories = $checkedList;
+    }
+     ?>
+
 	    <?= $form->field($model, 'gallery_categories')
-		    ->checkboxlist(ArrayHelper::map(\app\models\ProductCategories::find()->all(), 'id', 'category_name')) ?>
+		    ->checkboxlist(ArrayHelper::map(\app\models\ProductCategories::find()->all(), 'id', 'category_name')); ?>
 	</div>
 	<?= Html::submitButton($model->isNewRecord ? 'Зберегти' : 'Обновити', ['class' => 'btn-color-options']) ?>
 

@@ -19,6 +19,8 @@ class Galleries extends \yii\db\ActiveRecord {
 	 * @inheritdoc
 	 */
 
+	public $gallery_categories_array;
+
 	public static function tableName() {
 		return 'galleries';
 	}
@@ -68,6 +70,7 @@ class Galleries extends \yii\db\ActiveRecord {
 	public function afterFind() {
 		parent::afterFind();
 		if ( ! empty( $this->gallery_categories ) ) {
+			$this->gallery_categories_array = $this->gallery_categories;
 			$this->gallery_categories = explode( ',', $this->gallery_categories );
 			$this->gallery_categories = ProductCategories::find()->where( [
 				'in',
