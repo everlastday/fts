@@ -113,7 +113,7 @@ class AttributesController extends Controller
 			$post = Yii::$app->request->post();
 			//$this->findModel($id)->delete();
 			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
-				$items = [ 'result' => $this->findModel( $post[ 'id' ] )->delete() ];
+				$items = [ 'result' => $this->findModel( $post[ 'id' ] )->delete(), 'msg' => 'Атрибут успішно видалений' ];
 				\Yii::$app->response->format = 'json';
 
 				return $items;

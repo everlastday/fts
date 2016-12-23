@@ -16,7 +16,6 @@
      $('.top-nav-buttons .del').on('click', function (e) {
          e.preventDefault();
 
-
          if($(this).data("del") != undefined && $(this).data("del").length > 0) {
 
              //alert($(this).data("del"));
@@ -37,8 +36,26 @@
                      data: {id: value},
                      success: function (data) {
                          if(data.result == 1) {
-                             //alert(data.result);
+
+                             if(typeof data.msg !== 'undefined') {
+                                 $('#main_messages')
+                                     .addClass('alert alert-success')
+                                     .html(data.msg)
+                                     .slideDown()
+                                     .delay(3000)
+                                     .slideUp();
+                             }
+
                              $('input.action_box[value="'+ value +'"]').attr('checked', false).parents('tr').slideUp();
+                         } else {
+                             if(typeof data.msg !== 'undefined') {
+                                 $('#main_messages')
+                                     .addClass('alert alert-error')
+                                     .html(data.msg)
+                                     .slideDown()
+                                     .delay(3000)
+                                     .slideUp();
+                             }
                          }
 
                      }

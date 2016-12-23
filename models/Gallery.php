@@ -43,7 +43,6 @@ class Gallery extends \yii\db\ActiveRecord
 		if(!empty($this->options)) {
 			$this->options = json_decode($this->options, true);
 		}
-
 	}
 
 	public function beforeValidate() {
@@ -75,16 +74,42 @@ class Gallery extends \yii\db\ActiveRecord
     }
 
 
-    public function upload()
+    public function upload($gallery_url, $gallery_controller)
     {
         if ($this->validate()) {
 
             if(!empty($this->file)) {
 
-	            $path_to_frontend = Yii::getAlias('@webroot/uploads/gallerys/');
+            	//var_dump($this); die();
+
+	            //$path_to_frontend = Yii::getAlias('@webroot/uploads/');
+	            $path_to_frontend = Yii::getAlias('@webroot/uploads/' . $gallery_controller . '/' . $gallery_url . '/');
                 //$path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
 
-                $filename =  date('ymdHis'). '_' . $this->file->baseName . '.' . $this->file->extension;
+	            $filename_original =  trim(str_replace(' ', '', $this->file->baseName));
+
+
+	            if(preg_match('/^[a-z-A-Z0-9-_]*$/', $filename_original))
+	            {
+		            $filename =  $filename_original;
+		            $cnt = 1;
+		            while(file_exists($path_to_frontend . $filename . '.' . $this->file->extension)) {
+
+			            $filename = $filename_original . '_' . $cnt;
+			            $cnt++;
+		            }
+	            }
+	            else
+	            {
+		            $filename =  date('ymdHis');
+	            }
+
+
+
+				$filename = $filename .  '.' . $this->file->extension;
+
+
+                //var_dump($this->file);
 
                 $this->file->saveAs($path_to_frontend . $filename);
 

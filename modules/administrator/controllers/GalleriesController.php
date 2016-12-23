@@ -2,6 +2,7 @@
 
 namespace app\modules\administrator\controllers;
 
+use app\models\Gallery;
 use Yii;
 use app\models\Galleries;
 use yii\data\ActiveDataProvider;
@@ -78,7 +79,7 @@ class GalleriesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
 	        $uploads = Yii::getAlias('@webroot/uploads');
-	        $galleries = $uploads . '/galleries';
+	        $galleries = $uploads . '/gallery';
 
 	        if(!is_dir($galleries)) {
 		        FileHelper::createDirectory($galleries, '0750');
@@ -108,6 +109,9 @@ class GalleriesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	        //\Yii::$app->getSession()->setFlash('error', 'Your Text Here..');
+	        \Yii::$app->getSession()->setFlash('success', 'Галерея успішно оновлена');
+	        //return $this->redirect('Your Action');
 	        return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -122,18 +126,32 @@ class GalleriesController extends Controller
 			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
 				$model = $this->findModel( $post[ 'id' ] );
 
+				$gallery_items = Gallery::find()
+					->where(['galleries_id' => $post[ 'id' ]])
+					->count();
+
+				if($gallery_items > 0 ) {
+
+					$items = ['result' => false, 'msg' => '<strong>Помилка!</strong> Не можливо видалити галерею, якщо в ній є фотографії' ];
+					\Yii::$app->response->format = 'json';
+					return $items;
+				}
+
 				$url = $model->url;
 
 				$items = [ 'result' => $model->delete() ];
 
 				// Якщо успішно видалено з бази, то видаляєм папку
 				if($items['result'] == 1) {
-					$galleries = Yii::getAlias('@webroot/uploads/galleries');
+					$galleries = Yii::getAlias('@webroot/uploads/gallery');
 
 					$gallery_folder =  $galleries . '/' . $url;
 					if(is_dir($gallery_folder)){
 						FileHelper::removeDirectory($gallery_folder);
 					}
+
+					$items['msg'] = '<strong>Успішно!</strong> Галерея видалена';
+
 				}
 				\Yii::$app->response->format = 'json';
 

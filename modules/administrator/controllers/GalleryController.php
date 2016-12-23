@@ -71,6 +71,11 @@ class GalleryController extends DefaultController
      */
     public function actionCreate($gallery_url)
     {
+    	//$gallery_url = Yii::$app->controller->actionParams['gallery_url'];
+
+    	//var_dump( Yii::$app->controller); die();
+
+
         $model = new Gallery();
 	    $galleries = Galleries::findOne(['url' => $gallery_url]);
 
@@ -85,7 +90,9 @@ class GalleryController extends DefaultController
 	    	//var_dump(Yii::$app->request->post()); die();
             $model->file = UploadedFile::getInstance($model, 'file');
             if ($model->file->size !== 0) {
-                $model->upload();
+
+            	//var_dump(Yii::$app->controller->id); die();
+                $model->upload($gallery_url, Yii::$app->controller->id);
             }
         }
 
@@ -112,7 +119,7 @@ class GalleryController extends DefaultController
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['gallery/' . $galleries->url . '/index']);
+            return $this->redirect([ Yii::$app->controller->id . '/' . $galleries->url . '/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -127,7 +134,7 @@ class GalleryController extends DefaultController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete()
+    public function actionDelete($gallery_url)
     {
 
         if (Yii::$app->request->isAjax) {
@@ -139,7 +146,7 @@ class GalleryController extends DefaultController
 
                 $model = $this->findModel($post['id']);
 
-	            $path_to_frontend = Yii::getAlias('@webroot/uploads/gallerys/');
+	            $path_to_frontend = Yii::getAlias('@webroot/uploads/' .  Yii::$app->controller->id . '/' . $gallery_url . '/');
 	            //$path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
 
                 if(isset($model->img) and !empty($model->img)) {
@@ -152,7 +159,7 @@ class GalleryController extends DefaultController
 
                 }
                 //
-                $items = [ 'result' => $model->delete()];
+                $items = [ 'result' => $model->delete(), 'Фотографія успішно видалена'];
 
                 \Yii::$app->response->format = 'json';
 
