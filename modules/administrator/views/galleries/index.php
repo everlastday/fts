@@ -27,10 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			<tr>
 				<td class="right-border"><input class="action_box" value="<?=$val->id?>" type="checkbox"></td>
 				<td class="right-border"><?=$val->gallery_name ?></td>
-				<td class="right-border"><?=$val->gallery_type?></td>
+				<td class="right-border"><?= ($val->gallery_type == 1) ? 'Фотогалерея' : 'Галерея кольорів'?></td>
 				<td class="right-border"><?=Galleries::showCategories($val->gallery_categories)?></td>
 				<td class="right-border"><?=$val->url?></td>
 			</tr>
 		<?php endforeach ?>
 	</table>
+
+
 </div>

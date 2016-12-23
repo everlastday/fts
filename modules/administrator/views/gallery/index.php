@@ -14,14 +14,14 @@ $this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->cont
 ?>
 <div class="content-area-full-width grey">
     <ul class="photo-gallery">
-
+      <?php// var_dump($gallery_images); die(); ?>
         <?php  foreach ($gallery_images as $image): ?>
             <li>
                 <div>
 	                <a class="fancybox" rel="group"
 	                   title="<?=(isset($image['title'])) ? $image['title'] : ''?>"
-	                   href="<?=Url::to('/uploads/gallerys/' . $image['img']) ?>">
-		                <?= Html::img('@web/uploads/gallerys/small_' . $image['img']) ?>
+	                   href="<?=Url::to('/uploads/' . $this->params['gallery_url'] . '/' . $image['img']) ?>">
+		                <?= Html::img('@web/uploads/' .  $this->params['gallery_url'] . '/small_' . $image['img']) ?>
 		                <!--<img src="--><?//=Yii::$app->request->hostInfo . '/uploads/gallerys/small_' . $image['img']?><!--">-->
 	                </a>
                 </div>
