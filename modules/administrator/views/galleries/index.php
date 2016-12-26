@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Galleries;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,7 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php foreach($data as $val): ?>
 			<tr>
 				<td class="right-border"><input class="action_box" value="<?=$val->id?>" type="checkbox"></td>
-				<td class="right-border"><?=$val->gallery_name ?></td>
+				<td class="right-border">
+          <a class="product_link_to_site" href="<?= Url::to('../gallery/' . $val->gallery_name . '/index') ?>"><?=$val->gallery_name?></a>
+        </td>
 				<td class="right-border"><?= ($val->gallery_type == 1) ? 'Фотогалерея' : 'Галерея кольорів'?></td>
 				<td class="right-border"><?=Galleries::showCategories($val->gallery_categories)?></td>
 				<td class="right-border"><?=$val->url?></td>
