@@ -74,7 +74,7 @@ class Gallery extends \yii\db\ActiveRecord
     }
 
 
-    public function upload($gallery_url, $gallery_controller)
+    public function upload($gallery_url, $gallery_controller, $gallery_type = 1)
     {
         if ($this->validate()) {
 
@@ -148,6 +148,12 @@ class Gallery extends \yii\db\ActiveRecord
 
                 Image::thumbnail($path_to_frontend . $filename, $width, $height)
                      ->save($path_to_frontend .  'small_' . $filename);
+
+                if($gallery_type == 2) {
+                	// tiny size for color galleries
+	                Image::thumbnail($path_to_frontend . $filename, 20, 20)
+	                     ->save($path_to_frontend .  'tiny_' . $filename);
+                }
             }
             return $path_to_frontend . $filename;
         } else {
@@ -155,5 +161,10 @@ class Gallery extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+
+	public function getGalleries() {
+		return $this->hasOne( Galleries::className(), [ 'id' => 'galleries_id' ] );
+	}
 
 }
