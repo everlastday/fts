@@ -109,14 +109,19 @@ AdminAsset::register($this);
             <!--<div class="breadcrumbs">-->
                 <!--Товари / Менеджер товарів --><?//= Yii::$app->controller->action->id; ?>
                 <?php
+                //Yii::$app->setHomeUrl('/administrator');
+
+
+                //echo Yii::$app->getHomeUrl(); die();
+                //var_dump(); die();
                 // $this is the view object currently being used
                 echo Breadcrumbs::widget([
                     'tag' => 'div',
                     'options' => ['class' => 'breadcrumbs'],
                     'itemTemplate' => " / {link}", // template for all links
                     'activeItemTemplate' => " / {link}", // template for all links
-                    'homeLink' => ['label' => 'Головна', 'url' => Yii::$app->getHomeUrl(), 'template' => '{link}'],
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'homeLink' => ['label' => 'Головна', 'url' => Url::to('/' . Yii::$app->controller->module->id) , 'template' => '{link}'],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [''],
                 ]);
 
 

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Адмінка - Менеджер атрибутів';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = 'Менеджер атрибутів';
 ?>
 <div class="content-area">
 

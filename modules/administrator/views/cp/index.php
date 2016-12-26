@@ -1,9 +1,8 @@
 <?php
-
-$this->params['breadcrumbs'] = [
-        ['label' => 'Адмінка'],
+//$this->params['breadcrumbs'] = [];
+        //['label' => '']
         //['label' => 'Менеджер товарів', 'url' => ['/']],
-]
+//]
 
 
 ?>
