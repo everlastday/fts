@@ -39,12 +39,19 @@ class GalleryController extends DefaultController
     {
 	    $galleries_id = Galleries::findOne(['url' => $gallery_url]);
 
+	    //var_dump($galleries_id); die();
+
 	    if($galleries_id !== null) {
 		    //var_dump($galleries_id->id); die();
 		    $gallery_items = Gallery::find(['id' => $galleries_id->id])->asArray()->all();
 
+
+		    //var_dump($gallery_items); die();
+
 		    return $this->render('index', [
 			    'gallery_images' => $gallery_items,
+			    'gallery_name' => $galleries_id->gallery_name,
+
 		    ]);
 
 	    } else {
@@ -79,6 +86,13 @@ class GalleryController extends DefaultController
         $model = new Gallery();
 	    $galleries = Galleries::findOne(['url' => $gallery_url]);
 
+	    //var_dump($galleries); die();
+
+
+	    // 1 photogallery
+	    // 2 color
+	    $gallery_type = $galleries->gallery_type;
+
 	    // Якщо не існує галареї - перекидуэм на таблицю з всіма галереями
 	    if($galleries == NULL) {
 	    	return $this->redirect(['galleries/index']);
@@ -90,7 +104,7 @@ class GalleryController extends DefaultController
 		    $model->file = UploadedFile::getInstance($model, 'file');
 
 		    if ($model->file->size !== 0) {
-			    $filename = $model->upload($gallery_url, Yii::$app->controller->id);
+			    $filename = $model->upload($gallery_url, Yii::$app->controller->id, $gallery_type);
 		    }
 
 			if(!empty($filename)) {
@@ -196,9 +210,11 @@ class GalleryController extends DefaultController
 
                     $image = $path_to_frontend . $model->img;
                     $image_small = $path_to_frontend . 'small_' . $model->img;
+                    $image_tiny = $path_to_frontend . 'tiny_' . $model->img;
 
                     if(file_exists($image)) unlink($image);
                     if(file_exists($image_small)) unlink($image_small);
+                    if(file_exists($image_tiny)) unlink($image_tiny);
 
                 }
                 //

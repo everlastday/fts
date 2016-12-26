@@ -8,10 +8,10 @@ FancyAsset::register($this);
 $this->title = 'Фотографії галереї';
 $this->params['breadcrumbs'] = [
     ['label' => 'Галереї', 'url' => '../../galleries/index'],
-    ['label' => 'Фотографії галереї'],
+    ['label' => $gallery_name],
 ];
 $this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->controller->actionParams['gallery_url'] ;
-
+//var_dump($gallery_images); die();
 ?>
 <div class="content-area-full-width grey">
     <ul class="photo-gallery">
