@@ -34,7 +34,7 @@ class Gallery extends \yii\db\ActiveRecord
         return [
             [['type', 'galleries_id'], 'integer'],
             [['title', 'img', 'options'], 'string', 'max' => 255],
-            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, gif'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, gif'],
         ];
     }
 	public function afterFind() {
@@ -113,6 +113,7 @@ class Gallery extends \yii\db\ActiveRecord
 
                 $this->file->saveAs($path_to_frontend . $filename);
 
+
                 if(isset($this->img) and !empty($this->img)) {
 
                     $image = $path_to_frontend . $this->img;
@@ -148,8 +149,9 @@ class Gallery extends \yii\db\ActiveRecord
                 Image::thumbnail($path_to_frontend . $filename, $width, $height)
                      ->save($path_to_frontend .  'small_' . $filename);
             }
-            return true;
+            return $path_to_frontend . $filename;
         } else {
+
             return false;
         }
     }

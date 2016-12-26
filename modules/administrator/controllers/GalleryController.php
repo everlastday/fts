@@ -84,26 +84,69 @@ class GalleryController extends DefaultController
 	    	return $this->redirect(['galleries/index']);
 	    }
 
-	    //var_dump($galleries); die();
+	    //var_dump($model); die();
 
-        if (Yii::$app->request->isPost) {
-	    	//var_dump(Yii::$app->request->post()); die();
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file->size !== 0) {
+	    if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+		    $model->file = UploadedFile::getInstance($model, 'file');
 
-            	//var_dump(Yii::$app->controller->id); die();
-                $model->upload($gallery_url, Yii::$app->controller->id);
-            }
-        }
+		    if ($model->file->size !== 0) {
+			    $filename = $model->upload($gallery_url, Yii::$app->controller->id);
+		    }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	    	return $this->redirect(['gallery/' . $gallery_url . '/index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'gallery' => $galleries,
-            ]);
-        }
+			if(!empty($filename)) {
+
+				$model->file->tempName = $filename;
+				if($model->save()) {
+					return $this->redirect(['gallery/' . $gallery_url . '/index']);
+				}
+			}
+		    \Yii::$app->getSession()->setFlash('error', 'Не вдалось добавити зображення');
+		    return $this->redirect(['gallery/' . $gallery_url . '/index']);
+
+
+	    } else {
+		    return $this->render('create', [
+			    'model' => $model,
+			    'gallery' => $galleries,
+		    ]);
+	    }
+
+
+
+        //if (Yii::$app->request->isPost) {
+	    	////var_dump(Yii::$app->request->post()); die();
+        //    $model->file = UploadedFile::getInstance($model, 'file');
+        //
+        //    //var_dump($model->file); die();
+        //    if ($model->file->size !== 0) {
+        //
+        //    	//var_dump(Yii::$app->controller->id); die();
+        //        $filename = $model->upload($gallery_url, Yii::$app->controller->id);
+        //        if($filename != false) {
+	     //           $model->file->name = $filename;
+        //        }
+        //    }
+        //}
+
+
+        //var_dump($filename); die();
+
+        //var_dump($model); die();
+
+        //if($model->load(Yii::$app->request->post())) {
+	    	//$model-
+        //   var_dump($model); die();
+        //}
+
+
+
+
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //
+	    	//
+        //} else {
+        //
+        //}
     }
 
     /**
