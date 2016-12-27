@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<tr>
 				<td class="right-border"><input class="action_box" value="<?=$val->id?>" type="checkbox"></td>
 				<td class="right-border">
-          <a class="product_link_to_site" href="<?= Url::to('../gallery/' . $val->gallery_name . '/index') ?>"><?=$val->gallery_name?></a>
+          <a class="product_link_to_site" href="<?= Url::to('../gallery/' . $val->url . '/index') ?>"><?=$val->gallery_name?></a>
         </td>
 				<td class="right-border"><?= ($val->gallery_type == 1) ? 'Фотогалерея' : 'Галерея кольорів'?></td>
 				<td class="right-border"><?=Galleries::showCategories($val->gallery_categories)?></td>

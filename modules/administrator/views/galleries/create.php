@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Galleries */
 
 $this->title = 'Додати галерею';
-$this->params['breadcrumbs'][] = ['label' => 'Galleries', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Галереї', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="content-area">
