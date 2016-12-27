@@ -108,16 +108,36 @@ class GalleriesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	        //\Yii::$app->getSession()->setFlash('error', 'Your Text Here..');
-	        \Yii::$app->getSession()->setFlash('success', 'Галерея успішно оновлена');
-	        //return $this->redirect('Your Action');
-	        return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $model_old_url = $model->url;
+
+        if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post()))
+        {
+	        $uploads = Yii::getAlias('@webroot/uploads');
+	        $galleries = $uploads . '/gallery';
+	        $gallery_old_folder =  $galleries . '/' . $model_old_url;
+	        $gallery_new_folder =  $galleries . '/' . $model->url;
+	        if(is_dir($gallery_old_folder) and $gallery_old_folder != $gallery_new_folder){
+		        FileHelper::copyDirectory($gallery_old_folder, $gallery_new_folder);
+		        FileHelper::removeDirectory($gallery_old_folder);
+	        }
+
+        	if($model->save()) {
+		        \Yii::$app->getSession()->setFlash('success', 'Галерея успішно оновлена');
+		        return $this->redirect(['index']);
+	        }
         }
+
+	    return $this->render('update', [
+		    'model' => $model,
+	    ]);
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+	     //   //\Yii::$app->getSession()->setFlash('error', 'Your Text Here..');
+        //
+        //} else {
+        //    return $this->render('update', [
+        //        'model' => $model,
+        //    ]);
+        //}
     }
 
 	public function actionDelete() {
