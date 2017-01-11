@@ -34,22 +34,26 @@ class Gallery extends \yii\db\ActiveRecord
         return [
             [['type', 'galleries_id'], 'integer'],
             [['title', 'img', 'options'], 'string', 'max' => 255],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, gif'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, gif', 'on'=>'create'],
         ];
     }
 	public function afterFind() {
 		parent::afterFind();
-		//var_dump($this); die();
 		if(!empty($this->options)) {
+
 			$this->options = json_decode($this->options, true);
+
 		}
+
+
+
 	}
 
 	public function beforeValidate() {
 
     	if(parent::beforeValidate()) {
 
-		    if(isset($this->options)) {
+		    if(isset($this->options) and is_array($this->options)) {
 				$this->options = json_encode($this->options);
 		    }
 

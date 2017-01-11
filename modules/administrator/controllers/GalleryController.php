@@ -74,6 +74,7 @@ class GalleryController extends DefaultController
 
 
         $model = new Gallery();
+	    $model->scenario = 'create';
 	    $galleries = Galleries::findOne(['url' => $gallery_url]);
 
 	    //var_dump($galleries); die();
@@ -100,6 +101,8 @@ class GalleryController extends DefaultController
 			if(!empty($filename)) {
 
 				$model->file->tempName = $filename;
+
+				//var_dump($model); die();
 				if($model->save()) {
 					return $this->redirect(['gallery/' . $gallery_url . '/index']);
 				}

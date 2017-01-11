@@ -32,7 +32,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'type')->hiddenInput(['value'=> 1])->label(false); ?>
     <?= $form->field($model, 'galleries_id')->hiddenInput(['value'=> $gallery->id])->label(false); ?>
 
-    <? if(!empty($gallery->gallery_categories)):
+    <?
+    //var_dump($model); die();
+    if(!empty($gallery->gallery_categories)):
       foreach ($gallery->gallery_categories as $gallery_category) : ?>
 	    <?= $form->field($model, 'options['. $gallery_category['id'] .']')
             ->dropDownList($groups_info)

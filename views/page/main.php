@@ -63,9 +63,9 @@ $this->title = 'Головна FTS';
 <div class="fts-gallery-content">
     <div class="container">
         <ul class="fts-gallery-content-list">
-            <li><a href="/page/gallery"><img src="/uploads/gallery/6.jpg" alt=""></a></li>
-            <li><a href="/page/gallery"><img src="/uploads/gallery/53.jpg" alt=""></a></li>
-            <li><a href="/page/gallery"><img src="/uploads/gallery/5.jpg" alt=""></a></li>
+            <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/6.jpg" alt=""></a></li>
+            <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/53.jpg" alt=""></a></li>
+            <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/5.jpg" alt=""></a></li>
         </ul>
     </div>
 </div>
