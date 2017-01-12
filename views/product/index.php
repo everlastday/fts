@@ -24,12 +24,11 @@ $this->title = 'Штукатурка акрилова';
             </div>
             <div>
                 <?php if(!empty($data['colors_url'])): ?>
-                    <a class="btn-grey" href="<?= '/page/' . $data['colors_url'] ?>">Взірці кольорів</a>
+                    <a class="btn-red" href="<?= '/page/' . $data['colors_url'] ?>">ЗАМОВИТИ</a>
                 <?php endif ?>
             </div>
 
         </div>
-
         <div class="product-content">
             <h5 class="title"><?=(isset($data['category']['category_name']) and !empty($data['category']['category_name'])) ? $data['category']['category_name'] : ''; ?></h5>
             <h1 class="title"><?=(isset($data['name']) and !empty($data['name'])) ? $data['name'] : ''; ?></h1>
@@ -37,6 +36,11 @@ $this->title = 'Штукатурка акрилова';
             <?=(isset($data['info']) and !empty($data['info'])) ? $data['info'] : ''; ?>
 
         </div>
+      <div style="max-width: 17em;">
+	      <?php if(!empty($data['colors_url'])): ?>
+            <a class="btn-grey" href="<?= '/page/' . $data['colors_url'] ?>">Взірці кольорів</a>
+	      <?php endif ?>
+      </div>
 
         <div class="clearfix"></div>
         <?php
