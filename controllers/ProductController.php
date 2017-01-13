@@ -19,4 +19,18 @@ class ProductController extends \yii\web\Controller
             throw new \yii\web\NotFoundHttpException('Page not Found');
         }
     }
+
+    public function actionBuy($id)
+    {
+	    $dataProvider = ProductInfo::find()->joinWith('category')->asArray()->where(['url' => $id])->one();
+
+	    //var_dump($dataProvider); die();
+	    return $this->render('catalog', [ 'data' => $dataProvider ]);
+
+    	//var_dump($id); die();
+
+
+    }
+
+
 }

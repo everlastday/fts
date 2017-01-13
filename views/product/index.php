@@ -23,9 +23,9 @@ $this->title = 'Штукатурка акрилова';
 
             </div>
             <div>
-                <?php if(!empty($data['colors_url'])): ?>
-                    <a class="btn-red" href="<?= '/page/' . $data['colors_url'] ?>">ЗАМОВИТИ</a>
-                <?php endif ?>
+                <?php //if(!empty($data['colors_url'])): ?>
+                    <a class="btn-red" href="<?=Url::toRoute(['product/buy', 'id' => $data['url']]); ?>">ЗАМОВИТИ</a>
+                <?php //endif ?>
             </div>
 
         </div>
