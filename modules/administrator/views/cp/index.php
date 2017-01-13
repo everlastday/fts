@@ -1,4 +1,7 @@
 <?php
+
+$this->title = 'FTS Адмін панель';
+
 //$this->params['breadcrumbs'] = [];
         //['label' => '']
         //['label' => 'Менеджер товарів', 'url' => ['/']],

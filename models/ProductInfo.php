@@ -39,8 +39,8 @@ class ProductInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['params', 'info', 'colors_url'], 'string'],
-            [['category_id'], 'integer'],
+            [['params', 'info', 'measure'], 'string'],
+            [['category_id', 'gallery_id'], 'integer'],
             [['url', 'name', 'product_image'], 'string', 'max' => 255],
             [['url'], 'unique'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
@@ -60,7 +60,8 @@ class ProductInfo extends \yii\db\ActiveRecord
             'params' => 'Params',
             'info' => 'Info',
             'category_id' => 'Категорія',
-            'colors_url' => 'Ссилка на взірці кольорів',
+            'gallery_id' => 'Галерея',
+            'measure' => 'Маса',
         ];
     }
 
