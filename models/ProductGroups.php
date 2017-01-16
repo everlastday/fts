@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $group
  * @property integer $product_category_id
- * @property integer $type
+ * @property decimal $type
  * @property string $price
  *
  * @property ProductCategories $productCategory
@@ -31,7 +31,8 @@ class ProductGroups extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['group', 'product_category_id', 'type'], 'integer'],
+            [['group', 'product_category_id'], 'integer'],
+            [['type'], 'number'],
             [['price'], 'string', 'max' => 255],
             [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategories::className(), 'targetAttribute' => ['product_category_id' => 'id']],
         ];

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<td class="right-border"><input class="action_box" value="<?=$val['id']?>" type="checkbox"></td>
 				<td class="right-border"><?=$val['group']?></td>
 				<td class="right-border"><?=$val['productCategory']['category_name']?></td>
-				<td class="right-border"><?=$val['type']?></td>
+				<td class="right-border"><?=(float) $val['type']?></td>
 				<td class="right-border"><?=$val['price']?></td>
 
 			</tr>
