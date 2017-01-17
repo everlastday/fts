@@ -1210,10 +1210,22 @@ ul.fts-gallery-content-list {
 	height: 13px;
 	list-style: none;
 	border: 2px solid #000;
-	text-indent: -9999px;
-	overflow: hidden;
+	/*text-indent: -9999px;*/
+	/*overflow: hidden;*/
 	cursor: pointer;
 }
+
+.filter-color-container li > img{
+    width: 20px;
+    height: 20px;
+    list-style: none;
+    text-indent: 0px;
+    vertical-align: top;
+
+
+}
+
+
 .main-products { margin-left: 12em; }
 .main-products ul {
 	margin: 0;
@@ -1322,6 +1334,13 @@ ul.fts-gallery-content-list {
 	margin: 0 auto;
 	margin-left: 1.5%;
 }
+
+.page-container.catalog .catalog-image.large {
+    width: 72%;
+    margin-left: 0;
+}
+
+
 .page-container.catalog .catalog-image img {
 	margin: 2.91em auto;
 	display: block;
@@ -1343,7 +1362,7 @@ ul.fts-gallery-content-list {
 	margin: 0 auto;
 }
 .page-container.catalog .filter-container li {
-	background-position: 80% 0;
+	background-position: 80% 50%;
 	padding-left: 0px;
 	margin: 15px 0;
 }
@@ -2570,4 +2589,51 @@ div.galery.gallery-color a span {
 
 #user-login-form .form-group .help-block-error {
     top: 23px;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    background-color: #fff;
+    color: #959595;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -90px;
+    opacity: 0;
+    transition: opacity 1s;
+    border: 1px solid #e1e1e1;
+}
+
+.tooltip .tooltiptext img {
+    margin: 0px 5px 3px;
+    border-radius: 5px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e1e1e1 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

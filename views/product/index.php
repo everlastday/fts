@@ -37,7 +37,7 @@ $this->title = 'Штукатурка акрилова';
 
         </div>
       <div style="max-width: 17em;">
-	      <?php if(!empty($data['colors_url'])): ?>
+	      <?php if(!empty($data['gallery_id'])): ?>
             <a class="btn-grey" href="<?= '/page/' . $data['colors_url'] ?>">Взірці кольорів</a>
 	      <?php endif ?>
       </div>

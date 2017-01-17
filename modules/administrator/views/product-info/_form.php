@@ -31,7 +31,7 @@ EditorAsset::register( $this );
 
 	<?=$form->field( $model, 'info' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Текст' )?>
 	<?=$form->field( $model, 'info' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Текст' )?>
-	<?=$form->field( $model, 'measure' )->dropDownList( [ 'кг', 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Маса' ) ?>
+	<?=$form->field( $model, 'measure' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Маса' ) ?>
 
 	<? //= $form->field($model, 'category_id')->textInput() ?>
 

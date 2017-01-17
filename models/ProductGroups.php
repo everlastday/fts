@@ -59,4 +59,10 @@ class ProductGroups extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ProductCategories::className(), ['id' => 'product_category_id']);
     }
+
+	public function getProductInfo()
+	{
+		return $this->hasOne(ProductInfo::className(), ['category_id' => 'product_category_id']);
+	}
+
 }
