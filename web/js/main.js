@@ -38,7 +38,29 @@ $( document ).ready(function() {
             }
 
     });
-    
+
+
+    $('.filter-container li').click(function() {
+       current_el = $(this);
+
+       current_el.parent().find('li').removeClass('active');
+       current_el.addClass('active');
+       current_el.closest("div").find('.filter-result').empty().append(current_el.text());
+
+    });
+
+    $('.filter-colors li').click(function() {
+        current_el = $(this);
+        $('.selected-color').hide();
+        current_el.parent().find('li').removeClass('active');
+        current_el.addClass('active');
+        color_value = current_el.find('.tooltiptext').text();
+        color_img  = current_el.find('img').attr('src');
+
+        $('.selected-color').empty().append('<img src="' + color_img + '" alt="">' + color_value).slideDown();
+        current_el.closest("div").find('.filter-result').empty().append(current_el.data('color'));
+
+    });
     $('.toggle-top-button').click(function() {
         var topMenu = $('.top-menu');
         var button = $('.toggle-top-button span');
