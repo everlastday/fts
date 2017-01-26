@@ -3,6 +3,7 @@ use yii\helpers\Html;
 
 $this->title = 'Каталог';
 //var_dump($data); die();
+//$this->registerJs('$("document").ready(function(){ check_all_filters(); });');
 ?>
 
 <div class="page-container catalog">
@@ -15,7 +16,6 @@ $this->title = 'Каталог';
         <h3>Колір(№)</h3>
         <ul class="filter-colors">
 			<?php
-			$colors = \app\models\Gallery::find()->joinWith( 'galleries' )->where( [ 'galleries_id' => $data[ 'gallery_id' ] ] )->all();
 			foreach ( $colors as $color ): ?>
               <li class="tooltip" data-color="<?=$color->id?>">
                 <span class="tooltiptext"><?=Html::img( '@web/uploads/gallery/' . $color->galleries->url . '/small_' . $color->img )?>
@@ -40,7 +40,6 @@ $this->title = 'Каталог';
 
 	  <?php
 	  //var_dump($data); die();
-	  $attributes = \app\models\ProductAttributes::find()->where( [ 'product_category_id' => $data[ 'category_id' ] ] )->all();
 	  if ( ! empty( $attributes ) ) {
 		  foreach ( $attributes as $attribute ) :
 			  ?>
@@ -60,15 +59,16 @@ $this->title = 'Каталог';
                 <!--<li class="active">Баранек</li>-->
                 <!--<li>Короїд</li>-->
               </ul>
-              <div class="filter-result" data-title="<?=$attribute->attribute?>"></div>
+              <div class="filter-result" data-title="<?=$attribute->attribute?>"><?=( count( $attribute->attribute_values ) == 1 ) ? $attribute->attribute_values[ 0 ] : '';?></div>
             </div>
 			  <?php
 		  endforeach;
 	  }
-	  $groups = \app\models\ProductGroups::find()->where( [ 'product_category_id' => $data[ 'category_id' ] ] )->with( 'productInfo' )->groupBy( [ 'type' ] )->asArray()->all();
 	  //var_dump($groups); die();
 	  ?>
 
+
+	  <?php if ( !empty( $groups ) == 1 ): ?>
     <div class="filter-container">
       <h3>Вага відра</h3>
       <ul>
@@ -81,11 +81,12 @@ $this->title = 'Каталог';
 		  <?php endif; ?>
 
       </ul>
-      <div class="filter-result" data-title="measure">
-
-      </div>
+      <div class="filter-result" data-title="measure"><?=( count( $groups ) == 1 ) ? $groups[ 0 ][ 'type' ] . ' ' . $groups[ 0 ][ 'productInfo' ][ 'measure' ] : '';?></div>
 
     </div>
+    <?php endif; ?>
+
+    <div class="filter-result" data-title="current_category_id"><?=$data[ 'category_id' ]?></div>
 
     <!--<div class="filter-container">-->
     <!--	<h3>Тип</h3>-->
@@ -113,9 +114,14 @@ $this->title = 'Каталог';
   <div class="clearfix"></div>
   <div class="price-container">
     <div>
-      <p class="price">Ціна: <span>405 грн.</span></p>
-      <a class="btn-add-to-cart-red" href="#">Додати до кошика</a> <a class="btn-one-click-buy" href="#">Купити в 1
-        клік</a>
+      <p class="price">Ціна:
+        <span>
+          <span>0</span>
+          грн.
+        </span>
+      </p>
+      <button id="add_to_cart" class="btn-add-to-cart-red" disabled>Додати до кошика</button>
+      <a class="btn-one-click-buy" href="#">Перейти в корзину</a>
       <p class="price-notice">Для остаточного визначення ціни виберіть будь - ласка
         колір, тип, розмір зерна та вагу відра</p>
 

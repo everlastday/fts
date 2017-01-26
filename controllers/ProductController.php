@@ -22,15 +22,28 @@ class ProductController extends \yii\web\Controller
 
     public function actionBuy($id)
     {
-	    $dataProvider = ProductInfo::find()->joinWith('category')->asArray()->where(['url' => $id])->one();
+	    $data = ProductInfo::find()->joinWith('category')->asArray()->where(['url' => $id])->one();
+
+	    $colors = \app\models\Gallery::find()->joinWith( 'galleries' )->where( [ 'galleries_id' => $data[ 'gallery_id' ] ] )->all();
+
+	    $attributes = \app\models\ProductAttributes::find()->where( [ 'product_category_id' => $data[ 'category_id' ] ] )->all();
+
+	    $groups = \app\models\ProductGroups::find()->where( [ 'product_category_id' => $data[ 'category_id' ] ] )->with( 'productInfo' )->groupBy( [ 'type' ] )->asArray()->all();
 
 	    //var_dump($dataProvider); die();
-	    return $this->render('catalog', [ 'data' => $dataProvider ]);
+	    return $this->render('catalog', [
+	    	'data' => $data,
+	    	'colors' => $colors,
+	    	'attributes' => $attributes,
+	    	'groups' => $groups,
+	    ]);
 
     	//var_dump($id); die();
 
 
     }
+
+
 
 
 }
