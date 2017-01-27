@@ -7,6 +7,7 @@ use yii\web\Controller;
 use app\models\ProductGroups;
 use Yii;
 
+
 class AjaxController extends Controller
 {
 	public function actionIndex() {}
@@ -71,5 +72,33 @@ class AjaxController extends Controller
 		}
 	}
 
+	public function actionAddToCart() {
+		if (Yii::$app->request->isAjax) {
+			$data = Yii::$app->request->post();
+			$cart_id = 0;
+			if(isset($data['color']) and !empty($data['color']))
+			{
+				$cart_id = $data['product_id'] . $data['color'];
+			} else {
+				$cart_id = $data['product_id'];
+			}
+
+			$session = Yii::$app->session;
+			$session->open();
+			unset($_SESSION['cart']);
+
+			//$_SESSION['cart'] = 'testa';
+			$_SESSION['cart'][$cart_id] = $data;
+
+
+
+			//\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+
+			return $cart_id;
+
+		}
+
+	}
 
 }

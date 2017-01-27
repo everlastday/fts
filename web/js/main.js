@@ -78,8 +78,60 @@ $(document).ready(function () {
 
     });
 
-    $('#add_to_cart').click(function () {
-        alert('added to cart');
+    $('#del_from_cart').click(function (product) {
+
+        console.log($(this).data('product-id'));
+        $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Продукт видалено з кошика').slideDown().delay(3000).slideUp();
+
+
+        $('#del_from_cart').hide();
+        check_result = check_all_filters();
+
+        if(check_result == true) {
+            $('#add_to_cart').prop("disabled", false).show();
+
+        } else {
+            $('#add_to_cart').prop("disabled", true).show();
+        }
+
+
+    });
+
+
+    $('#add_to_cart').click(function (product) {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+
+        obj = {};
+
+        $(".filter-result").each(function (index, element) {
+            current_result = $(this);
+
+            current_result_key = current_result.data('title');
+            obj[current_result_key] = current_result.text();
+
+        });
+
+        price = $('.price span > span');
+
+        obj['price'] = price.text();
+        obj['groups_id'] = price.data('groups-id')
+
+        //console.log(obj)
+        obj['_csrf'] = csrfToken;
+        $.ajax({
+            url: '/ajax/add-to-cart',
+            type: 'post',
+            data: obj,
+            success: function (data) {
+                console.log(data);
+                $('#add_to_cart').hide();
+                $('#del_from_cart').css('display', 'block').attr('data-product-id', data);
+                $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Успішно додано до кошика !').slideDown().delay(3000).slideUp();
+
+            }
+        });
+
     });
 
     function check_all_filters() {
@@ -101,12 +153,9 @@ $(document).ready(function () {
         });
 
         if (check_result == true) {
-
-            //console.log(obj);
-
             get_price(obj);
-
-
+            $('#add_to_cart').show();
+            $('#del_from_cart').hide();
         }
 
 
@@ -114,6 +163,7 @@ $(document).ready(function () {
     }
 
     function get_price(product) {
+        console.log(product);
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
         product['_csrf'] = csrfToken;
@@ -123,14 +173,14 @@ $(document).ready(function () {
             data: product,
             success: function (data) {
 
-                //console.log(data[0].price);
+                //console.log(data);
 
-                if(data != 0) {
-                    $('.price span > span').text(data[0].price);
+                if (data != 0) {
+                    $('.price span > span').text(data[0].price).attr('data-groups-id', data[0].id);
                     $('#add_to_cart').prop("disabled", false);
                 }
                 else {
-                    $('.price span > span').text(0);
+                    $('.price span > span').text(0).data("groups-id", '0');
                     $('#add_to_cart').prop("disabled", true);
                 }
                 //price = data.price;
@@ -141,12 +191,11 @@ $(document).ready(function () {
     }
 
 
-    if($('.filter-result').length) {
+    if ($('.filter-result').length) {
         //alert('yes');
         $('#add_to_cart').prop("disabled", true);
         check_all_filters();
     }
-
 
 
     function slider_caption_width() {

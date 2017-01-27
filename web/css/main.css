@@ -1279,8 +1279,18 @@ ul.fts-gallery-content-list {
 	top: .3em;
 	right: 1em;
 }
+
 .btn-add-to-cart-red { background-color: #e71e25; }
 .btn-add-to-cart-red:after { background-image: url(../images/btn-add-to-cart-red.png); }
+
+.btn-add-to-cart-red.del {
+    background-color: #f1f1f1;
+    color: #e71e25;
+    border: 1px solid #e71e25;
+    display: none;
+}
+
+
 .btn-one-click-buy {
 	max-width: 140px;
 	width: 100%;
@@ -2685,7 +2695,16 @@ div.galery.gallery-color a span {
     visibility: visible;
     opacity: 1;
 }
+.cart-notice {
+    display: none;
+}
 
+.cart-notice.success {
+    color: #3ca50e;
+}
+.cart-notice.error {
+    color: #e71e25;
+}
 
 /**
    cart development

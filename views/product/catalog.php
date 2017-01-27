@@ -87,6 +87,7 @@ $this->title = 'Каталог';
     <?php endif; ?>
 
     <div class="filter-result" data-title="current_category_id"><?=$data[ 'category_id' ]?></div>
+    <div class="filter-result" data-title="product_id"><?=$data[ 'id' ]?></div>
 
     <!--<div class="filter-container">-->
     <!--	<h3>Тип</h3>-->
@@ -120,8 +121,11 @@ $this->title = 'Каталог';
           грн.
         </span>
       </p>
+      <button id="del_from_cart" class="btn-add-to-cart-red del">Видалити з кошика</button>
       <button id="add_to_cart" class="btn-add-to-cart-red" disabled>Додати до кошика</button>
-      <a class="btn-one-click-buy" href="#">Перейти в корзину</a>
+
+      <a class="btn-one-click-buy" href="#">Перейти до кошика</a>
+      <p class="cart-notice"></p>
       <p class="price-notice">Для остаточного визначення ціни виберіть будь - ласка
         колір, тип, розмір зерна та вагу відра</p>
 
