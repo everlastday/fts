@@ -30,10 +30,10 @@ EditorAsset::register( $this );
 	<?=$form->field( $model, 'params' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Характеристики' )?>
 
 	<?=$form->field( $model, 'info' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Текст' )?>
-	<?=$form->field( $model, 'info' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Текст' )?>
+	<?php //=$form->field( $model, 'info' )->textarea( [ 'rows' => 6, 'class' => 'xlarge' ] )->label( 'Текст' )?>
 	<?=$form->field( $model, 'measure' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Маса' ) ?>
 
-	<? //= $form->field($model, 'category_id')->textInput() ?>
+	<?php //= $form->field($model, 'category_id')->textInput() ?>
 
 	<?=Html::submitButton( $model->isNewRecord ? 'Додати' : 'Обновити', [ 'class' => 'btn-color-options' ] )?>
 

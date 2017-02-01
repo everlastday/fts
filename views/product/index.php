@@ -15,7 +15,7 @@ $this->title = 'Штукатурка акрилова';
 
     <div class="products-description-cart">
         <div class="product-img">
-            <?=(isset($data['product_image']) and !empty($data['product_image'])) ? '<img src="/uploads/product_info_images/' . $data['product_image'] . '" alt="" title="">' : ''; ?>
+            <?=(isset($data['product_image']) and !empty($data['product_image'])) ? '<img src="/uploads/product_info_images/x300_' .  $data['product_image'] . '" alt="" title="">' : ''; ?>
 
             <div class="product-description-general">
                 <?=(isset($data['params']) and !empty($data['params'])) ? $data['params'] : ''; ?>

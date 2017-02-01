@@ -59,7 +59,7 @@ $this->title = 'Каталог';
                 <!--<li class="active">Баранек</li>-->
                 <!--<li>Короїд</li>-->
               </ul>
-              <div class="filter-result" data-title="<?=$attribute->attribute?>"><?=( count( $attribute->attribute_values ) == 1 ) ? $attribute->attribute_values[ 0 ] : '';?></div>
+              <div class="filter-result skip_filter" data-title="<?=$attribute->attribute?>"><?=( count( $attribute->attribute_values ) == 1 ) ? $attribute->attribute_values[ 0 ] : '';?></div>
             </div>
 			  <?php
 		  endforeach;
