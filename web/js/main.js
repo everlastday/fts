@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
     $('.fts-products-menu > li > a').each(function () {
 
         $(this).click(function (e) {
@@ -77,39 +79,80 @@ $(document).ready(function () {
 
 
     });
+    $('.cart_delete_item').click(function ( event ) {
+        obj = {};
+
+        event.preventDefault();
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        current_el = $(this);
+        obj['_csrf'] = csrfToken;
+        obj['item_id'] =  current_el.data('item');
+
+        $.ajax({
+            url: '/ajax/delete-from-cart',
+            type: 'post',
+            data: obj,
+            success: function (data) {
+                console.log(data);
+                if(data > -1) {
+                    if(data == 0) {
+                        $('.cart').addClass('hidden');
+                        $('.empty-cart').removeClass('hidden');
+                    }
+                    current_el.closest('.cart-item').slideUp().empty();
+                    generate_total_price();
+                }
+            }
+        });
+
+
+        //current_el.preventDefault();
+
+        console.log('deleted item ' + current_el.attr('href'));
+
+    });
 
     $('#del_from_cart').click(function (product) {
+        current_el = $(this);
+        obj['_csrf'] = csrfToken;
+        obj['item_id'] =  current_el.data('product-id');
 
-        console.log($(this).data('product-id'));
-        $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Продукт видалено з кошика').slideDown().delay(3000).slideUp();
+        $.ajax({
+            url: '/ajax/delete-from-cart',
+            type: 'post',
+            data: obj,
+            success: function (data) {
+                    $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Продукт видалено з кошика').slideDown().delay(3000).slideUp();
+                    $('#del_from_cart').hide().attr('data-product-id', '');
+            }
+        });
 
-
-        $('#del_from_cart').hide();
         check_result = check_all_filters();
 
-        if(check_result == true) {
+        if (check_result == true) {
             $('#add_to_cart').prop("disabled", false).show();
 
         } else {
             $('#add_to_cart').prop("disabled", true).show();
         }
-
-
     });
-
-
     $('#add_to_cart').click(function (product) {
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
-
         obj = {};
+        count = 0;
 
         $(".filter-result").each(function (index, element) {
             current_result = $(this);
-
             current_result_key = current_result.data('title');
-            obj[current_result_key] = current_result.text();
 
+            if (current_result.hasClass('skip_filter')) {
+                obj[count] = current_result_key + "|" + current_result.text();
+                count++;
+            } else {
+                obj[current_result_key] = current_result.text();
+            }
         });
 
         price = $('.price span > span');
@@ -133,6 +176,99 @@ $(document).ready(function () {
         });
 
     });
+
+    // $('.qty-plus').click(function (event) {
+    //
+    //     current_el = $(this);
+    //     count_input = current_el.closest("div.cart-counter").find('input');
+    //     count_input.val(parseInt(count_input.val()) + 1);
+    //
+    //
+    //
+    // });
+
+    $('button.qty').click(function (event) {
+
+        current_el = $(this);
+        item_id = current_el.closest('.cart-item').data('item-id');
+
+        count_input = current_el.closest("div.cart-counter").find('input');
+        quantity = parseInt(count_input.val());
+
+        if(quantity != 0) {
+            total_quantity = 1;
+            if(current_el.hasClass('minus')) {
+                if(quantity != 1) {
+                    total_quantity = quantity - 1;
+                }
+            } else {
+                total_quantity = quantity + 1;
+            }
+
+                count_input.val(total_quantity);
+                change_quantity(item_id, total_quantity);
+
+
+        }
+
+    });
+
+    $('.cart-counter input').change(function (event) {
+        current_el = $(this);
+        item_id = current_el.closest('.cart-item').data('item-id');
+        quantity = parseInt($(this).val());
+        if(quantity > 0) {
+            change_quantity(item_id, quantity);
+        } else {
+            change_quantity(item_id, 1);
+            current_el.val(1);
+        }
+
+
+    });
+
+
+    function generate_total_price() {
+        total = 0
+        currency = ' грн';
+
+        $(".cart-item .total > span").each(function (index, element) {
+            current_result = $(this);
+            console.log($(this).text());
+            total += parseInt(current_result.text());
+        });
+
+        $('.sum-column .goods_total span').text(total + currency);
+        delivery = $('.sum-column .delivery_total span');
+        delivery_val = parseInt(delivery.text());
+
+        $('.cart-sum .total-sum span').text(total + delivery_val + currency);
+        console.log(total);
+    }
+
+
+
+    function change_quantity(item_id, quantity) {
+        obj = {};
+        obj['item_id'] = item_id;
+        obj['quantity'] = quantity;
+        obj['_csrf'] = csrfToken;
+        $.ajax({
+            url: '/ajax/cart-item-change-quantity',
+            type: 'post',
+            data: obj,
+            success: function (data) {
+
+                //data.quantity
+                cart_item = $('div[data-item-id=' + item_id + ']');
+                cart_item.find('.total span').text(data.price * data.quantity);
+                //console.log(data.price);
+                generate_total_price();
+            }
+        });
+
+    }
+
 
     function check_all_filters() {
 
@@ -172,7 +308,6 @@ $(document).ready(function () {
             type: 'post',
             data: product,
             success: function (data) {
-
                 //console.log(data);
 
                 if (data != 0) {
@@ -227,5 +362,4 @@ $(document).ready(function () {
         // Fancybox activation
         fancyboxFts.fancybox();
     }
-
 });

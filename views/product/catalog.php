@@ -2,11 +2,13 @@
 use yii\helpers\Html;
 
 $this->title = 'Каталог';
+$this->params['breadcrumbs'][] = ['label' => $data['name'], 'url' => '../'];
+$this->params['breadcrumbs'][] = "Замовити";
 //var_dump($data); die();
 //$this->registerJs('$("document").ready(function(){ check_all_filters(); });');
 ?>
 
-<div class="page-container catalog">
+<div class="catalog">
   <div class="catalog-your-choice"><strong>Ваш вибір:</strong>
     <h2><?=$data[ 'category' ][ "category_name" ]?></h2>
   </div>
@@ -32,7 +34,7 @@ $this->title = 'Каталог';
 	<?php endif; ?>
   <div class="catalog-image <?=( empty( $data[ 'gallery_id' ] ) ) ? 'large' : ''?>">
     <!--<img src="/images/catalog-sample1.jpg" alt="">-->
-	  <?=( isset( $data[ 'product_image' ] ) and ! empty( $data[ 'product_image' ] ) ) ? '<img src="/uploads/product_info_images/' . $data[ 'product_image' ] . '" alt="" title="">' : '';?>
+	  <?=( isset( $data[ 'product_image' ] ) and ! empty( $data[ 'product_image' ] ) ) ? '<img src="/uploads/product_info_images/x300_' . $data[ 'product_image' ] . '" alt="" title="">' : '';?>
 
     <div class="selected-color"></div>
   </div>
@@ -88,6 +90,7 @@ $this->title = 'Каталог';
 
     <div class="filter-result" data-title="current_category_id"><?=$data[ 'category_id' ]?></div>
     <div class="filter-result" data-title="product_id"><?=$data[ 'id' ]?></div>
+    <div class="filter-result" data-title="quantity">1</div>
 
     <!--<div class="filter-container">-->
     <!--	<h3>Тип</h3>-->
@@ -124,7 +127,7 @@ $this->title = 'Каталог';
       <button id="del_from_cart" class="btn-add-to-cart-red del">Видалити з кошика</button>
       <button id="add_to_cart" class="btn-add-to-cart-red" disabled>Додати до кошика</button>
 
-      <a class="btn-one-click-buy" href="#">Перейти до кошика</a>
+      <a class="btn-one-click-buy" href="/cart">Перейти до кошика</a>
       <p class="cart-notice"></p>
       <p class="price-notice">Для остаточного визначення ціни виберіть будь - ласка
         колір, тип, розмір зерна та вагу відра</p>

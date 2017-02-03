@@ -1,11 +1,9 @@
 <?php
 use yii\helpers\Url;
-$this->title = 'Штукатурка акрилова';
+$this->title = $data['name'];
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="page-container">
-    <div class="fts-breadcrums">
-        <!-- <a class="home" href="#">На головну</a> / Вхід в магазин / Реєстрація -->
-    </div>
 
 
     <?php
@@ -107,4 +105,3 @@ $this->title = 'Штукатурка акрилова';
         <?php endif; ?>
 
     </div>
-</div>

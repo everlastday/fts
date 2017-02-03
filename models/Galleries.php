@@ -81,7 +81,7 @@ class Galleries extends \yii\db\ActiveRecord {
 	}
 
 	public function beforeValidate() {
-		if ( ! empty( $this->gallery_categories and is_array( $this->gallery_categories ) ) ) {
+		if ( ! empty( $this->gallery_categories) and is_array( $this->gallery_categories ) ) {
 			$this->gallery_categories = implode( ",", $this->gallery_categories );
 		}
 
@@ -89,7 +89,7 @@ class Galleries extends \yii\db\ActiveRecord {
 	}
 
 	public static function showCategories( $categories_id = array() ) {
-		if ( ! empty( $categories_id and is_array( $categories_id ) ) ) {
+		if ( ! empty( $categories_id) and is_array( $categories_id ) ) {
 			//$categories = ProductCategories::find()->asArray()->all();
 			//$categories = ArrayHelper::index( $categories, 'id' );
 			$data = '<ul style="list-style: none">';

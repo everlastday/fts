@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'Головна FTS';
+//$this->disablePageContainer = 1;
+$this->params['disablePageContainer'] = true;
 ?>
 <div class="fts-slider-body">
     <div class="fts-slider section full-width">

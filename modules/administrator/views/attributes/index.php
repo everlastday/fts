@@ -18,8 +18,6 @@ $this->params['breadcrumbs'][] = 'Менеджер атрибутів';
       <th><span>Значення</span></th>
     </tr>
 
-
-
 	  <?php foreach($data as $val): ?>
         <tr>
           <td class="right-border"><input class="action_box" value="<?=$val['id']?>" type="checkbox"></td>
@@ -27,7 +25,8 @@ $this->params['breadcrumbs'][] = 'Менеджер атрибутів';
           <td class="right-border"><?=$val['productCategory']['category_name']?></td>
           <td class="right-border"><?=$val['attribute']?></td>
           <td class="right-border">
-          <?
+          <?php
+
             if(!empty($val['attribute_values']) and is_array($val['attribute_values'])) {
               foreach ( $val[ 'attribute_values' ] as $attribute_value ) {
                 if(!empty($attribute_value)) {
@@ -39,7 +38,7 @@ $this->params['breadcrumbs'][] = 'Менеджер атрибутів';
 
           </td>
         </tr>
-            <?//=(isset($val['product_image']) and !empty($val['product_image'])) ? Html::img($image_url . 'small_' . $val['product_image'], ['class' => 'small_product_image']) : ''?>
+            <?php //echo (isset($val['product_image']) and !empty($val['product_image'])) ? Html::img($image_url . 'small_' . $val['product_image'], ['class' => 'small_product_image']) : ''?>
        <!--   <td class="right-border">-->
        <!--     <a target="_blank" class="product_link_to_site" href="--><?//= Url::to('/product/' . $val['url']) ?><!--">--><?//=$val['name']?><!--</a>-->
        <!--   </td>-->

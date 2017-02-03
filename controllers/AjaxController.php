@@ -85,20 +85,50 @@ class AjaxController extends Controller
 
 			$session = Yii::$app->session;
 			$session->open();
-			unset($_SESSION['cart']);
-
-			//$_SESSION['cart'] = 'testa';
 			$_SESSION['cart'][$cart_id] = $data;
 
-
-
-			//\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-
 			return $cart_id;
+		}
+	}
+
+	public function actionCartItemChangeQuantity() {
+		if (Yii::$app->request->isAjax) {
+			$data = Yii::$app->request->post();
+
+			$session = Yii::$app->session;
+			$session->open();
+
+			if(isset($_SESSION['cart'][$data['item_id']])) {
+				$_SESSION['cart'][$data['item_id']]['quantity'] = $data['quantity'];
+
+				\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+				return $_SESSION['cart'][$data['item_id']];
+			}
+
+			return 0;
 
 		}
 
 	}
+
+
+	public function actionDeleteFromCart() {
+		if (Yii::$app->request->isAjax) {
+			$data = Yii::$app->request->post();
+
+			$session = Yii::$app->session;
+			$session->open();
+
+			if(isset($_SESSION['cart'][$data['item_id']])) {
+				unset($_SESSION['cart'][$data['item_id']]);
+
+				return count($_SESSION['cart']);
+			}
+			return -1;
+		}
+	}
+
+
 
 }

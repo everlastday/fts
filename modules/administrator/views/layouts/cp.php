@@ -107,7 +107,8 @@ AdminAsset::register($this);
     <div class="admin-panel-page">
         <div class="container">
             <!--<div class="breadcrumbs">-->
-                <!--Товари / Менеджер товарів --><?//= Yii::$app->controller->action->id; ?>
+                <!--Товари / Менеджер товарів -->
+                <?php //= Yii::$app->controller->action->id; ?>
                 <?php
                 //Yii::$app->setHomeUrl('/administrator');
 
@@ -289,16 +290,16 @@ AdminAsset::register($this);
         <?php
         //var_dump(Yii::$app->session->getAllFlashes()); die();
 
-        if(!empty(Yii::$app->session->getAllFlashes())):
-          if(!empty(Yii::$app->session->getFlash('error'))) $flash_type = 'error';
-          if(!empty(Yii::$app->session->getFlash('success'))) $flash_type = 'success';
+        //if(!empty(Yii::$app->session->getAllFlashes())):
+        //  if(!empty(Yii::$app->session->getFlash('error'))) $flash_type = 'error';
+        //  if(!empty(Yii::$app->session->getFlash('success'))) $flash_type = 'success';
         ?>
 
           <div class="alert alert-<?=$flash_type?>" role="alert">
             <!--<strong>Well done!</strong> You successfully read this important alert message.-->
 	          <strong><?= Yii::$app->session->getFlash($flash_type); ?></strong>
           </div>
-        <?php endif; ?>
+        <?php  ///endif; ?>
             <?= $content ?>
         <!--  end content  -->
 
