@@ -2501,6 +2501,8 @@ div.galery.gallery-color a span {
 .login-form-container .form-body .form-group {
     margin-top: 30px;
 }
+.login-form-container .form-body .form-group textarea,
+.login-form-container .form-body .form-group select,
 .login-form-container .form-body .form-group input[type='text'],
 .login-form-container .form-body .form-group input[type='password'] {
     width: 392px;
@@ -2591,12 +2593,23 @@ div.galery.gallery-color a span {
 #user-register-form .form-group label {
     font-size: 17px;
 }
-
+#user-register-form textarea,
 #user-register-form input {
     width: 250px;
     float: right;
     margin-right: 25px;
 }
+#user-register-form textarea {
+    height: auto;
+}
+
+#user-register-form select {
+    width: 262px;
+    height: 33px;
+    float: right;
+    margin-right: 25px;
+}
+
 #user-register-form .submit-container {
     position: relative;
     margin: 20px 0 0;
@@ -2867,7 +2880,7 @@ div.galery.gallery-color a span {
 .cart .cart-sum {
     position: relative;
     overflow: auto;
-    height: 400px;
+    min-height: 400px;
     font-size: 20px;
     color: #636363;
     font-weight: bold;
@@ -2901,8 +2914,10 @@ div.galery.gallery-color a span {
 
 
 .cart .cart-sum .cart-buttons {
-    margin-top: 228px;
     text-align: right;
+    position: absolute;
+    right: 0px;
+    bottom: 50px;
 }
 
 .continue-shopping {
@@ -2954,9 +2969,31 @@ div.galery.gallery-color a span {
     z-index: 5;
 }
 
+.login-form-container.cart-form {
+    margin: 0 auto;
+    border: 0;
+}
+.login-form-container.cart-form #user-register-form{
+    font-size: 18px;
+}
+
+.login-form-container.cart-form .form-body {
+    margin-top: 0;
+    padding: 0 15px 75px 24px;
+}
+
+
 @media (max-width:  970px) {
     .page-container .cart .titles {
         display: none;
+    }
+
+    .login-form-container.cart-form {
+        margin: 180px auto 0;
+        float: right;
+    }
+    .cart .cart-sum {
+        min-height: 670px;
     }
 
     .page-container .cart  div.product {
@@ -3039,6 +3076,25 @@ div.galery.gallery-color a span {
         margin-left: 0;
     }
 }
+
+@media (max-width:  530px) {
+    #user-register-form select,
+    .intl-tel-input,
+    #user-register-form textarea, #user-register-form input {
+        float: none;
+        display: block;
+    }
+    .login-form-container .form-body .form-group {
+         margin-top: 10px;
+    }
+    #user-register-form .form-group {
+        float: right;
+    }
+    .cart .cart-sum {
+        min-height: 730px;
+    }
+}
+
 
 /*div.page-container.breadcrumbs {*/
     /*min-height: inherit;*/

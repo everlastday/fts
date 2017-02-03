@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Gallery;
+use app\models\SignupCustomerForm;
 use yii\web\Controller;
 use Yii;
 use app\models\ProductInfo;
@@ -43,12 +44,16 @@ class CartController extends Controller {
 		}
 		//var_dump($_SESSION['cart']); die();
 		//die();
+
+		$order_model = new SignupCustomerForm();
+
 		return $this->render( 'index', [
 			'products'               => $products,
 			'colors'                 => $colors,
 			'items'                  => $cart_items,
 			'path_to_product_images' => $path_to_product_images,
-		    'cart_total'             => $_SESSION['cart_total']
+		    'cart_total'             => $_SESSION['cart_total'],
+		    'users'                  => $order_model,
 		] );
 	}
 }

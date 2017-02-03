@@ -1,5 +1,8 @@
 <?php
 use yii\bootstrap\Html;
+use yii\bootstrap\ActiveForm;
+use borales\extensions\phoneInput\PhoneInput;
+use yii\captcha\Captcha;
 
 $this->title = 'Кошик';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,8 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="product">
           <div class="image">
               <?php
-
-                //var_dump($item_id); die();
                 $image     = 'x150_' . $products[ $item[ 'product_id' ] ][ 'product_image' ];
                 $png_image = substr( $image, 0, strrpos( $image, '.', - 1 ) ) . '.png';
               ?>
@@ -80,6 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php endif; ?>
     <div class="cart-sum">
+
+
+
         <div class="sum-column">
           <p class="goods_total">Вартість товару: <span><?=$cart_total['goods_total'] ?> грн</span></p>
           <p class="delivery_total">Вартість доставки: <span><?=$cart_total['delivery_total'] ?> грн</span></p>
@@ -89,10 +93,39 @@ $this->params['breadcrumbs'][] = $this->title;
           </div>
 
         </div>
-        <div class="cart-buttons">
-          <a href="#" class="continue-shopping">Продовжити покупки</a>
-          <a href="#" class="pay-order">Оплатити замовлення</a>
+        <div class="login-form-container cart-form">
+        <div class="form-body">
+
+
+		    <?php $register_form = ActiveForm::begin([
+			    //'action' => 'signup',
+			    'id' => 'user-register-form',
+			    'enableClientValidation' => true,
+			    'enableAjaxValidation' => false,
+			    'method' => 'POST']); ?>
+
+		    <?=$register_form->field($users, 'username', ['enableAjaxValidation' => true])->label('ПІБ *')?>
+		    <?=$register_form->field($users, 'phone', ['enableAjaxValidation' => true])->label('Телефон *')->widget(PhoneInput::className(), [
+			    'jsOptions' => [
+				    //'onlyCountries' => ['ua'],
+				    'initialCountry' => ['ua'],
+				    //'setNumber' => ['1234345'],
+				    'nationalMode' => false,
+			    ]]); ?>
+		    <?=$register_form->field( $users, 'address' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
+		    <?=$register_form->field( $users, 'address' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Оплата' ) ?>
+		    <?=$register_form->field( $users, 'address' )->textarea(['rows' => 3])->label( 'Коментар' ) ?>
+          <div class="submit-container">
+		      <?php //= Html::submitButton('Зареєструватись', ['class' => 'user-login-submit', 'name' => 'login-button']) ?>
+          </div>
+          <div class="cart-buttons">
+            <!--<a href="#" class="continue-shopping">Продовжити покупки</a>-->
+            <a href="#" class="pay-order">Оплатити замовлення</a>
+          </div>
+		    <?php ActiveForm::end() ?>
         </div>
+      </div>
+
     </div>
 
   </div>
