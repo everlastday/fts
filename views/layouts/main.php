@@ -154,13 +154,13 @@ FtsAsset::register($this);
 						<div class="fts-submenu-container">
 							<ul>
 								<li><a href="">Взірці кольорів </a></li>
-								<li><a href="/page/gallery-decor">Взірці кольорів DECOR </a></li>
-								<li><a href="/page/gallery-marmure">Взірці кольорів MARMURE </a></li>
-								<li><a href="/page/gallery-akryll">Взірці кольорів STRUCTURE LINE</a></li>
+								<li><a href="/gallery/decor">Взірці кольорів DECOR </a></li>
+								<li><a href="/gallery/marmure">Взірці кольорів MARMURE </a></li>
+								<li><a href="/gallery/akryll">Взірці кольорів STRUCTURE LINE</a></li>
 							</ul>
 							<ul>
 								<li><a href="">Фотогалерея</a></li>
-								<li><a href="/gallery">Фотогалерея робіт</a></li>
+								<li><a href="/gallery/portfolio">Фотогалерея робіт</a></li>
 
 							</ul>
 						</div>
