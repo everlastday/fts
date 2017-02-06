@@ -4,11 +4,11 @@ use yii\bootstrap\Html;
 use app\assets\FancyAsset;
 FancyAsset::register($this);
 
-
+//var_dump($gallery); die();
 $this->title = 'Фотографії галереї';
 $this->params['breadcrumbs'] = [
     ['label' => 'Галереї', 'url' => '../../galleries/index'],
-    ['label' => $gallery_name],
+    ['label' => $gallery['gallery_name']],
 ];
 $this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->controller->actionParams['gallery_url'] ;
 //var_dump($gallery_images); die();
@@ -23,7 +23,9 @@ $this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->cont
 	                   title="<?=(isset($image['title'])) ? $image['title'] : ''?>"
 	                   href="<?=Url::to('/uploads/' . $this->params['gallery_url'] . '/' . $image['img']) ?>">
 		                <?= Html::img('@web/uploads/' .  $this->params['gallery_url'] . '/small_' . $image['img']) ?>
-		                <!--<img src="--><?//=Yii::$app->request->hostInfo . '/uploads/gallerys/small_' . $image['img']?><!--">-->
+                    <?php if($gallery['gallery_type'] == 2) : ?>
+                    <span><?=(isset($image['title'])) ? $image['title'] : ''?></span>
+                    <?php endif; ?>
 	                </a>
                 </div>
 

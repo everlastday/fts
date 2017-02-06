@@ -11,13 +11,15 @@ class m170203_162252_create_orders extends Migration
 		    'id' => $this->primaryKey(),
 		    'fio' => $this->string(30),
 		    'phone' => $this->string(30),
-		    'delivery' => $this->string(20),
-		    'payment_method' => $this->string(20),
+		    'delivery' => $this->string(50),
+		    'payment_method' => $this->string(50),
 		    'comment' => $this->text(),
 		    'total_price'  => $this->text(),
 		    'items'  => $this->text(),
 		    'status' => $this->smallInteger(3)->defaultValue(0),
 	        'user_id' => $this->integer(11)->defaultValue(0),
+		    'updated_at' => $this->timestamp()->defaultValue(null),
+		    'created_at' => $this->timestamp(),
 	    ]);
 
 	    $this->createIndex('user_id', 'orders', 'user_id');

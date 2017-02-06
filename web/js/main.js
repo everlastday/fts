@@ -79,7 +79,7 @@ $(document).ready(function () {
 
 
     });
-    $('.cart_delete_item').click(function ( event ) {
+    $('.cart_delete_item').click(function (event) {
         obj = {};
 
         event.preventDefault();
@@ -87,16 +87,15 @@ $(document).ready(function () {
 
         current_el = $(this);
         obj['_csrf'] = csrfToken;
-        obj['item_id'] =  current_el.data('item');
+        obj['item_id'] = current_el.data('item');
 
         $.ajax({
             url: '/ajax/delete-from-cart',
             type: 'post',
             data: obj,
             success: function (data) {
-                console.log(data);
-                if(data > -1) {
-                    if(data == 0) {
+                if (data > -1) {
+                    if (data == 0) {
                         $('.cart').addClass('hidden');
                         $('.empty-cart').removeClass('hidden');
                     }
@@ -107,24 +106,20 @@ $(document).ready(function () {
         });
 
 
-        //current_el.preventDefault();
-
-        console.log('deleted item ' + current_el.attr('href'));
-
     });
 
     $('#del_from_cart').click(function (product) {
         current_el = $(this);
         obj['_csrf'] = csrfToken;
-        obj['item_id'] =  current_el.data('product-id');
+        obj['item_id'] = current_el.data('product-id');
 
         $.ajax({
             url: '/ajax/delete-from-cart',
             type: 'post',
             data: obj,
             success: function (data) {
-                    $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Продукт видалено з кошика').slideDown().delay(3000).slideUp();
-                    $('#del_from_cart').hide().attr('data-product-id', '');
+                $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Продукт видалено з кошика').slideDown().delay(3000).slideUp();
+                $('#del_from_cart').hide().attr('data-product-id', '');
             }
         });
 
@@ -160,14 +155,13 @@ $(document).ready(function () {
         obj['price'] = price.text();
         obj['groups_id'] = price.data('groups-id')
 
-        //console.log(obj)
+
         obj['_csrf'] = csrfToken;
         $.ajax({
             url: '/ajax/add-to-cart',
             type: 'post',
             data: obj,
             success: function (data) {
-                console.log(data);
                 $('#add_to_cart').hide();
                 $('#del_from_cart').css('display', 'block').attr('data-product-id', data);
                 $('.cart-notice').hide().removeClass('error').addClass('success').empty().text('Успішно додано до кошика !').slideDown().delay(3000).slideUp();
@@ -177,15 +171,6 @@ $(document).ready(function () {
 
     });
 
-    // $('.qty-plus').click(function (event) {
-    //
-    //     current_el = $(this);
-    //     count_input = current_el.closest("div.cart-counter").find('input');
-    //     count_input.val(parseInt(count_input.val()) + 1);
-    //
-    //
-    //
-    // });
 
     $('button.qty').click(function (event) {
 
@@ -195,18 +180,18 @@ $(document).ready(function () {
         count_input = current_el.closest("div.cart-counter").find('input');
         quantity = parseInt(count_input.val());
 
-        if(quantity != 0) {
+        if (quantity != 0) {
             total_quantity = 1;
-            if(current_el.hasClass('minus')) {
-                if(quantity != 1) {
+            if (current_el.hasClass('minus')) {
+                if (quantity != 1) {
                     total_quantity = quantity - 1;
                 }
             } else {
                 total_quantity = quantity + 1;
             }
 
-                count_input.val(total_quantity);
-                change_quantity(item_id, total_quantity);
+            count_input.val(total_quantity);
+            change_quantity(item_id, total_quantity);
 
 
         }
@@ -217,7 +202,7 @@ $(document).ready(function () {
         current_el = $(this);
         item_id = current_el.closest('.cart-item').data('item-id');
         quantity = parseInt($(this).val());
-        if(quantity > 0) {
+        if (quantity > 0) {
             change_quantity(item_id, quantity);
         } else {
             change_quantity(item_id, 1);
@@ -231,10 +216,10 @@ $(document).ready(function () {
     function generate_total_price() {
         total = 0
         currency = ' грн';
+        price = {};
 
         $(".cart-item .total > span").each(function (index, element) {
             current_result = $(this);
-            console.log($(this).text());
             total += parseInt(current_result.text());
         });
 
@@ -243,9 +228,20 @@ $(document).ready(function () {
         delivery_val = parseInt(delivery.text());
 
         $('.cart-sum .total-sum span').text(total + delivery_val + currency);
-        console.log(total);
-    }
 
+        price['goods_total'] = total + delivery_val;
+        price['delivery_total'] = delivery_val;
+        price['total'] = total;
+        price['_csrf'] = csrfToken;
+
+        $.ajax({
+            url: '/ajax/cart-change-total-price',
+            type: 'post',
+            data: price,
+            success: function (data) {
+            }
+        });
+    }
 
 
     function change_quantity(item_id, quantity) {
@@ -259,10 +255,9 @@ $(document).ready(function () {
             data: obj,
             success: function (data) {
 
-                //data.quantity
                 cart_item = $('div[data-item-id=' + item_id + ']');
                 cart_item.find('.total span').text(data.price * data.quantity);
-                //console.log(data.price);
+
                 generate_total_price();
             }
         });
@@ -271,9 +266,6 @@ $(document).ready(function () {
 
 
     function check_all_filters() {
-
-
-        //console.log('checking all filters');
         obj = {};
 
         check_result = true;
@@ -299,7 +291,6 @@ $(document).ready(function () {
     }
 
     function get_price(product) {
-        console.log(product);
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
         product['_csrf'] = csrfToken;
@@ -308,7 +299,6 @@ $(document).ready(function () {
             type: 'post',
             data: product,
             success: function (data) {
-                //console.log(data);
 
                 if (data != 0) {
                     $('.price span > span').text(data[0].price).attr('data-groups-id', data[0].id);
@@ -318,11 +308,8 @@ $(document).ready(function () {
                     $('.price span > span').text(0).data("groups-id", '0');
                     $('#add_to_cart').prop("disabled", true);
                 }
-                //price = data.price;
             }
         });
-        //return price;
-
     }
 
 

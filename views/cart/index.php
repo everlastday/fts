@@ -98,13 +98,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 		    <?php $register_form = ActiveForm::begin([
-			    //'action' => 'signup',
+			    'action' => \yii\helpers\Url::toRoute('cart/confirm'),
 			    'id' => 'user-register-form',
 			    'enableClientValidation' => true,
 			    'enableAjaxValidation' => false,
 			    'method' => 'POST']); ?>
 
-		    <?=$register_form->field($users, 'username', ['enableAjaxValidation' => true])->label('ПІБ *')?>
+		    <?=$register_form->field($users, 'fio', ['enableAjaxValidation' => true])->label('ПІБ *')?>
 		    <?=$register_form->field($users, 'phone', ['enableAjaxValidation' => true])->label('Телефон *')->widget(PhoneInput::className(), [
 			    'jsOptions' => [
 				    //'onlyCountries' => ['ua'],
@@ -112,15 +112,15 @@ $this->params['breadcrumbs'][] = $this->title;
 				    //'setNumber' => ['1234345'],
 				    'nationalMode' => false,
 			    ]]); ?>
-		    <?=$register_form->field( $users, 'address' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
-		    <?=$register_form->field( $users, 'address' )->dropDownList( [ 'кг' => 'кг', 'л' => 'л' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Оплата' ) ?>
-		    <?=$register_form->field( $users, 'address' )->textarea(['rows' => 3])->label( 'Коментар' ) ?>
+		    <?=$register_form->field( $users, 'delivery' )->dropDownList( [ 'Нова пошта' => 'Нова пошта', 'Укрпошта' => 'Укрпошта', 'Самовивіз' => 'Самовивіз' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
+		    <?=$register_form->field( $users, 'payment_method' )->dropDownList( [ 'Наложений платіж' => 'Наложений платіж', 'Безготівковий рахунок' => 'Безготівковий рахунок' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Оплата' ) ?>
+		    <?=$register_form->field( $users, 'comment' )->textarea(['rows' => 3])->label( 'Коментар' ) ?>
           <div class="submit-container">
 		      <?php //= Html::submitButton('Зареєструватись', ['class' => 'user-login-submit', 'name' => 'login-button']) ?>
           </div>
           <div class="cart-buttons">
             <!--<a href="#" class="continue-shopping">Продовжити покупки</a>-->
-            <a href="#" class="pay-order">Оплатити замовлення</a>
+            <button type="submit" class="pay-order">Оплатити замовлення</button>
           </div>
 		    <?php ActiveForm::end() ?>
         </div>

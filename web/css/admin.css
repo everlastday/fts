@@ -842,6 +842,20 @@ table.basic.users-table td .btn-user-details {
 .photo-gallery .img-action a:hover {
     color: #898989;
 }
+.photo-gallery a span {
+    display: inline !important;
+    position: absolute;
+    bottom: 40px;
+    left: 4px;
+    width: 165px;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    text-align: center;
+    padding: 0 1px;
+    opacity: 0.9;
+    z-index: 20;
+}
+
 
 .content-area-full-width.grey {
     background-color: #ebebeb;
@@ -1655,3 +1669,4 @@ a.product_link_to_site {
 #main_messages {
     display: none;
 }
+

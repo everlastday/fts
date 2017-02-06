@@ -13,9 +13,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
     </div>
     <div>
-		<?php //if(!empty($data['colors_url'])): ?>
+		<?php if(($data['url']) == 'test'): ?>
       <a class="btn-red" href="<?=Url::toRoute( [ 'product/buy', 'id' => $data[ 'url' ] ] );?>">ЗАМОВИТИ</a>
-		<?php //endif ?>
+		<?php endif ?>
     </div>
 
   </div>

@@ -42,7 +42,7 @@ class GalleryController extends DefaultController
 		    $gallery_items = Gallery::find()->where(['galleries_id' => $galleries_id->id])->asArray()->all();
 		    return $this->render('index', [
 			    'gallery_images' => $gallery_items,
-			    'gallery_name' => $galleries_id->gallery_name,
+			    'gallery' => $galleries_id,
 		    ]);
 	    } else {
 		    echo 'nothing found';

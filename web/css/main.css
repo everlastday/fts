@@ -2942,23 +2942,22 @@ div.galery.gallery-color a span {
     text-decoration: underline;
 }
 
-.cart .cart-sum .cart-buttons a.pay-order {
-    width: 151px;
-    height: 29px;
+.cart .cart-sum .cart-buttons .pay-order {
     background-color: #e71e25;
     border-radius: 5px;
     color: #FFF;
     text-transform: uppercase;
     font-size: 14px;
     line-height: 36px;
-    padding: 16px 68px 15px 14px;
+    padding: 5px 68px 5px 14px;
     font-weight: 400;
     line-height: 36px;
     position: relative;
     margin: 0 40px 0 25px;
+    border: 0;
 }
 
-.cart .cart-sum .cart-buttons a.pay-order:after {
+.cart .cart-sum .cart-buttons .pay-order:after {
     position: absolute;
     content: " ";
     right: 8px;
@@ -3023,12 +3022,12 @@ div.galery.gallery-color a span {
         display: inline-block;
         margin-bottom: 20px;
     }
-    .cart .cart-sum .cart-buttons a.pay-order {
+    .cart .cart-sum .cart-buttons .pay-order {
         width: 211px;
         line-height: 26px;
     }
 
-    .cart .cart-sum .cart-buttons a.pay-order:after {
+    .cart .cart-sum .cart-buttons .pay-order:after {
         right: 18px;
         top: 10px;
     }
@@ -3093,6 +3092,18 @@ div.galery.gallery-color a span {
     .cart .cart-sum {
         min-height: 730px;
     }
+
+    #user-register-form .form-group .help-block-error {
+        left: -51px;
+    }
+    .form-group .help-block-error {
+        top: 48px;
+    }
+
+    #user-register-form .has-success:after, #user-register-form .has-error:after {
+        top: 35px;
+    }
+
 }
 
 
