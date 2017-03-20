@@ -1,9 +1,11 @@
 <?php
 
-$this->params['breadcrumbs'] = [
-        ['label' => 'Адмінка'],
+$this->title = 'FTS Адмін панель';
+
+//$this->params['breadcrumbs'] = [];
+        //['label' => '']
         //['label' => 'Менеджер товарів', 'url' => ['/']],
-]
+//]
 
 
 ?>

@@ -14,7 +14,7 @@ $this->title = 'Авторизація для клієна';
 			<div class="form-header">
 				<div class="login-icon">
 					<?= Html::img('@web/images/login-form-icon.png', ['alt'=>'some', 'class'=>'thing']);?>
-					<!--<img src="--><?//=Yii::$app->request->getBaseUrl() ?><!--/images/admin-login-user-icon.png">-->
+
 				</div>
 				Постійний покупець
 			</div>

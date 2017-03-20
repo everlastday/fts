@@ -2,6 +2,7 @@
 
 namespace app\modules\administrator\controllers;
 
+use app\models\Galleries;
 use Yii;
 use app\models\Gallery;
 use yii\data\ActiveDataProvider;
@@ -34,14 +35,18 @@ class GalleryController extends DefaultController
      * Lists all Gallery models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($gallery_url)
     {
-        $gallery_items = Gallery::find()->asArray()->all();
-
-
-        return $this->render('index', [
-            'gallery_images' => $gallery_items,
-        ]);
+	    $galleries_id = Galleries::findOne(['url' => $gallery_url]);
+	    if($galleries_id !== null) {
+		    $gallery_items = Gallery::find()->where(['galleries_id' => $galleries_id->id])->asArray()->all();
+		    return $this->render('index', [
+			    'gallery_images' => $gallery_items,
+			    'gallery' => $galleries_id,
+		    ]);
+	    } else {
+		    echo 'nothing found';
+	    }
     }
 
     /**
@@ -61,25 +66,94 @@ class GalleryController extends DefaultController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($gallery_url)
     {
+    	//$gallery_url = Yii::$app->controller->actionParams['gallery_url'];
+
+    	//var_dump( Yii::$app->controller); die();
+
+
         $model = new Gallery();
+	    $model->scenario = 'create';
+	    $galleries = Galleries::findOne(['url' => $gallery_url]);
 
-        if (Yii::$app->request->isPost) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file->size !== 0) {
-                $model->upload();
-            }
-        }
-        
+	    //var_dump($galleries); die();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+
+	    // 1 photogallery
+	    // 2 color
+	    $gallery_type = $galleries->gallery_type;
+
+	    // Якщо не існує галареї - перекидуэм на таблицю з всіма галереями
+	    if($galleries == NULL) {
+	    	return $this->redirect(['galleries/index']);
+	    }
+
+	    //var_dump($model); die();
+
+	    if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+		    $model->file = UploadedFile::getInstance($model, 'file');
+
+		    if ($model->file->size !== 0) {
+			    $filename = $model->upload($gallery_url, Yii::$app->controller->id, $gallery_type);
+		    }
+
+			if(!empty($filename)) {
+
+				$model->file->tempName = $filename;
+
+				//var_dump($model); die();
+				if($model->save()) {
+					return $this->redirect(['gallery/' . $gallery_url . '/index']);
+				}
+			}
+		    \Yii::$app->getSession()->setFlash('error', 'Не вдалось добавити зображення');
+		    return $this->redirect(['gallery/' . $gallery_url . '/index']);
+
+
+	    } else {
+		    return $this->render('create', [
+			    'model' => $model,
+			    'gallery' => $galleries,
+		    ]);
+	    }
+
+
+
+        //if (Yii::$app->request->isPost) {
+	    	////var_dump(Yii::$app->request->post()); die();
+        //    $model->file = UploadedFile::getInstance($model, 'file');
+        //
+        //    //var_dump($model->file); die();
+        //    if ($model->file->size !== 0) {
+        //
+        //    	//var_dump(Yii::$app->controller->id); die();
+        //        $filename = $model->upload($gallery_url, Yii::$app->controller->id);
+        //        if($filename != false) {
+	     //           $model->file->name = $filename;
+        //        }
+        //    }
+        //}
+
+
+        //var_dump($filename); die();
+
+        //var_dump($model); die();
+
+        //if($model->load(Yii::$app->request->post())) {
+	    	//$model-
+        //   var_dump($model); die();
+        //}
+
+
+
+
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //
+	    	//
+        //} else {
+        //
+        //}
     }
 
     /**
@@ -88,15 +162,18 @@ class GalleryController extends DefaultController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $gallery_url)
     {
         $model = $this->findModel($id);
+	    $galleries = Galleries::findOne(['id' => $model->galleries_id]);
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([ Yii::$app->controller->id . '/' . $galleries->url . '/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'gallery' => $galleries,
             ]);
         }
     }
@@ -107,7 +184,7 @@ class GalleryController extends DefaultController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete()
+    public function actionDelete($gallery_url)
     {
 
         if (Yii::$app->request->isAjax) {
@@ -119,20 +196,22 @@ class GalleryController extends DefaultController
 
                 $model = $this->findModel($post['id']);
 
-	            $path_to_frontend = Yii::getAlias('@webroot/uploads/gallerys/');
+	            $path_to_frontend = Yii::getAlias('@webroot/uploads/' .  Yii::$app->controller->id . '/' . $gallery_url . '/');
 	            //$path_to_frontend = '../..' . \Yii::$app->urlManagerFrontend->createUrl('/') . 'uploads/gallerys/';
 
                 if(isset($model->img) and !empty($model->img)) {
 
                     $image = $path_to_frontend . $model->img;
                     $image_small = $path_to_frontend . 'small_' . $model->img;
+                    $image_tiny = $path_to_frontend . 'tiny_' . $model->img;
 
                     if(file_exists($image)) unlink($image);
                     if(file_exists($image_small)) unlink($image_small);
+                    if(file_exists($image_tiny)) unlink($image_tiny);
 
                 }
                 //
-                $items = [ 'result' => $model->delete()];
+                $items = [ 'result' => $model->delete(), 'Фотографія успішно видалена'];
 
                 \Yii::$app->response->format = 'json';
 

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'] = [
             <td class="right-border"><input class="action_box" value="<?=$val['id']?>" type="checkbox"></td>
             <td class="right-border"><?=$val['id']?></td>
             <td class="right-border">
-	            <?=(isset($val['product_image']) and !empty($val['product_image'])) ? Html::img($image_url . 'small_' . $val['product_image'], ['class' => 'small_product_image']) : ''?>
+	            <?=(isset($val['product_image']) and !empty($val['product_image'])) ? Html::img($image_url . 'x65_' . $val['product_image'], ['class' => 'small_product_image']) : ''?>
             <td class="right-border">
 		        <a target="_blank" class="product_link_to_site" href="<?= Url::to('/product/' . $val['url']) ?>"><?=$val['name']?></a>
 	        </td>

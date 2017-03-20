@@ -6,16 +6,15 @@ use yii\helpers\Html;
 /* @var $model app\models\Gallery */
 
 $this->title = 'Update Gallery: ' . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Galleries', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = ['label' => $gallery->gallery_name, 'url' => 'index'];
+$this->params['breadcrumbs'][] = 'Змінити параметри зображення';
 ?>
-<div class="gallery-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="content-area">
+  <div class="background-square-grey">
 
     <?= $this->render('_form', [
         'model' => $model,
+        'gallery' => $gallery,
     ]) ?>
-
+  </div>
 </div>

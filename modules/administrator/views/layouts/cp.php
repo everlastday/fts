@@ -85,9 +85,15 @@ AdminAsset::register($this);
                 </div>
                 <div class="top-nav-buttons">
                     <ul>
-                        <li><a class="add" href="<?=Url::toRoute(Yii::$app->controller->id . '/create') ?>">Додати</a></li>
-                        <li><a class="edit" data-update="" href="<?=Url::toRoute(Yii::$app->controller->id . '/update')?>">Змінити</a></li>
-                        <li><a class="del" href="<?=Url::toRoute(Yii::$app->controller->id . '/delete')?>">Видалити</a></li>
+
+	                    <?php
+	                        // якщо існує ссилка на галерею добавлеяєм її в адрес для кнопок в верхній панелі
+	                        $gallery_url = isset(Yii::$app->controller->actionParams['gallery_url']) ? '/' . Yii::$app->controller->actionParams['gallery_url'] : '';
+	                    ?>
+
+                        <li><a class="add" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url . '/create') ?>">Додати</a></li>
+                        <li><a class="edit" data-update="" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url. '/update')?>">Змінити</a></li>
+                        <li><a class="del" href="<?=Url::toRoute(Yii::$app->controller->id . $gallery_url . '/delete')?>">Видалити</a></li>
                     </ul>
                 </div>
 
@@ -101,16 +107,22 @@ AdminAsset::register($this);
     <div class="admin-panel-page">
         <div class="container">
             <!--<div class="breadcrumbs">-->
-                <!--Товари / Менеджер товарів --><?//= Yii::$app->controller->action->id; ?>
+                <!--Товари / Менеджер товарів -->
+                <?php //= Yii::$app->controller->action->id; ?>
                 <?php
+                //Yii::$app->setHomeUrl('/administrator');
+
+
+                //echo Yii::$app->getHomeUrl(); die();
+                //var_dump(); die();
                 // $this is the view object currently being used
                 echo Breadcrumbs::widget([
                     'tag' => 'div',
                     'options' => ['class' => 'breadcrumbs'],
                     'itemTemplate' => " / {link}", // template for all links
                     'activeItemTemplate' => " / {link}", // template for all links
-                    'homeLink' => ['label' => 'Головна', 'url' => Yii::$app->getHomeUrl(), 'template' => '{link}'],
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'homeLink' => ['label' => 'Головна', 'url' => Url::to('/' . Yii::$app->controller->module->id) , 'template' => '{link}'],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [''],
                 ]);
 
 
@@ -119,6 +131,11 @@ AdminAsset::register($this);
 
 
             <?php
+
+
+
+             //var_dump($gallery_menu_item); die();
+
              $menu = [
                  'products' => [
                      'title' => 'Товари',
@@ -126,6 +143,8 @@ AdminAsset::register($this);
                          'product-info/index' => 'Менеджер товарів',
                          'product-categories/index' => 'Категорія Товарів',
                          'page/index' => 'Менеджер сторінок',
+                         'group/index' => 'Групи',
+                         'attributes/index' => 'Атрибути'
                      ]
                  ],
                  'users' => [
@@ -146,8 +165,8 @@ AdminAsset::register($this);
                  'gallery' => [
                      'title' => 'Галерея',
                      'items' => [
-                         'gallery/index' => 'Фотографії галереї',
-                         'cp/photo-groups' => 'Фотографії по групам',
+                         'galleries/index' => 'Галереї',
+                         //'cp/photo-groups' => 'Фотографії по групам',
                      ]
                  ],
                  'colors' => [
@@ -162,7 +181,14 @@ AdminAsset::register($this);
              ];
 
 
+            $galleries = \app\models\Galleries::find()->all();
+            $gallery_menu_item = '';
+            foreach ($galleries as $gallery_val) {
+	            $menu['gallery']['items'] += [
+	              'gallery/' . $gallery_val->url . '/index' => $gallery_val->gallery_name,
+              ];
 
+            }
 
 
 
@@ -257,6 +283,23 @@ AdminAsset::register($this);
             </div>
 
         <!--  content  -->
+        <div id="main_messages">
+
+        </div>
+
+        <?php
+        //var_dump(Yii::$app->session->getAllFlashes()); die();
+
+        //if(!empty(Yii::$app->session->getAllFlashes())):
+        //  if(!empty(Yii::$app->session->getFlash('error'))) $flash_type = 'error';
+        //  if(!empty(Yii::$app->session->getFlash('success'))) $flash_type = 'success';
+        ?>
+
+          <!--<div class="alert alert---><?php//=$flash_type?><!--" role="alert">-->
+          <!--  <!--<strong>Well done!</strong> You successfully read this important alert message.-->
+	       <!--   <strong>--><?php//= Yii::$app->session->getFlash($flash_type); ?><!--</strong>-->
+          <!--</div>-->
+        <?php  ///endif; ?>
             <?= $content ?>
         <!--  end content  -->
 

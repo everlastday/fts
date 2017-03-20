@@ -59,6 +59,8 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
+button:focus {outline:0;}
+
 body {
     background: url(../images/admin/bg-fts.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -475,7 +477,7 @@ table.basic th span {
     padding: 5px 10px;
     border-bottom: 1px solid #6ce1ff;
     border-top: 1px solid #6ce1ff;
-    width: 91%;
+    width: 93%;
     font-size: 16px;
     font-weight: 400;
 }
@@ -506,7 +508,7 @@ table.basic img.status {
 /* --END-- BASIC TEMPLATE FOR TABLE */
 
 table.basic.product-category th span {
-    width: 95%;
+    width: 96%;
 }
 
 /* Table admin users   */
@@ -840,6 +842,20 @@ table.basic.users-table td .btn-user-details {
 .photo-gallery .img-action a:hover {
     color: #898989;
 }
+.photo-gallery a span {
+    display: inline !important;
+    position: absolute;
+    bottom: 40px;
+    left: 4px;
+    width: 165px;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    text-align: center;
+    padding: 0 1px;
+    opacity: 0.9;
+    z-index: 20;
+}
+
 
 .content-area-full-width.grey {
     background-color: #ebebeb;
@@ -980,7 +996,7 @@ input.xlarge {
 
 .background-square-grey {
     background-color: #ebebeb;
-    padding: 40px;
+    padding: 40px 40px 70px;
     /*min-height: 920px;*/
     position: relative;
 }
@@ -1572,9 +1588,9 @@ table.cart td input {
     padding: 8px;
 }
 
-.ftsform select,
+/*.ftsform select,*/
 .ftsform .form-group {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .ftsform .help-block {
@@ -1614,3 +1630,43 @@ a.product_link_to_site {
     text-align: left;
     line-height: 12px;
 }
+.multicheckbox label:not(.control-label) {
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 14px;
+    font-weight: 500;
+}
+
+.photo-gallery div.img-action input.action_box {
+    position: relative;
+    right: 25px;
+}
+.admin-panel-page .container:after {
+    clear: both;
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.alert {
+    padding: 15px;
+    /*margin-bottom: 20px;*/
+    margin: 0 15px 15px 290px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+#main_messages {
+    display: none;
+}
+

@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use app\assets\FtsAsset;
-
+use yii\widgets\Breadcrumbs;
+use yii\helpers\Url;
 
 FtsAsset::register($this);
 //echo CustomMenu::widget(['message' => 'Good morning']);
@@ -138,6 +139,20 @@ FtsAsset::register($this);
 								<li><a href="/product/product-card-termo-1">TERMO 1</a></li>
 								<li><a href="/product/product-card-termo-2">TERMO 2</a></li>
 							</ul>
+						   <ul>
+								<li><a href="">CERAMIC</a></li>
+								<li><a href="/product/Ceramic_01">CERAMIC 01</a></li>
+								<li><a href="/product/Ceramic_11">CERAMIC 11</a></li>
+								<li><a href="/product/Ceramic_21">CERAMIC 21</a></li>
+								<li><a href="/product/Ceramic_31">CERAMIC 31</a></li>
+							</ul>
+							
+							<ul>
+								<li><a href="">BLOCK</a></li>
+								<li><a href="/product/BLOCK_63">Block 63</a></li>
+								
+							</ul>
+
 						</div>
 					</div>
 				</li>
@@ -153,13 +168,13 @@ FtsAsset::register($this);
 						<div class="fts-submenu-container">
 							<ul>
 								<li><a href="">Взірці кольорів </a></li>
-								<li><a href="/page/gallery-decor">Взірці кольорів DECOR </a></li>
-								<li><a href="/page/gallery-marmure">Взірці кольорів MARMURE </a></li>
-								<li><a href="/page/gallery-akryll">Взірці кольорів STRUCTURE LINE</a></li>
+								<li><a href="/gallery/decor">Взірці кольорів DECOR </a></li>
+								<li><a href="/gallery/marmure">Взірці кольорів MARMURE </a></li>
+								<li><a href="/gallery/akryll">Взірці кольорів STRUCTURE LINE</a></li>
 							</ul>
 							<ul>
 								<li><a href="">Фотогалерея</a></li>
-								<li><a href="/gallery">Фотогалерея робіт</a></li>
+								<li><a href="/gallery/portfolio">Фотогалерея робіт</a></li>
 
 							</ul>
 						</div>
@@ -171,11 +186,27 @@ FtsAsset::register($this);
 		</div>
 	</nav>
 
+  <?php if($this->params['disablePageContainer'] != true): ?>
 	<div class="clearfix"></div>
-
+  <div class="page-container">
+    <div class="fts-breadcrums">
+      <?=Breadcrumbs::widget([
+	      'tag' => 'div',
+	      'options' => ['class' => 'breadcrumbs'],
+	      'itemTemplate' => " / {link}", // template for all links
+	      'activeItemTemplate' => " / {link}", // template for all links
+	      'homeLink' => [ 'class' => 'home', 'label' => 'Головна', 'url' => Url::to('/') , 'template' => '{link}'],
+	      'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [''],
+      ]); ?>
+      <!--<a class="home" href="#">На головну</a> / Вхід в магазин / Реєстрація-->
+    </div>
+  <?php endif ?>
 	<?=$content ?>
 
-	<footer>
+	<?php if($this->params['disablePageContainer'] != true): ?>
+  </div>
+  <?php endif ?>
+  <footer>
 		<div class="fts-footer-contacts">
 			<div class="container">
 				<ul class="fts-contacts">
@@ -254,4 +285,3 @@ FtsAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
-
