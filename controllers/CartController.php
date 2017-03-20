@@ -19,8 +19,8 @@ class CartController extends Controller {
 		$cart_items = $_SESSION[ 'cart' ];
 		$_SESSION[ 'cart_total' ] = [
 			'goods_total'    => 0,
-			'delivery_total' => 50,
-			'total'          => 0,
+			'delivery_total' => 0, // поле для доставки (поки поле не задіяно)
+			'total'          => 0, // загальна сума всіх товарів
 		];
 		if ( ! empty( $cart_items ) and is_array( $cart_items ) ) {
 			$product_info_ids = array();

@@ -1,6 +1,7 @@
 <?php
 $this->title = 'Кошик';
-$this->params['breadcrumbs'][] = $this->title;
+
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => '/cart'];
 $this->params['breadcrumbs'][] = 'Замовлення прийнято';
 ?>
 

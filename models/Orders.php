@@ -59,9 +59,9 @@ class Orders extends \yii\db\ActiveRecord
             [['phone'], 'string'],
             [['phone'], PhoneInputValidator::className(), 'message' => 'Невірний формат поля «{attribute}».'],
             ['phone', 'required', 'message'=>"Необхідно заповнити «{attribute}»"],
-
-            [['delivery', 'payment_method'], 'string', 'max' => 50],
-            [['delivery', 'payment_method'], 'required', 'message'=> "Необхідно вибрати «{attribute}»"],
+            //[['delivery', 'payment_method'], 'string', 'max' => 50],
+            [['delivery'], 'string', 'max' => 50],
+            [['delivery'], 'required', 'message'=> "Необхідно вибрати «{attribute}»"],
 
             [['created_at', 'updated_at'], 'date']
         ];

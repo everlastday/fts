@@ -113,14 +113,13 @@ $this->params['breadcrumbs'][] = $this->title;
 				    'nationalMode' => false,
 			    ]]); ?>
 		    <?=$register_form->field( $users, 'delivery' )->dropDownList( [ 'Нова пошта' => 'Нова пошта', 'Укрпошта' => 'Укрпошта', 'Самовивіз' => 'Самовивіз' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
-		    <?=$register_form->field( $users, 'payment_method' )->dropDownList( [ 'Наложений платіж' => 'Наложений платіж', 'Безготівковий рахунок' => 'Безготівковий рахунок' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Оплата' ) ?>
 		    <?=$register_form->field( $users, 'comment' )->textarea(['rows' => 3])->label( 'Коментар' ) ?>
           <div class="submit-container">
 		      <?php //= Html::submitButton('Зареєструватись', ['class' => 'user-login-submit', 'name' => 'login-button']) ?>
           </div>
           <div class="cart-buttons">
             <!--<a href="#" class="continue-shopping">Продовжити покупки</a>-->
-            <button type="submit" class="pay-order">Оплатити замовлення</button>
+            <button type="submit" class="pay-order">Оформити замовлення</button>
           </div>
 		    <?php ActiveForm::end() ?>
         </div>
