@@ -141,15 +141,15 @@ FtsAsset::register($this);
 							</ul>
 						   <ul>
 								<li><a href="">CERAMIC</a></li>
-								<li><a href="/product/Ceramic_01">CERAMIC 01</a></li>
-								<li><a href="/product/Ceramic_11">CERAMIC 11</a></li>
-								<li><a href="/product/Ceramic_21">CERAMIC 21</a></li>
-								<li><a href="/product/Ceramic_31">CERAMIC 31</a></li>
+								<li><a href="/product/ceramic_01">CERAMIC 01</a></li>
+								<li><a href="/product/ceramic_11">CERAMIC 11</a></li>
+								<li><a href="/product/ceramic_21">CERAMIC 21</a></li>
+								<li><a href="/product/ceramic_31">CERAMIC 31</a></li>
 							</ul>
 							
 							<ul>
 								<li><a href="">BLOCK</a></li>
-								<li><a href="/product/BLOCK_63">Block 63</a></li>
+								<li><a href="/product/block_63">Block 63</a></li>
 								
 							</ul>
 
