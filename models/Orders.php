@@ -31,6 +31,22 @@ class Orders extends \yii\db\ActiveRecord
         return 'orders';
     }
 
+	//public function afterFind() {
+	//	var_dump($this); die();
+	//
+	//	parent::afterFind();
+	//	//if(!empty($this->attribute_values)) {
+	//	//	$this->attribute_values = json_decode($this->attribute_values, true);
+	//	//}
+	//
+	//}
+	public function afterFind() {
+    	parent::afterFind();
+    	if (!empty($this->total_price)) $this->total_price = json_decode($this->total_price);
+		if (!empty($this->items)) $this->items = json_decode($this->items);
+	}
+
+
 	public function behaviors()
 	{
 		return [
@@ -85,4 +101,7 @@ class Orders extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         ];
     }
+
+
+
 }

@@ -1,8 +1,13 @@
 <?php
 namespace app\modules\administrator\controllers;
 
+use app\models\Gallery;
+use app\models\Orders;
+use app\models\ProductInfo;
 use Yii;
 use app\models\LoginForm;
+use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -71,10 +76,36 @@ class CpController extends DefaultController {
 	}
 
 	public function actionOrdersActive() {
-		return $this->render( 'orders-active' );
+
+		$query = Orders::find();
+		$countQuery = clone $query;
+		$pages = new Pagination([
+			'totalCount' => $countQuery->count(),
+		    'pageSize' => 15
+		]);
+
+		$orders = $query->offset($pages->offset)
+		                ->limit($pages->limit)
+		                ->all();
+		$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
+		$products = ArrayHelper::index( $products, 'id' );
+		$colors = Gallery::find()->joinWith('galleries')->where(['gallery_type' => 2])->asArray()->all();
+		$colors = ArrayHelper::index( $colors, 'id' );
+
+		//$products = array();
+		//var_dump($products); die();
+
+		return $this->render( 'orders-active', [
+			'orders' => $orders,
+			'products' => $products,
+		    'colors' => $colors,
+			'pages' => $pages,
+		]);
 	}
 
 	public function actionOrdersArchive() {
+
+
 		return $this->render( 'orders-archive' );
 	}
 

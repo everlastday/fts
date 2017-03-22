@@ -614,12 +614,23 @@ table.basic.users-table td .btn-user-details {
 }
 
 .order-body .order-time {
+    font-size: 14px;
+    border-bottom: 1px solid #d7d7d7;
+}
+.order-body .order-time ul li {
+    list-style: none;
+}
+
+
+.order-body .order-time div.time {
     text-align: right;
     font-size: 18px;
     font-weight: 400;
     padding: 15px 17px 18px 0;
-    border-bottom: 1px solid #d7d7d7;
+    float: right;
+
 }
+
 
 .order-body .order-status-line {
     font-size: 18px;
@@ -719,6 +730,12 @@ table.basic.users-table td .btn-user-details {
 
 .order-body .order-details table tr:first-child th:last-child:after {
     background: none;
+}
+
+.order-body .order-details img {
+    width: 50px;
+    height: 20px;
+    padding-left: 5px;
 }
 
 .order-body .order-details table tr td {
@@ -1670,3 +1687,28 @@ a.product_link_to_site {
     display: none;
 }
 
+ul.pagination li {
+    list-style: none;
+    float: left;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #d7d7d7;
+    background-color: #ebebeb;
+    color: #898989;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+ul.pagination li.disabled,
+ul.pagination li.active {
+    background-color: #FFF;
+    cursor: default;
+}
+ul.pagination li:hover {
+    background-color: #FFF;
+
+}
+div.pagination-container {
+    width: 550px;
+    margin: 0 auto;
+}
