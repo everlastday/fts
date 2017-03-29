@@ -27,3 +27,4 @@ phpunit.phar
 /phpunit.xml
 web/uploads/
 /web/uploads/
+modules/administrator/views/layouts/ftp_log_20170207.gz

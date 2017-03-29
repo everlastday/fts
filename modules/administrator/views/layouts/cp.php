@@ -295,10 +295,10 @@ AdminAsset::register($this);
         //  if(!empty(Yii::$app->session->getFlash('success'))) $flash_type = 'success';
         ?>
 
-          <div class="alert alert-<?=$flash_type?>" role="alert">
-            <!--<strong>Well done!</strong> You successfully read this important alert message.-->
-	          <strong><?= Yii::$app->session->getFlash($flash_type); ?></strong>
-          </div>
+          <!--<div class="alert alert---><?php//=$flash_type?><!--" role="alert">-->
+          <!--  <!--<strong>Well done!</strong> You successfully read this important alert message.-->
+	       <!--   <strong>--><?php//= Yii::$app->session->getFlash($flash_type); ?><!--</strong>-->
+          <!--</div>-->
         <?php  ///endif; ?>
             <?= $content ?>
         <!--  end content  -->
