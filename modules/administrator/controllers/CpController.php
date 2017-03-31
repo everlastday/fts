@@ -1,14 +1,14 @@
 <?php
+
 namespace app\modules\administrator\controllers;
 
-use app\models\Gallery;
-use app\models\Orders;
-use app\models\ProductInfo;
 use Yii;
 use app\models\LoginForm;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
-
+use app\models\Gallery;
+use app\models\Orders;
+use app\models\ProductInfo;
 
 /**
  * Site controller
@@ -56,7 +56,6 @@ class CpController extends DefaultController {
 		Yii::$app->user->logout();
 
 		return $this->redirect( Yii::$app->urlManager->createUrl( "administrator/cp/login" ) );
-		//return $this->goHome();
 	}
 
 	public function actionProductCategory() {
@@ -76,36 +75,76 @@ class CpController extends DefaultController {
 	}
 
 	public function actionOrdersActive() {
-
-		$query = Orders::find();
+		$query      = Orders::find();
 		$countQuery = clone $query;
-		$pages = new Pagination([
+		$pages      = new Pagination( [
 			'totalCount' => $countQuery->count(),
-		    'pageSize' => 15
-		]);
-
-		$orders = $query->offset($pages->offset)
-		                ->limit($pages->limit)
-		                ->all();
+			'pageSize'   => 15
+		] );
+		$orders   = $query->offset( $pages->offset )->limit( $pages->limit )->all();
 		$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
 		$products = ArrayHelper::index( $products, 'id' );
-		$colors = Gallery::find()->joinWith('galleries')->where(['gallery_type' => 2])->asArray()->all();
-		$colors = ArrayHelper::index( $colors, 'id' );
-
+		$colors   = Gallery::find()->joinWith( 'galleries' )->where( [ 'gallery_type' => 2 ] )->asArray()->all();
+		$colors   = ArrayHelper::index( $colors, 'id' );
 		//$products = array();
 		//var_dump($products); die();
-
 		return $this->render( 'orders-active', [
-			'orders' => $orders,
+			'orders'   => $orders,
 			'products' => $products,
-		    'colors' => $colors,
-			'pages' => $pages,
-		]);
+			'colors'   => $colors,
+			'pages'    => $pages,
+		] );
+	}
+
+	public function actionAjaxAddPayment() {
+		if ( Yii::$app->request->isAjax ) {
+			$post = Yii::$app->request->post();
+			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
+				$orders = Orders::findOne( $post[ 'id' ] );
+				if ( ! empty( $orders->id ) ) {
+					$orders->payed = 1; // Устанавливаем флажок оплачено
+					if ( $orders->save() ) {
+						echo 1;
+						exit();
+					}
+				}
+			}
+			echo false;
+			exit();
+		}
+	}
+
+	public function actionAjaxChangeStatus() {
+		if ( Yii::$app->request->isAjax ) {
+			$post   = Yii::$app->request->post();
+			$status = 0;
+			switch ( $post[ 'status' ] ) {
+				case 'processed':
+					$status = 5;
+					break;
+				case 'completed':
+					$status = 10;
+					break;
+				case 'canceled':
+					$status = 100;
+					break;
+			}
+			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) and $status > 0 ) {
+				$orders = Orders::findOne( $post[ 'id' ] );
+				if ( ! empty( $orders->id ) ) {
+					$orders->status = $status;
+					if ( $orders->save() ) {
+						echo 1;
+						exit();
+					}
+				}
+			}
+			echo false;
+			exit();
+		}
 	}
 
 	public function actionOrdersArchive() {
-
-
 		return $this->render( 'orders-archive' );
 	}
 

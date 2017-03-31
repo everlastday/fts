@@ -104,6 +104,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			    'enableAjaxValidation' => false,
 			    'method' => 'POST']); ?>
 
+
+	      <?=$register_form->field($users, 'user_id')->hiddenInput()->label(false);?>
 		    <?=$register_form->field($users, 'fio', ['enableAjaxValidation' => true])->label('ПІБ *')?>
 		    <?=$register_form->field($users, 'phone', ['enableAjaxValidation' => true])->label('Телефон *')->widget(PhoneInput::className(), [
 			    'jsOptions' => [
@@ -128,6 +130,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
   </div>
+
+
 
 
 

@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\assets\FancyAsset;
 $this->title = 'Активні замовлення';
 $this->params['breadcrumbs'] = [
@@ -12,13 +13,13 @@ FancyAsset::register($this);
 
 ?>
 <div class="content-area-full-width">
-
+  <div class="order-category">
+    <span>Активні замовлення</span>
+  </div>
     <?php if(!empty($orders)): ?>
       <?php foreach ($orders as $order ): ?>
       <div class="order-body">
-    <div class="order-category">
-      <span>Активні замовлення</span>
-    </div>
+
     <div class="order-container">
       <div class="order-title">
         Замовлення №100<?=$order->id ?> від <?=Yii::$app->formatter->asDate($order->created_at . ' CEST', 'dd.MM.yyyy') ?>
@@ -39,7 +40,7 @@ FancyAsset::register($this);
 
       </div>
       <div class="order-status-line">
-        Оплачено: ні
+        Оплачено: <span class="payed"><?=($order->payed == 1) ? 'так' : 'ні' ?></span>
         <div class="order-status accepted">
           Прийнято
         </div>
@@ -92,8 +93,13 @@ FancyAsset::register($this);
       </div>
 
     </div>
-    <div class="submit-payment">
-      Підтвердити оплату: <a href="#" class="btn-order-details">Оплачено</a>
+    <div class="order-category bottom-panel">
+      <a class="order-action" href="<?=Url::toRoute([Yii::$app->controller->id . '/ajax-change-status', 'id' => $order->id, 'status'=> 'canceled'])  ?>" data-id="<?=$order->id?>" data-status="canceled">Відмінено</a>
+      <a class="order-action" href="<?=Url::toRoute([Yii::$app->controller->id . '/ajax-change-status', 'id' => $order->id, 'status'=> 'processed']) ?>" data-id="<?=$order->id?>" data-status="processed">Опрацьовано</a>
+      <a class="order-action" href="<?=Url::toRoute([Yii::$app->controller->id . '/ajax-change-status', 'id' => $order->id, 'status'=> 'completed']) ?>" data-id="<?=$order->id?>" data-status="completed">Завершено</a>
+      <?php if($order->payed != 1):  ?>
+        <a class="order-action" href="<?=Url::toRoute([Yii::$app->controller->id . '/ajax-add-payment', 'id' => $order->id, 'status'=> 'payed'])     ?>" data-id="<?=$order->id?>" data-status="payed">Оплачено</a>
+      <?php endif; ?>
     </div>
   </div>
       <?php endforeach; ?>

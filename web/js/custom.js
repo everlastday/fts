@@ -1,5 +1,7 @@
 jQuery(document).ready(function ($) {
 
+    var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
 
     $('.top-nav-buttons .edit').on('click', function (e) {
         e.preventDefault();
@@ -11,14 +13,53 @@ jQuery(document).ready(function ($) {
 
 
     });
+    $('.order-action').on('click', function (e) {
+        e.preventDefault();
 
+        var status = $(this);
+        var link = status.attr('href');
+        var obj = {};
+        obj['_csrf'] = csrfToken;
+        obj['id'] = status.data("id");
+        obj['status'] = status.data("status");
+
+        if(status.data("status") != null) {
+            if(status.data("status") == 'payed') {
+                if(!window.confirm("Підтвердити оплату?")) {
+                    return false;
+                }
+                $.ajax({
+                    url: link,
+                    type: 'post',
+                    data: obj,
+                    success: function (data) {
+                        if(data == 1) {
+                            status.hide();
+                            status.closest('.order-body').find('.order-status-line span').html('так');
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: link,
+                    type: 'post',
+                    data: obj,
+                    success: function (data) {
+                        console.log(data);
+                        if(data == 1) {
+                            //status.hide();
+                            //status.closest('.order-body').find('.order-status-line span').html('так');
+                        }
+                    }
+                });
+            }
+        }
+    });
 
     $('.top-nav-buttons .del').on('click', function (e) {
         e.preventDefault();
 
         if ($(this).data("del") != undefined && $(this).data("del").length > 0) {
-
-            //alert($(this).data("del"));
             var
                 ids = $(this).data("del").trim().split(' ');
             delete_link = $(this).attr("href");
