@@ -14,7 +14,7 @@ FancyAsset::register($this);
 ?>
 <div class="content-area-full-width">
   <div class="order-category">
-    <span>Активні замовлення</span>
+    <span><?=$order_title ?> замовлення</span>
   </div>
     <?php if(!empty($orders)): ?>
       <?php foreach ($orders as $order ): ?>
@@ -41,8 +41,8 @@ FancyAsset::register($this);
       </div>
       <div class="order-status-line">
         Оплачено: <span class="payed"><?=($order->payed == 1) ? 'так' : 'ні' ?></span>
-        <div class="order-status accepted">
-          Прийнято
+        <div class="order-status <?=$status_colors[$order->status]['color-status'] ?>">
+	        <?=$status_colors[$order->status]['text-status'] ?>
         </div>
       </div>
       <div class="order-details">

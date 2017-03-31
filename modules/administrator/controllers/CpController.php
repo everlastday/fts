@@ -113,7 +113,6 @@ class CpController extends DefaultController {
 			exit();
 		}
 	}
-
 	public function actionAjaxChangeStatus() {
 		if ( Yii::$app->request->isAjax ) {
 			$post   = Yii::$app->request->post();
@@ -143,20 +142,64 @@ class CpController extends DefaultController {
 			exit();
 		}
 	}
+	public function actionOrders($id = 0) {
 
-	public function actionOrdersArchive() {
-		return $this->render( 'orders-archive' );
+		if($id == 'new') {
+			$query      = Orders::find()->where(['status' => 1]);
+			$order_title = 'Нові';
+		} elseif($id == 'active') {
+			$query      = Orders::find()->where(['status' => 5]);
+			$order_title = 'Активні';
+		} elseif($id == 'archive') {
+			$query      = Orders::find()->where(['status' => 10])->orWhere(['status' => 100]);
+			$order_title = 'Архівні';
+		} else {
+			$query      = Orders::find();
+			$order_title = 'Всі';
+		}
+
+		$status_colors = [
+				1 => [
+					'color-status' => 'new',
+					'text-status' => 'Нове',
+				],
+				5 => [
+					'color-status' => 'accepted',
+					'text-status' => 'Активне',
+				],
+				10 => [
+					'color-status' => 'completed',
+					'text-status' => 'Завершено',
+				],
+		        100 => [
+					'color-status' => 'cenceled',
+					'text-status' => 'Відмінено',
+				]
+		];
+
+
+		$countQuery = clone $query;
+		$pages      = new Pagination( [
+			'totalCount' => $countQuery->count(),
+			'pageSize'   => 15
+		] );
+		$orders   = $query->offset( $pages->offset )->limit( $pages->limit )->all();
+		$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
+		$products = ArrayHelper::index( $products, 'id' );
+		$colors   = Gallery::find()->joinWith( 'galleries' )->where( [ 'gallery_type' => 2 ] )->asArray()->all();
+		$colors   = ArrayHelper::index( $colors, 'id' );
+		//$products = array();
+		//var_dump($products); die();
+		return $this->render( 'orders-active', [
+			'orders'   => $orders,
+			'products' => $products,
+			'colors'   => $colors,
+			'pages'    => $pages,
+		    'status_colors'  => $status_colors,
+		    'order_title' => $order_title
+		]);
+
+
 	}
 
-	public function actionPhotoGallery() {
-		return $this->render( 'photo-gallery' );
-	}
-
-	public function actionPhotoGroups() {
-		return $this->render( 'photo-groups' );
-	}
-
-	public function actionColorOptions() {
-		return $this->render( 'color-options' );
-	}
 }

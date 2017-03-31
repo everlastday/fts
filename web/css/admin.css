@@ -651,41 +651,41 @@ table.basic.users-table td .btn-user-details {
 
 .order-body .order-status-line .order-status {
     float: right;
-    width: 239px;
+    width: 139px;
     text-align: right;
     padding: 17px 20px 17px 0;
     margin: -17px 0 1px 0;
 
 }
 
+.order-body .order-status-line .order-status {
+    text-align: right;
+    border-left: 1px solid #d7d7d7;
+}
+
 .order-body .order-status-line .accepted {
     background-color: #f69679;
 }
 
-.order-body .order-status-line .canceled {
+.order-body .order-status-line .active {
     background-color: #ed1c24;
 }
 
-.order-body .order-status-line .paid {
+.order-body .order-status-line .completed {
     background-color: #fff799;
 }
 
-.order-body .order-status-line .completed {
+.order-body .order-status-line .new  {
     background-color: #8dc63f;
     font-weight: bold;
 }
 
-.order-body .order-status-line .archived {
+.order-body .order-status-line .cenceled {
     background-color: #cccccc;
     font-weight: bold;
-    text-align: center;
-    font-size: 18px;
-    padding: 13px 20px 13px 0;
 }
 
-.order-body .order-status-line .archived span {
-    font-size: 24px;
-}
+
 
 .order-body .order-details {
     border: 1px solid #d7d7d7;

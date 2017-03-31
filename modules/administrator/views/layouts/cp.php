@@ -157,9 +157,9 @@ AdminAsset::register($this);
                  'orders' => [
                      'title' => 'Замовлення',
                      'items' => [
-                         'cp/orders-active' => 'Активні',
-                         'cp/orders-complete' => 'Виконані',
-                         'cp/orders-archive' => 'Архів замовлень',
+                         'cp/orders/new' => "Нові",
+                         'cp/orders/active' => 'Активні',
+                         'cp/orders/archive' => 'Архів замовлень',
                      ]
                  ],
                  'gallery' => [
@@ -169,15 +169,6 @@ AdminAsset::register($this);
                          //'cp/photo-groups' => 'Фотографії по групам',
                      ]
                  ],
-                 'colors' => [
-                     'title' => 'Взірці кольорів',
-                     'items' => [
-                         '#1' => 'Акрилова штукатурка',
-                         '#2' => 'Мозаїчна DECOR',
-                         '#3' => 'Фарба',
-                         'cp/color-options' => 'Опції',
-                     ]
-                 ]
              ];
 
 
