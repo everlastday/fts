@@ -3,17 +3,17 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\assets\FancyAsset;
 FancyAsset::register($this);
-
+$this->title = 'Замовлення';
 ?>
 
 
 <div class="content-area-full-width">
   <div class="order-category">
     Показати закази:
-    <a href="<?=Url::to('orders-status') ?>" class="active">Активні</a>
-    <a href="<?=Url::to('orders-complete') ?>">Виконані</a>
-    <a href="<?=Url::to('orders-all') ?>">Всі</a>
-    <a href="<?=Url::to('orders-canceled') ?>">Відмінені</a>
+    <a href="<?=Url::to('active') ?>" class="<?=($status == 'active') ? 'active' : '' ?>">Активні</a>
+    <a href="<?=Url::to('complete') ?>" class="<?=($status == 'complete') ? 'active' : '' ?>">Виконані</a>
+    <a href="<?=Url::to('all') ?>" class="<?=($status == 'all') ? 'active' : '' ?>">Всі</a>
+    <a href="<?=Url::to('canceled') ?>" class="<?=($status == 'canceled') ? 'active' : '' ?>">Відмінені</a>
   </div>
 
 	<?php if(!empty($orders)): ?>
@@ -21,15 +21,21 @@ FancyAsset::register($this);
         <div class="order-body">
           <div class="order-container">
             <div class="order-title">
-              Замовлення №100<?=$order->id ?> від <?=Yii::$app->formatter->asDate($order->created_at . ' CEST', 'dd.MM.yyyy') ?>
+              Замовлення №100<?=$order->id ?> від <?=Yii::$app->formatter->asDate($order->created_at . ' CEST', 'dd.MM.Y') ?>
             </div>
             <div class="order-time">
-              <div class="time">Час замовлення: <?=Yii::$app->formatter->asTime($order->created_at . ' CEST', "HH:mm") ?></div>
+              <div class="time">
+	              <?php if($order->status == 10 or $order->status == 100): ?>
+                  <?=$status_colors[$order->status]['text-status'] ?>: <?=Yii::$app->formatter->asDatetime($order->updated_at . ' CEST', "dd.MM.Y HH:mm") ?>
+                <?php else: ?>
+                  Час замовлення: <?=Yii::$app->formatter->asTime($order->created_at . ' CEST', "HH:mm") ?>
+                <?php endif; ?>
+              </div>
             </div>
             <div class="order-status-line">
-              Оплачено: ні
-              <div class="order-status accepted">
-                Прийнято
+              Оплачено: <span class="payed"><?=($order->payed == 1) ? 'так' : 'ні' ?></span>
+              <div class="order-status <?=$status_colors[$order->status]['color-status'] ?>">
+		          <?=$status_colors[$order->status]['text-status'] ?>
               </div>
             </div>
             <div class="order-details">

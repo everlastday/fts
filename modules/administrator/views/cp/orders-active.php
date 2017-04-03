@@ -27,7 +27,13 @@ FancyAsset::register($this);
             </div>
           </div>
           <div class="order-time">
-            <div class="time">Час замовлення: <?=Yii::$app->formatter->asTime($order->created_at . ' CEST', "HH:mm") ?></div>
+            <div class="time">
+	            <?php if($order->status == 10 or $order->status == 100): ?>
+		            <?=$status_colors[$order->status]['text-status'] ?>: <?=Yii::$app->formatter->asDatetime($order->updated_at . ' CEST', "dd.MM.Y HH:mm") ?>
+	            <?php else: ?>
+                  Час замовлення: <?=Yii::$app->formatter->asTime($order->created_at . ' CEST', "HH:mm") ?>
+	            <?php endif; ?>
+            </div>
             <div class="order-params">
               <ul>
                 <li>ПІБ: <strong><?=$order->fio ?></strong></li>

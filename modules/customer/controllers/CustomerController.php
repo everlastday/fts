@@ -39,11 +39,7 @@ class CustomerController extends DefaultController {
 
 
 	public function actionOrdersStatus() {
-		$orders = $this->getOrders();
 
-		//var_dump(count($orders)); die();
-
-		return $this->render( 'orders-status', $orders);
 	}
 
 	public function actionOrdersComplete() {
@@ -99,8 +95,40 @@ class CustomerController extends DefaultController {
 	}
 
 
-	public function getOrders() {
-		$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id]);
+	public function actionOrders($id = 'active') {
+
+		if($id == 'active') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]]);
+		} elseif($id == 'complete') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10]);
+		} elseif($id == 'canceled') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 100]);
+		} else {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id]);
+		}
+
+		$status_colors = [
+			1 => [
+				'color-status' => 'accepted',
+				'text-status' => 'Активне',
+			],
+			5 => [
+				'color-status' => 'accepted',
+				'text-status' => 'Активне',
+			],
+			10 => [
+				'color-status' => 'completed',
+				'text-status' => 'Завершено',
+			],
+			100 => [
+				'color-status' => 'cenceled',
+				'text-status' => 'Відмінено',
+			]
+		];
+
+
+
+
 		$countQuery = clone $query;
 		$pages = new Pagination([
 			'totalCount' => $countQuery->count(),
@@ -115,12 +143,15 @@ class CustomerController extends DefaultController {
 		$colors = Gallery::find()->joinWith('galleries')->where(['gallery_type' => 2])->asArray()->all();
 		$colors = ArrayHelper::index( $colors, 'id' );
 
-		return [
+		$orders = [
 			'orders' => $orders,
 			'products' => $products,
 			'colors' => $colors,
-			'pages' => $pages
+			'pages' => $pages,
+		    'status' => $id,
+		    'status_colors' => $status_colors
 		];
+		return $this->render( 'orders-status', $orders);
 	}
 
 

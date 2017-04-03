@@ -74,27 +74,27 @@ class CpController extends DefaultController {
 		return $this->render( 'orders-complete' );
 	}
 
-	public function actionOrdersActive() {
-		$query      = Orders::find();
-		$countQuery = clone $query;
-		$pages      = new Pagination( [
-			'totalCount' => $countQuery->count(),
-			'pageSize'   => 15
-		] );
-		$orders   = $query->offset( $pages->offset )->limit( $pages->limit )->all();
-		$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
-		$products = ArrayHelper::index( $products, 'id' );
-		$colors   = Gallery::find()->joinWith( 'galleries' )->where( [ 'gallery_type' => 2 ] )->asArray()->all();
-		$colors   = ArrayHelper::index( $colors, 'id' );
-		//$products = array();
-		//var_dump($products); die();
-		return $this->render( 'orders-active', [
-			'orders'   => $orders,
-			'products' => $products,
-			'colors'   => $colors,
-			'pages'    => $pages,
-		] );
-	}
+	//public function actionOrdersActive() {
+	//	$query      = Orders::find();
+	//	$countQuery = clone $query;
+	//	$pages      = new Pagination( [
+	//		'totalCount' => $countQuery->count(),
+	//		'pageSize'   => 15
+	//	] );
+	//	$orders   = $query->offset( $pages->offset )->limit( $pages->limit )->all();
+	//	$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
+	//	$products = ArrayHelper::index( $products, 'id' );
+	//	$colors   = Gallery::find()->joinWith( 'galleries' )->where( [ 'gallery_type' => 2 ] )->asArray()->all();
+	//	$colors   = ArrayHelper::index( $colors, 'id' );
+	//	//$products = array();
+	//	//var_dump($products); die();
+	//	return $this->render( 'orders-active', [
+	//		'orders'   => $orders,
+	//		'products' => $products,
+	//		'colors'   => $colors,
+	//		'pages'    => $pages,
+	//	] );
+	//}
 
 	public function actionAjaxAddPayment() {
 		if ( Yii::$app->request->isAjax ) {
@@ -206,8 +206,8 @@ class CpController extends DefaultController {
 		if ( Yii::$app->request->isAjax ) {
 			$post = Yii::$app->request->post();
 			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
-				//$items =  ['result' => Orders::deleteAll('id = ' .$post[ 'id' ]) > 0 ? 2 : false];
-				$items =  ['result' => 2];
+				$items =  ['result' => Orders::deleteAll('id = ' .$post[ 'id' ]) > 0 ? 2 : false];
+				//$items =  ['result' => 2];
 
 				\Yii::$app->response->format = 'json';
 

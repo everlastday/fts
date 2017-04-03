@@ -171,7 +171,7 @@ jQuery(document).ready(function ($) {
         });
 
     });
-    
+
     var fancyboxFts = $(".fancybox");
     if (fancyboxFts.length > 0) {
         fancyboxFts.fancybox();
