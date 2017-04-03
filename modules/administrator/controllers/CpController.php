@@ -202,4 +202,20 @@ class CpController extends DefaultController {
 
 	}
 
+	public function actionDelete() {
+		if ( Yii::$app->request->isAjax ) {
+			$post = Yii::$app->request->post();
+			if ( isset( $post[ 'id' ] ) and is_numeric( $post[ 'id' ] ) ) {
+				//$items =  ['result' => Orders::deleteAll('id = ' .$post[ 'id' ]) > 0 ? 2 : false];
+				$items =  ['result' => 2];
+
+				\Yii::$app->response->format = 'json';
+
+				return $items;
+			}
+		}
+		//return $this->redirect(['index']);
+	}
+
+
 }
