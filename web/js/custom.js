@@ -149,13 +149,19 @@ jQuery(document).ready(function ($) {
     });
 
     $('.photo-gallery .img-action a').on('click', function (e) {
-        e.preventDefault();
-
-
         var link = $(this);
         var delete_link = $(this).attr("href");
         var id_value = link.data('id');
 
+        if(id_value == undefined) {
+            return;
+        } else {
+            e.preventDefault();
+        }
+
+        if (!window.confirm("Видалити зображення?")) {
+            return false;
+        }
 
         $.ajax({
             url: delete_link,
@@ -165,6 +171,12 @@ jQuery(document).ready(function ($) {
             success: function (data) {
                 if (data.result == 1) {
                     link.parents('li').fadeOut();
+                    $('#main_messages')
+                        .addClass('alert alert-success')
+                        .html('Успішно видалено!')
+                        .slideDown()
+                        .delay(3000)
+                        .slideUp();
                 }
 
             }

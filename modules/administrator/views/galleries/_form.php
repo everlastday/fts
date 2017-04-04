@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
 	    'prompt'=>'Вибрати...',
 	    1 => 'Фотогалерея',
 	    2 => 'Галерея кольорів',
+      3 => 'Слайдер'
     ]); ?>
 
 	<div class="multicheckbox">

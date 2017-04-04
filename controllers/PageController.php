@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Gallery;
 use yii\web\Controller;
 use app\models\Pages;
 
@@ -24,7 +25,12 @@ class PageController extends Controller
 
     public function actionMain()
     {
-        return $this->render('main');
+		$slides = Gallery::find()->joinWith('galleries', false, 'LEFT JOIN')
+		                           ->select(['gallery.type', 'gallery.img', 'galleries.url', 'gallery.title'])
+		                           ->where(['type' => 3])->asArray()->all();
+		//var_dump($slides); die();
+
+        return $this->render('main', ['slides' => $slides]);
     }
 
 

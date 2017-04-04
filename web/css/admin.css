@@ -1664,7 +1664,8 @@ a.product_link_to_site {
 
 .photo-gallery div.img-action input.action_box {
     position: relative;
-    right: 25px;
+    right: 2px;
+    top: 2px;
 }
 .admin-panel-page .container:after {
     content: "";

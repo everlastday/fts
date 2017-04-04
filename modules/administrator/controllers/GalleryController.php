@@ -101,7 +101,7 @@ class GalleryController extends DefaultController
 			if(!empty($filename)) {
 
 				$model->file->tempName = $filename;
-
+				$model->type = $gallery_type;
 				//var_dump($model); die();
 				if($model->save()) {
 					return $this->redirect(['gallery/' . $gallery_url . '/index']);
