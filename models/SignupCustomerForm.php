@@ -66,7 +66,7 @@ class SignupCustomerForm extends Model
 			['password_repeat', 'compare', 'compareAttribute'=>'password', 'message'=>"Паролі не збігаються" ],
 
 			['captcha', 'required'],
-			['captcha', 'captcha', 'captchaAction'=>'/customer/customer/captcha'],
+			//['captcha', 'captcha', 'captchaAction'=>'/customer/customer/captcha'],
 
 
 		];

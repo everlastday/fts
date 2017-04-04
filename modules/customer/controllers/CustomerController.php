@@ -34,7 +34,25 @@ class CustomerController extends DefaultController {
 
 
 	public function actionIndex() {
-		return $this->render( 'index' );
+
+		$report = [];
+		$all_orders = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->asArray()->all();
+
+		foreach ($all_orders as $val) {
+			$report['total_sum'] += json_decode($val["total_price"])->total;
+		}
+
+		$report['all_orders'] = count($all_orders);
+
+		$report['active'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]])->asArray()->all());
+		$report['payed'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['payed' => 1])->asArray()->all());
+		$report['unpaid'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['payed' => 0])->asArray()->all());
+		$report['complete'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10])->asArray()->all());
+		//$report['total_sum'] = 1000;
+
+
+
+		return $this->render( 'index', ['report' => $report] );
 	}
 
 
@@ -98,13 +116,13 @@ class CustomerController extends DefaultController {
 	public function actionOrders($id = 'active') {
 
 		if($id == 'active') {
-			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]]);
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]])->orderBy(['id' => SORT_DESC]);
 		} elseif($id == 'complete') {
-			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10]);
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10])->orderBy(['id' => SORT_DESC]);
 		} elseif($id == 'canceled') {
-			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 100]);
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 100])->orderBy(['id' => SORT_DESC]);
 		} else {
-			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id]);
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->orderBy(['id' => SORT_DESC]);
 		}
 
 		$status_colors = [

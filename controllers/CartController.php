@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Gallery;
 use app\models\Orders;
 use app\models\SignupCustomerForm;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 use app\models\ProductInfo;
@@ -79,7 +80,18 @@ class CartController extends Controller {
 				$register->total_price = $_SESSION[ 'cart_total' ];
 				$register->items       = $_SESSION[ 'cart' ];
 				$register->status      = 1;
-				$register->save();
+
+				if($register->save()) {
+					$current_id = $register->id + 1000;
+
+					Yii::$app->mailer->compose()
+					                 ->setFrom('site@fts.ua')
+					                 ->setTo('site@fts.ua')
+					                 ->setSubject('Нове замовлення: №' . $current_id)
+					                 //->setTextBody('Текст сообщения')
+					                 ->setHtmlBody('<b>Отримано нове замовлення №' . $current_id.  ' </b><a href="'. Url::to(['administrator/cp/orders/' . $current_id], true) .'">Деталі замовлення</a>')
+					                 ->send();
+				}
 			}
 		}
 

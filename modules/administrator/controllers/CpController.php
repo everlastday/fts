@@ -70,9 +70,6 @@ class CpController extends DefaultController {
 		return $this->render( 'users' );
 	}
 
-	public function actionOrdersComplete() {
-		return $this->render( 'orders-complete' );
-	}
 
 	//public function actionOrdersActive() {
 	//	$query      = Orders::find();
@@ -153,6 +150,12 @@ class CpController extends DefaultController {
 		} elseif($id == 'archive') {
 			$query      = Orders::find()->where(['status' => 10])->orWhere(['status' => 100]);
 			$order_title = 'Архівні';
+		} elseif(is_numeric($id)) {
+			if($id > 1000) {
+				$id -= 1000;
+			}
+			$query      = Orders::find()->where(['id' => $id]);
+			$order_title = 'Перегляд';
 		} else {
 			$query      = Orders::find();
 			$order_title = 'Всі';
@@ -217,5 +220,15 @@ class CpController extends DefaultController {
 		//return $this->redirect(['index']);
 	}
 
+	public function actionSend() {
+		Yii::$app->mailer->compose()
+		                 ->setFrom('site@fts.ua')
+		                 ->setTo('site@fts.ua')
+		                 ->setSubject('Тема сообщения')
+		                 ->setTextBody('Текст сообщения')
+		                 ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+		                 ->send();
+
+	}
 
 }

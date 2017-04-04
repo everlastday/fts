@@ -2636,6 +2636,12 @@ div.galery.gallery-color a span {
     top: 20px;
     padding: 7px 70px 6px 18px;
 }
+
+#signupcustomerform-captcha-image:hover {
+    cursor: pointer;
+}
+
+
 /*  login form end */
 
 .intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
