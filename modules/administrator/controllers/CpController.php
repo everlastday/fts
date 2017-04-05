@@ -142,13 +142,13 @@ class CpController extends DefaultController {
 	public function actionOrders($id = 0) {
 
 		if($id == 'new') {
-			$query      = Orders::find()->where(['status' => 1]);
+			$query      = Orders::find()->where(['status' => 1])->orderBy(['id' => SORT_DESC]);
 			$order_title = 'Нові';
 		} elseif($id == 'active') {
-			$query      = Orders::find()->where(['status' => 5]);
+			$query      = Orders::find()->where(['status' => 5])->orderBy(['id' => SORT_DESC]);
 			$order_title = 'Активні';
 		} elseif($id == 'archive') {
-			$query      = Orders::find()->where(['status' => 10])->orWhere(['status' => 100]);
+			$query      = Orders::find()->where(['status' => 10])->orWhere(['status' => 100])->orderBy(['id' => SORT_DESC]);
 			$order_title = 'Архівні';
 		} elseif(is_numeric($id)) {
 			if($id > 1000) {
@@ -157,7 +157,7 @@ class CpController extends DefaultController {
 			$query      = Orders::find()->where(['id' => $id]);
 			$order_title = 'Перегляд';
 		} else {
-			$query      = Orders::find();
+			$query      = Orders::find()->orderBy(['id' => SORT_DESC]);
 			$order_title = 'Всі';
 		}
 

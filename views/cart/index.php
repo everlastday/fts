@@ -86,7 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="sum-column">
           <p class="goods_total">Вартість товару: <span><?=$cart_total['goods_total'] ?> грн</span></p>
-          <p class="delivery_total">Вартість доставки: <span><?=$cart_total['delivery_total'] ?> грн</span></p>
+          <!--<p class="delivery_total">Вартість доставки: <span>--><?//=$cart_total['delivery_total'] ?><!-- грн</span></p>-->
+          <p class="delivery_total">Орієнтовну вартість доставки повідомить менеджер після обробки замовлення</p>
 
           <div class="total-sum">
             Всього: <span><?=$cart_total['total'] ?> грн</span>
@@ -114,7 +115,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				    //'setNumber' => ['1234345'],
 				    'nationalMode' => false,
 			    ]]); ?>
-		    <?=$register_form->field( $users, 'delivery' )->dropDownList( [ 'Нова пошта' => 'Нова пошта', 'Укрпошта' => 'Укрпошта', 'Самовивіз' => 'Самовивіз' ], [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
+		    <?=$register_form->field( $users, 'delivery' )->dropDownList( [
+		        'Нова пошта' => 'Нова пошта',
+            'Укрпошта' => 'Укрпошта',
+            'Деливери' => 'Деливери',
+            'Ин-Тайм' => 'Ин-Тайм',
+            'Мист Экспресс' => 'Мист Экспресс',
+            'Самовивіз' => 'Самовивіз' ],
+            [ 'prompt' => 'Вибрати...' ] )->label( 'Доставка' ) ?>
 		    <?=$register_form->field( $users, 'comment' )->textarea(['rows' => 3])->label( 'Коментар' ) ?>
           <div class="submit-container">
 		      <?php //= Html::submitButton('Зареєструватись', ['class' => 'user-login-submit', 'name' => 'login-button']) ?>
