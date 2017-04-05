@@ -541,8 +541,6 @@ ul.fts-gallery-content-list {
 }
 .recomendation-list ul li a:hover {
     text-decoration: underline;
-    font-weight: bold;
-    font-size: 91%;
 }
 
 .recomendation-list ul li a img {
@@ -562,38 +560,12 @@ ul.fts-gallery-content-list {
 	right: 8.7%;
 
 }
-.recommend {
-    /*max-width: 1550px;*/
-    max-width: 86.875rem;
-}
-
-.recommend li {
-    max-width: 285px;
-    height: 330px;
-    border: 1px solid #FFF;
-    position: relative;
-    border: 0.05em solid #C5C0BD;
-    background-color: #FFF;
-    border-radius: 1.042em;
-    box-shadow: 0.208em 0.167em 0.375em 0 rgba(0, 0, 0, 0.24);
-    color: #959595;
-    list-style: none;
-
-}
-
-.recommend li img{
-    max-width: 240px;
-    max-height: 234px;
-    display: block;
-    margin: 0 auto;
-}
 .recommend-container {
     width: 100%;
     position: absolute;
     bottom: 10%;
     text-align: center;
 }
-
 
 .fts-footer-contacts { background-color: #555555; }
 .fts-footer-contacts ul {
@@ -1980,7 +1952,7 @@ div.fts-gallery-content-list {
 
 @media (max-width: 479px) {
     .recomendation-list ul li a {
-        font-size: 1.1em;
+        font-size: 0.8em;
     }
 
 .fts-search form input { width: 200px }

@@ -2,7 +2,6 @@
 jQuery(document).ready(function ($) {
 var owl = $(".fts-gallery-content-list");
 var slider = $(".fts-slider-new");
-var recommend = $(".recommend");
 
     slider.owlCarousel({
         //loop:true,
@@ -52,36 +51,5 @@ var recommend = $(".recommend");
 
     });
     $(".fts-gallery-content").fadeIn(3000);
-
-    recommend.owlCarousel({
-        //autoWidth:true,
-        pagination: false,
-        //lazyLoad:true,
-        //autoplay: true,
-        //autoplayTimeout: 3000, //Set AutoPlay to 3 seconds
-        //rewind: true,
-        items : 4, //10 items above 1000px browser width
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 2,
-            },
-            400: {
-                items: 2,
-
-            },
-            600: {
-                items: 3,
-            },
-            1200: {
-                items: 3,
-                autoHeight: true,
-            },
-            1500: {
-                items: 4,
-            }
-
-        }
-    });
 
 });
