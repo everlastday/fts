@@ -1352,6 +1352,7 @@ ul.fts-gallery-content-list {
     color: #959595;
     font-size: 0.9em;
     display: none;
+    max-width: 200px;
 }
 .page-container .catalog .selected-color img {
     margin: 0 auto 5px;
@@ -2654,7 +2655,7 @@ div.galery.gallery-color a span {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 180px;
+    width: 400px;
     background-color: #fff;
     color: #959595;
     font-weight: bold;
@@ -2663,17 +2664,19 @@ div.galery.gallery-color a span {
     padding: 5px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: 144%;
     left: 50%;
-    margin-left: -90px;
+    margin-left: -200px;
     opacity: 0;
     transition: opacity 1s;
     border: 1px solid #e1e1e1;
 }
 
+
 .tooltip .tooltiptext img {
     margin: 0px 5px 3px;
     border-radius: 5px;
+    max-width: 97%;
 }
 
 .tooltip .tooltiptext::after {

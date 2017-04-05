@@ -1,8 +1,12 @@
 <?php
 use yii\helpers\Html;
 
+use app\assets\FancyAsset;
+
+FancyAsset::register($this);
+
 $this->title = 'Каталог';
-$this->params['breadcrumbs'][] = ['label' => $data['name'], 'url' => '../'];
+$this->params['breadcrumbs'][] = ['label' => $data['name'], 'url' => [$data['url']]];
 $this->params['breadcrumbs'][] = "Замовити";
 //var_dump($data); die();
 //$this->registerJs('$("document").ready(function(){ check_all_filters(); });');
@@ -20,7 +24,7 @@ $this->params['breadcrumbs'][] = "Замовити";
 			<?php
 			foreach ( $colors as $color ): ?>
               <li class="tooltip" data-color="<?=$color->id?>">
-                <span class="tooltiptext"><?=Html::img( '@web/uploads/gallery/' . $color->galleries->url . '/small_' . $color->img )?>
+                <span class="tooltiptext"><?=Html::img( '@web/uploads/gallery/' . $color->galleries->url . '/' .  $color->img )?>
                   <br><?=$color->title?></span>
 				  <?=Html::img( '@web/uploads/gallery/' . $color->galleries->url . '/small_' . $color->img )?>
               </li>

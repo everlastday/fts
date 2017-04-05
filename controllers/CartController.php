@@ -82,6 +82,9 @@ class CartController extends Controller {
 				$register->status      = 1;
 
 				if($register->save()) {
+
+					unset($_SESSION['cart'], $_SESSION[ 'cart_total' ]);
+
 					$current_id = $register->id + 1000;
 
 					Yii::$app->mailer->compose()

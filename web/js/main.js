@@ -58,7 +58,11 @@ $(document).ready(function () {
         color_value = current_el.find('.tooltiptext').text();
         color_img = current_el.find('img').attr('src');
 
-        $('.selected-color').empty().append('<img src="' + color_img + '" alt="">' + color_value).slideDown();
+        $('.selected-color').empty().append('' +
+            '<a class="fancybox"  href="'+ color_img +'"><img src="' + color_img + '" alt=""></a>' + color_value
+        ).slideDown();
+
+        $('.selected-color a').fancybox();
         current_el.closest("div").find('.filter-result').empty().append(current_el.data('color'));
 
         check_all_filters();
