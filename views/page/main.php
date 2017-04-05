@@ -73,13 +73,45 @@ $this->params[ 'disablePageContainer' ] = true;
     <ul>
 	    <?php foreach ($products as $product): ?>
         <li>
+          <div class="recommend-container">
           <a href="/product/<?=$product['url']?>">
             <img src="<?=Yii::$app->request->hostInfo . '/uploads/product_info_images/x300_' . $product['product_image'] ?>" alt="<?=$product['category_name'] ?>">
               <span><?=$product['category_name'] ?></span>
            </a>
+
             <span class="fts-recomendation-price"></span>
+          </div>
         </li>
 	    <?php endforeach; ?>
+      <!---->
+      <!---->
+      <!---->
+      <!--<li><a href="/page/cap"><img src="images/recommendation2.jpg" alt="">Фреза для-->
+      <!--    пінополістиролу</a><span class="fts-recomendation-price"></span></li>-->
+      <!--<li><a href="#"><img src="images/recommendation5.jpg" alt="">Дюбель для-->
+      <!--    пінополістиролу</a><span class="fts-recomendation-price"></span></li>-->
+      <!--<li><a href="/page/cap"><img src="images/recommendation4.jpg" alt="">Заглушки з-->
+      <!--    пінополістиролу</a><span class="fts-recomendation-price"></span></li>-->
+    </ul>
+  </div>
+
+</div>
+
+<div class="recommend-list">
+  <div class="container">
+    <ul class="recommend owl-carousel">
+		<?php foreach ($products as $product): ?>
+          <li>
+            <div class="recommend-container">
+
+            <a href="/product/<?=$product['url']?>">
+              <img src="<?=Yii::$app->request->hostInfo . '/uploads/product_info_images/x300_' . $product['product_image'] ?>" alt="<?=$product['category_name'] ?>">
+              <span><?=$product['category_name'] ?></span>
+            </a>
+            <span class="fts-recomendation-price"></span>
+            </div>
+          </li>
+		<?php endforeach; ?>
       <!---->
       <!---->
       <!---->
