@@ -526,6 +526,8 @@ ul.fts-gallery-content-list {
 	box-shadow: 0.208em 0.167em 0.375em 0 rgba(0, 0, 0, 0.24);
 	color: #959595;
 	width: 19%;
+    text-align: center;
+    font-size: 95%;
 }
 .recomendation-list ul li:last-child { margin-right: 0; }
 .recomendation-list ul li a {
@@ -535,13 +537,23 @@ ul.fts-gallery-content-list {
 	top: 2.2%;
 	left: 5.2%;
     padding-right: 15px;
+
 }
+.recomendation-list ul li a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 91%;
+}
+
 .recomendation-list ul li a img {
     width:97%;
 	position: relative;
 	top: -2.2%;
 	left: -5.2%;
-    margin-bottom: 10px;
+    max-width: 244px;
+    display: block;
+    margin: 0 auto 10px;
+    max-height: 234px;
 }
 .fts-recomendation-price {
 	position: absolute;
