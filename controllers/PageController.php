@@ -25,11 +25,18 @@ class PageController extends Controller
 
     public function actionMain()
     {
-		$slides = Gallery::find()->joinWith('galleries', false, 'LEFT JOIN')
+		$images = Gallery::find()->joinWith('galleries', false, 'LEFT JOIN')
 		                           ->select(['gallery.type', 'gallery.img', 'galleries.url', 'gallery.title'])
-		                           ->where(['type' => 3])->asArray()->all();
-		//var_dump($slides); die();
+		                           ->where(['type' => [3,1]])->asArray()->all();
 
+		$slides = [];
+		foreach ($images as $sort_key => $sort_image) {
+			if($sort_image['type'] == 3) {
+				$slides['slider'][$sort_key] = $sort_image;
+			} elseif($sort_image['type'] == 1) {
+				$slides['carousel'][$sort_key] = $sort_image;
+			}
+		}
         return $this->render('main', ['slides' => $slides]);
     }
 

@@ -320,28 +320,28 @@ $(document).ready(function () {
     }
 
 
-    function slider_caption_width() {
-        var w = $(window).width();
-        $('.full-width .slide-caption').css('width', w + 'px');
-    }
-
-    slider_caption_width();
-    $(window).resize(function () {
-        slider_caption_width();
-    });
-
-
-    $('.slider').glide({
-        autoplay: 3000,
-        hoverpause: true,
-        circular: true,
-        animationDuration: 500,
-        arrows: true,
-        arrowRightText: '<span class="slider-right-arrow-ico"></span>',
-        arrowLeftText: '<span class="slider-left-arrow-ico"></span>',
-        navigation: true,
-        navigationCenter: true
-    });
+    // function slider_caption_width() {
+    //     var w = $(window).width();
+    //     $('.full-width .slide-caption').css('width', w + 'px');
+    // }
+    //
+    // slider_caption_width();
+    // $(window).resize(function () {
+    //     slider_caption_width();
+    // });
+    //
+    //
+    // $('.slider').glide({
+    //     autoplay: 3000,
+    //     hoverpause: true,
+    //     circular: true,
+    //     animationDuration: 500,
+    //     arrows: true,
+    //     arrowRightText: '<span class="slider-right-arrow-ico"></span>',
+    //     arrowLeftText: '<span class="slider-left-arrow-ico"></span>',
+    //     navigation: true,
+    //     navigationCenter: true
+    // });
 
     var fancyboxFts = $(".fancybox");
 

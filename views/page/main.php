@@ -1,21 +1,19 @@
 <?php
 /* @var $this yii\web\View */
+use app\assets\OwlGalleryAsset;
+use app\assets\FancyAsset;
+OwlGalleryAsset::register($this);
+FancyAsset::register($this);
+
 $this->title = 'Головна FTS';
 //$this->disablePageContainer = 1;
 $this->params[ 'disablePageContainer' ] = true;
 ?>
 <div class="fts-slider-body">
-  <div class="fts-slider section full-width">
-    <div class="slider">
-      <ul class="slides">
-        <?php foreach ($slides as $slide): ?>
-        <li class="slide">
-          <div class="slide-caption"></div>
-          <img src="<?=Yii::$app->request->hostInfo . '/uploads/gallery/' . $slide['url'] . '/' . $slide['img'] ?>" alt="<?=$slide['title'] ?>" title="<?=$slide['title'] ?>">
-        </li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
+  <div class="fts-slider-new owl-carousel owl-theme fts-slider">
+        <?php foreach ($slides['slider'] as $slide): ?>
+          <img class="owl-lazy" data-src="<?=Yii::$app->request->hostInfo . '/uploads/gallery/' . $slide['url'] . '/' . $slide['img'] ?>" alt="<?=$slide['title'] ?>" title="<?=$slide['title'] ?>">
+         <?php endforeach; ?>
   </div>
 </div>
 
@@ -45,11 +43,23 @@ $this->params[ 'disablePageContainer' ] = true;
 </div>
 <div class="fts-gallery-content">
   <div class="container">
-    <ul class="fts-gallery-content-list">
-      <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/6.jpg" alt=""></a></li>
-      <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/53.jpg" alt=""></a></li>
-      <li><a href="/page/gallery"><img src="/uploads/gallery/portfolio/5.jpg" alt=""></a></li>
-    </ul>
+      <ul class="fts-gallery-content-list owl-carousel">
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/6.jpg" alt=""></a></li>-->
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/53.jpg" alt=""></a></li>-->
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/5.jpg" alt=""></a></li>-->
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/6.jpg" alt=""></a></li>-->
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/53.jpg" alt=""></a></li>-->
+        <!--<li><a href="/page/gallery"><img class="owl-lazy" data-src="/uploads/gallery/portfolio/5.jpg" alt=""></a></li>-->
+	      <?php foreach ($slides['carousel'] as $slide): ?>
+          <li><a class="fancybox" rel="group"  href="<?=Yii::$app->request->hostInfo . '/uploads/gallery/' . $slide['url'] . '/' . $slide['img'] ?>">
+              <img class="owl-lazy height-fixed" data-src="<?=Yii::$app->request->hostInfo . '/uploads/gallery/' . $slide['url'] . '/' . $slide['img'] ?>" alt="<?=$slide['title'] ?>" title="<?=$slide['title'] ?>">
+            </a>
+          </li>
+	      <?php endforeach; ?>
+
+
+
+      </ul>
   </div>
 </div>
 
