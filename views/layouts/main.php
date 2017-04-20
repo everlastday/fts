@@ -139,6 +139,20 @@ FtsAsset::register($this);
 								<li><a href="/product/product-card-termo-1">TERMO 1</a></li>
 								<li><a href="/product/product-card-termo-2">TERMO 2</a></li>
 							</ul>
+						   <ul>
+								<li><a href="">CERAMIC</a></li>
+								<li><a href="/product/ceramic_01">CERAMIC 01</a></li>
+								<li><a href="/product/ceramic_11">CERAMIC 11</a></li>
+								<li><a href="/product/ceramic_21">CERAMIC 21</a></li>
+								<li><a href="/product/ceramic_31">CERAMIC 31</a></li>
+							</ul>
+							
+							<ul>
+								<li><a href="">BLOCK</a></li>
+								<li><a href="/product/block_63">Block 63</a></li>
+								
+							</ul>
+
 						</div>
 					</div>
 				</li>
@@ -271,4 +285,3 @@ FtsAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
-

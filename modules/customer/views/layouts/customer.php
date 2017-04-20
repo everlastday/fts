@@ -105,24 +105,25 @@ AdminAsset::register( $this );
 							'orders'  => [
 								'title' => 'Замовлення',
 								'items' => [
-									'orders-status'       => 'Стан замовлень',
-									'cart' => 'Вміст кошика',
-									'order-history'               => 'Історія замовлень',
+									'orders/active'       => 'Стан замовлень',
+				          'orders/complete'     => 'Історія замовлень',
+									'cart/' => 'Вміст кошика',
+
 								]
 							],
 							'users'   => [
 								'title' => 'Особисті дані',
 								'items' => [
-									'info' => 'Особиста інформація',
-									'index'  => "Загальна інформація <br> про замовлення",
+									'info/' => 'Особиста інформація',
+									'index/'  => "Загальна інформація <br> про замовлення",
 								]
 							],
 							'contact' => [
 								'title' => 'Контакти',
 								'items' => [
-									'#admin'   => 'Написати повідомлення адміну',
-									'#contact-manager' => 'Звязатись з менеджером',
-									'#contacts'  => 'Контактні дані фірми',
+									'#admin/'   => 'Написати повідомлення адміну',
+									'#contact-manager/' => 'Звязатись з менеджером',
+									'#contacts/'  => 'Контактні дані фірми',
 								]
 							]
 						];
@@ -135,7 +136,7 @@ AdminAsset::register( $this );
 								} else {
 									$active = '';
 								}
-								echo '<li' . $active . '><a href="' . Url::to( [ $link ] ) . '">' . $url_name . '</a></li>';
+								echo '<li' . $active . '><a href="' . Url::to(  [ $link]  ) . '">' . $url_name . '</a></li>';
 							}
 							echo '</ul></div>';
 						}

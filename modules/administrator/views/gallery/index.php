@@ -29,7 +29,11 @@ $this->params['gallery_url'] = Yii::$app->controller->id . '/' . Yii::$app->cont
 	                </a>
                 </div>
 
-                <div class="img-action"><input class="action_box" value="<?=$image['id']?>" type="checkbox"><a data-id="<?=$image['id']?>" href="<?=Url::toRoute($this->params['gallery_url'] . '/delete')?>">Видалити</a></div>
+                <div class="img-action">
+                  <input class="action_box" value="<?=$image['id']?>" type="checkbox">
+                  <a href="<?=Url::toRoute([$this->params['gallery_url'] . '/update', 'id' => $image['id']], [])?>">Змінити</a> |
+                  <a data-id="<?=$image['id']?>" href="<?=Url::toRoute($this->params['gallery_url'] . '/delete')?>">Видалити</a>
+                </div>
             </li>
 
         <?php endforeach; ?>

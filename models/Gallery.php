@@ -137,8 +137,8 @@ class Gallery extends \yii\db\ActiveRecord
 
                 $width = 170;
                 $height = round($width/$ratio);
-
-                if($size->getWidth() > 800) {
+					// gallery_type 3 - слайдер
+                if($size->getWidth() > 800 and $gallery_type != 3) {
                     $width_original = 800;
                     $height_original = round($width_original/$ratio);
 

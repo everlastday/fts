@@ -126,7 +126,7 @@ body {
     display: inline-block;
 
     color: #959595;
-    font-family: Arial;
+    font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
     font-size: 1.5em;
     font-weight: 400;
     line-height: 1.875em;
@@ -148,7 +148,7 @@ body {
     width: 29.875em;
     height: 1.7em;
     color: #e9e9e9;
-    font-family: Arial;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-size: 2.25em;
     font-weight: 700;
     line-height: 1.875em;
@@ -211,7 +211,7 @@ ul.top-nav-icons {
     width: 20px;
     text-align: center;
     color: #e90305;
-    font-family: Arial;
+    font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     font-weight: 400;
     display: none;
@@ -551,7 +551,7 @@ table.basic.users-table td .btn-user-details {
 
 }
 
-.order-body .order-category {
+.order-category {
     background-color: #e8f7fd;
     border-top: 1px solid #6ce1ff;
     border-bottom: 1px solid #6ce1ff;
@@ -563,8 +563,8 @@ table.basic.users-table td .btn-user-details {
     font-weight: 400;
 }
 
-.order-body .order-category span,
-.order-body .order-category a {
+.order-category span,
+.order-category a {
     padding: 3px 18px 3px;
     background-color: #fbfbfb;
     border: 1px solid #6ce1ff;
@@ -572,17 +572,25 @@ table.basic.users-table td .btn-user-details {
     margin-left: 5px;
 }
 
-.order-body .order-category a:hover,
-.order-body .order-category a.active {
+.order-category a:hover,
+.order-category a.active {
     background-color: #898989;
     border: 1px solid #636363;
     border-radius: 7px;
     color: white;
 }
 
+.order-category.bottom-panel {
+    margin-top: -10px;
+    border-radius: 5px;
+    border: 1px solid #6ce1ff;
+}
+
 .order-body {
     margin-bottom: 10px;
 }
+
+
 
 .order-body .order-container {
     margin: 5px 0 0;
@@ -614,12 +622,24 @@ table.basic.users-table td .btn-user-details {
 }
 
 .order-body .order-time {
+    min-height: 50px;
+    font-size: 14px;
+    border-bottom: 1px solid #d7d7d7;
+}
+.order-body .order-time ul li {
+    list-style: none;
+}
+
+
+.order-body .order-time div.time {
     text-align: right;
     font-size: 18px;
     font-weight: 400;
     padding: 15px 17px 18px 0;
-    border-bottom: 1px solid #d7d7d7;
+    float: right;
+
 }
+
 
 .order-body .order-status-line {
     font-size: 18px;
@@ -631,41 +651,41 @@ table.basic.users-table td .btn-user-details {
 
 .order-body .order-status-line .order-status {
     float: right;
-    width: 239px;
+    width: 139px;
     text-align: right;
     padding: 17px 20px 17px 0;
     margin: -17px 0 1px 0;
 
 }
 
+.order-body .order-status-line .order-status {
+    text-align: right;
+    border-left: 1px solid #d7d7d7;
+}
+
 .order-body .order-status-line .accepted {
     background-color: #f69679;
 }
 
-.order-body .order-status-line .canceled {
+.order-body .order-status-line .active {
     background-color: #ed1c24;
 }
 
-.order-body .order-status-line .paid {
+.order-body .order-status-line .completed {
     background-color: #fff799;
 }
 
-.order-body .order-status-line .completed {
+.order-body .order-status-line .new  {
     background-color: #8dc63f;
     font-weight: bold;
 }
 
-.order-body .order-status-line .archived {
+.order-body .order-status-line .cenceled {
     background-color: #cccccc;
     font-weight: bold;
-    text-align: center;
-    font-size: 18px;
-    padding: 13px 20px 13px 0;
 }
 
-.order-body .order-status-line .archived span {
-    font-size: 24px;
-}
+
 
 .order-body .order-details {
     border: 1px solid #d7d7d7;
@@ -719,6 +739,12 @@ table.basic.users-table td .btn-user-details {
 
 .order-body .order-details table tr:first-child th:last-child:after {
     background: none;
+}
+
+.order-body .order-details img {
+    width: 50px;
+    height: 20px;
+    padding-left: 5px;
 }
 
 .order-body .order-details table tr td {
@@ -906,7 +932,7 @@ table.basic.users-table td .btn-user-details {
 
 .details-container label {
     position: absolute;
-    left: 0px;
+    left: 0;
     top: -10px;
     margin: 10px;
     min-width: 300px;
@@ -1003,7 +1029,7 @@ input.xlarge {
 
 #color-options-form label {
     color: #555;
-    font-family: Arial;
+    font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
     font-size: 30px;
     font-weight: 700;
     line-height: 44px;
@@ -1087,7 +1113,7 @@ input.xlarge {
 
 .admin-login-panel-header h2 {
     color: #959595;
-    font-family: Arial;
+    font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
     font-size: 24px;
     font-weight: 700;
 }
@@ -1134,7 +1160,7 @@ input.xlarge {
     width: 502px;
     height: 41px;
     background-color: white;
-    border: 1.5px solid #d9d9d9;
+    border: 1px solid #d9d9d9;
     border-radius: 7px;
     padding-left: 10px;
     outline: none;
@@ -1149,8 +1175,8 @@ input.xlarge {
     padding: 7px 100px 6px 18px;
     background-color: #e99fff;
     border-radius: 5px;
-    border: 1px solid #959595;
-    color: white;
+    /*border: 1px solid #959595;*/
+    /*color: white;*/
     color: #ebebeb;
     font-size: 23px;
     font-weight: 400;
@@ -1345,7 +1371,7 @@ input.xlarge {
 table.cart {
     width: 800px;
     background-color: #ebebeb;
-    border: 1.49px solid #cbcbcb;
+    border: 1px solid #cbcbcb;
     margin-bottom: 5px;
 
 }
@@ -1529,7 +1555,6 @@ table.cart td input {
     line-height: 36px;
     padding: 16px 68px 15px 14px;
     font-weight: 400;
-    line-height: 36px;
     position: relative;
     margin: 0 40px 0 25px;
 }
@@ -1548,7 +1573,7 @@ table.cart td input {
 .cart-empty-container {
     height: 192px;
     background-color: #ebebeb;
-    border: 1.5px solid #c2c2c2;
+    border: 2px solid #c2c2c2;
     border-radius: 1px;
     text-align: center;
     font-size: 24px;
@@ -1565,7 +1590,7 @@ table.cart td input {
 
 .ftsform label {
     color: #555;
-    font-family: Arial;
+    font-family: Arial,'Helvetica Neue', Helvetica, sans-serif;
     font-size: 30px;
     font-weight: 700;
     line-height: 44px;
@@ -1639,14 +1664,27 @@ a.product_link_to_site {
 
 .photo-gallery div.img-action input.action_box {
     position: relative;
-    right: 25px;
+    right: 2px;
+    top: 2px;
 }
 .admin-panel-page .container:after {
-    clear: both;
     content: "";
     clear: both;
     display: table;
 }
+#main_messages {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    z-index: 10;
+    top:0px;
+    font-size: 1.5em;
+    opacity: 0.9;
+    display: none;
+
+}
+
+
 
 .alert-success {
     color: #3c763d;
@@ -1660,13 +1698,33 @@ a.product_link_to_site {
 }
 .alert {
     padding: 15px;
-    /*margin-bottom: 20px;*/
-    margin: 0 15px 15px 290px;
     border: 1px solid transparent;
-    border-radius: 4px;
 }
 
-#main_messages {
-    display: none;
-}
 
+
+ul.pagination li {
+    list-style: none;
+    float: left;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #d7d7d7;
+    background-color: #ebebeb;
+    color: #898989;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+ul.pagination li.disabled,
+ul.pagination li.active {
+    background-color: #FFF;
+    cursor: default;
+}
+ul.pagination li:hover {
+    background-color: #FFF;
+
+}
+div.pagination-container {
+    width: 550px;
+    margin: 0 auto;
+}

@@ -58,7 +58,11 @@ $(document).ready(function () {
         color_value = current_el.find('.tooltiptext').text();
         color_img = current_el.find('img').attr('src');
 
-        $('.selected-color').empty().append('<img src="' + color_img + '" alt="">' + color_value).slideDown();
+        $('.selected-color').empty().append('' +
+            '<a class="fancybox"  href="'+ color_img +'"><img src="' + color_img + '" alt=""></a>' + color_value
+        ).slideDown();
+
+        $('.selected-color a').fancybox();
         current_el.closest("div").find('.filter-result').empty().append(current_el.data('color'));
 
         check_all_filters();
@@ -320,28 +324,28 @@ $(document).ready(function () {
     }
 
 
-    function slider_caption_width() {
-        var w = $(window).width();
-        $('.full-width .slide-caption').css('width', w + 'px');
-    }
-
-    slider_caption_width();
-    $(window).resize(function () {
-        slider_caption_width();
-    });
-
-
-    $('.slider').glide({
-        autoplay: 3000,
-        hoverpause: true,
-        circular: true,
-        animationDuration: 500,
-        arrows: true,
-        arrowRightText: '<span class="slider-right-arrow-ico"></span>',
-        arrowLeftText: '<span class="slider-left-arrow-ico"></span>',
-        navigation: true,
-        navigationCenter: true
-    });
+    // function slider_caption_width() {
+    //     var w = $(window).width();
+    //     $('.full-width .slide-caption').css('width', w + 'px');
+    // }
+    //
+    // slider_caption_width();
+    // $(window).resize(function () {
+    //     slider_caption_width();
+    // });
+    //
+    //
+    // $('.slider').glide({
+    //     autoplay: 3000,
+    //     hoverpause: true,
+    //     circular: true,
+    //     animationDuration: 500,
+    //     arrows: true,
+    //     arrowRightText: '<span class="slider-right-arrow-ico"></span>',
+    //     arrowLeftText: '<span class="slider-left-arrow-ico"></span>',
+    //     navigation: true,
+    //     navigationCenter: true
+    // });
 
     var fancyboxFts = $(".fancybox");
 

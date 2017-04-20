@@ -1,9 +1,11 @@
 <?php
+
 namespace app\controllers;
 
 use app\models\Gallery;
 use app\models\Orders;
 use app\models\SignupCustomerForm;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 use app\models\ProductInfo;
@@ -16,18 +18,18 @@ class CartController extends Controller {
 	public function actionIndex() {
 		$session = Yii::$app->session;
 		$session->open();
-		$cart_items = $_SESSION[ 'cart' ];
+		$cart_items               = $_SESSION[ 'cart' ];
 		$_SESSION[ 'cart_total' ] = [
 			'goods_total'    => 0,
-			'delivery_total' => 50,
-			'total'          => 0,
+			'delivery_total' => 0, // поле для доставки (поки поле не задіяно)
+			'total'          => 0, // загальна сума всіх товарів
 		];
 		if ( ! empty( $cart_items ) and is_array( $cart_items ) ) {
 			$product_info_ids = array();
 			$color_ids        = array();
 			foreach ( $cart_items as $cart_id => $item ) {
-				$product_info_ids[] = $item[ 'product_id' ];
-				$color_ids[]        = $item[ 'color' ];
+				$product_info_ids[]                        = $item[ 'product_id' ];
+				$color_ids[]                               = $item[ 'color' ];
 				$_SESSION[ 'cart_total' ][ 'goods_total' ] += ( $item[ 'price' ] * $item[ 'quantity' ] );
 				//$product_id = ProductInfo::find()->where(['id' => [1,4,3,5]])->all();
 				//var_dump($product_id); die();
@@ -43,6 +45,15 @@ class CartController extends Controller {
 		//var_dump($_SESSION['cart']); die();
 		//die();
 		$order_model = new Orders();
+		if ( empty( $order_model->fio ) and ! empty( Yii::$app->user->identity->name ) ) {
+			$order_model->fio = ( ! empty( Yii::$app->user->identity->surname ) ? Yii::$app->user->identity->surname . ' ' : '' ) . Yii::$app->user->identity->name;
+		}
+		if ( empty( $order_model->phone ) and ! empty( Yii::$app->user->identity->phone ) ) {
+			$order_model->phone = Yii::$app->user->identity->phone;
+		}
+		if ( empty( $order_model->user_id ) and ! empty( Yii::$app->user->identity->id ) ) {
+			$order_model->user_id = Yii::$app->user->identity->id;
+		}
 
 		return $this->render( 'index', [
 			'products'               => $products,
@@ -63,18 +74,27 @@ class CartController extends Controller {
 
 				return ActiveForm::validate( $register );
 			}
-
 			if ( Yii::$app->request->post() && $register->load( Yii::$app->request->post() ) ) {
-
 				$session = Yii::$app->session;
 				$session->open();
+				$register->total_price = $_SESSION[ 'cart_total' ];
+				$register->items       = $_SESSION[ 'cart' ];
+				$register->status      = 1;
 
-				$register->total_price = json_encode($_SESSION[ 'cart_total' ]);
-				$register->items = json_encode($_SESSION['cart']);
-				$register->status = 1;
+				if($register->save()) {
 
-				$register->save();
+					unset($_SESSION['cart'], $_SESSION[ 'cart_total' ]);
 
+					$current_id = $register->id + 1000;
+
+					Yii::$app->mailer->compose()
+					                 ->setFrom('site@fts.ua')
+					                 ->setTo('site@fts.ua')
+					                 ->setSubject('Нове замовлення: №' . $current_id)
+					                 //->setTextBody('Текст сообщения')
+					                 ->setHtmlBody('<b>Отримано нове замовлення №' . $current_id.  ' </b><a href="'. Url::to(['administrator/cp/orders/' . $current_id], true) .'">Деталі замовлення</a>')
+					                 ->send();
+				}
 			}
 		}
 

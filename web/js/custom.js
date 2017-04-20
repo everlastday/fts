@@ -1,5 +1,7 @@
 jQuery(document).ready(function ($) {
 
+    var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
 
     $('.top-nav-buttons .edit').on('click', function (e) {
         e.preventDefault();
@@ -11,22 +13,60 @@ jQuery(document).ready(function ($) {
 
 
     });
+    $('.order-action').on('click', function (e) {
+        e.preventDefault();
 
+        var status = $(this);
+        var link = status.attr('href');
+        var obj = {};
+        obj['_csrf'] = csrfToken;
+        obj['id'] = status.data("id");
+        obj['status'] = status.data("status");
+
+        if (status.data("status") != null) {
+            if (status.data("status") == 'payed') {
+                if (!window.confirm("Підтвердити оплату?")) {
+                    return false;
+                }
+                $.ajax({
+                    url: link,
+                    type: 'post',
+                    data: obj,
+                    success: function (data) {
+                        if (data == 1) {
+                            status.hide();
+                            status.closest('.order-body').find('.order-status-line span').html('так');
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: link,
+                    type: 'post',
+                    data: obj,
+                    success: function (data) {
+                        console.log(data);
+                        if (data == 1) {
+                            status.closest('.order-body').slideUp();
+                            //status.hide();
+                            //status.closest('.order-body').find('.order-status-line span').html('так');
+                        }
+                    }
+                });
+            }
+        }
+    });
 
     $('.top-nav-buttons .del').on('click', function (e) {
         e.preventDefault();
 
         if ($(this).data("del") != undefined && $(this).data("del").length > 0) {
-
-            //alert($(this).data("del"));
-            var
-                ids = $(this).data("del").trim().split(' ');
-            delete_link = $(this).attr("href");
-
+            var ids = $(this).data("del").trim().split(' ');
+            var delete_link = $(this).attr("href");
+            var message_errors = 0;
+            var message_success = 0;
 
             $.each(ids, function (key, value) {
-                //alert( value );
-
                 $.ajax({
                     url: delete_link,
                     type: 'POST',
@@ -34,33 +74,40 @@ jQuery(document).ready(function ($) {
                     data: {id: value},
                     success: function (data) {
                         if (data.result == 1) {
-
-                            if (typeof data.msg !== 'undefined') {
-                                $('#main_messages')
-                                    .addClass('alert alert-success')
-                                    .html(data.msg)
-                                    .slideDown()
-                                    .delay(3000)
-                                    .slideUp();
-                            }
-
+                            message_success += 1;
                             $('input.action_box[value="' + value + '"]').attr('checked', false).parents('tr').slideUp();
+                        } else if (data.result == 2) {
+                            message_success += 1;
+                            $('input.action_box[value="' + value + '"]').attr('checked', false).closest('.order-body').slideUp();
                         } else {
-                            if (typeof data.msg !== 'undefined') {
-                                $('#main_messages')
-                                    .addClass('alert alert-error')
-                                    .html(data.msg)
-                                    .slideDown()
-                                    .delay(3000)
-                                    .slideUp();
-                            }
+                            message_errors += 1;
                         }
-
                     }
                 });
-
-
             });
+
+            $(document).ajaxStop(function () {
+                if (message_success > 0) {
+                    $('#main_messages')
+                        .addClass('alert alert-success')
+                        .html('Успішно видалено!')
+                        .slideDown()
+                        .delay(3000)
+                        .slideUp();
+                }
+
+                if (message_errors > 0) {
+                    $('#main_messages')
+                        .addClass('alert alert-error')
+                        .html('Виникла помилка при видаленні даних')
+                        .slideDown()
+                        .delay(3000)
+                        .slideUp();
+                }
+
+                $(this).unbind("ajaxStop");
+            });
+
 
             //console.log(ids);
 
@@ -84,12 +131,9 @@ jQuery(document).ready(function ($) {
 
     });
 
-
     $('.action_box').on('change', function () {
-        //alert($(this).val());
         if ($(this).is(":checked")) {
             $('.top-nav-buttons .edit').data("update", $(this).val());
-            //console.log($('.top-nav-buttons .edit').data("update"));
         }
 
 
@@ -101,24 +145,23 @@ jQuery(document).ready(function ($) {
                 map = map + $(this).val() + ' ';
             }
         });
-        //console.log(map);
         $('.top-nav-buttons .del').data("del", map);
-        //console.log($('.top-nav-buttons .del').data("del"));
-
-
-        //console.log(map);
-
     });
 
-
     $('.photo-gallery .img-action a').on('click', function (e) {
-        e.preventDefault();
-
-
         var link = $(this);
         var delete_link = $(this).attr("href");
         var id_value = link.data('id');
 
+        if(id_value == undefined) {
+            return;
+        } else {
+            e.preventDefault();
+        }
+
+        if (!window.confirm("Видалити зображення?")) {
+            return false;
+        }
 
         $.ajax({
             url: delete_link,
@@ -128,6 +171,12 @@ jQuery(document).ready(function ($) {
             success: function (data) {
                 if (data.result == 1) {
                     link.parents('li').fadeOut();
+                    $('#main_messages')
+                        .addClass('alert alert-success')
+                        .html('Успішно видалено!')
+                        .slideDown()
+                        .delay(3000)
+                        .slideUp();
                 }
 
             }
@@ -135,13 +184,8 @@ jQuery(document).ready(function ($) {
 
     });
 
-
     var fancyboxFts = $(".fancybox");
-
     if (fancyboxFts.length > 0) {
-        // Fancybox activation
         fancyboxFts.fancybox();
     }
-
-
 });

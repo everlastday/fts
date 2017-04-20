@@ -7,6 +7,11 @@ use app\models\LoginForm;
 use yii\bootstrap\ActiveForm;
 use app\models\User;
 use yii\web\NotFoundHttpException;
+use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
+use app\models\Gallery;
+use app\models\Orders;
+use app\models\ProductInfo;
 
 class CustomerController extends DefaultController {
 
@@ -29,12 +34,30 @@ class CustomerController extends DefaultController {
 
 
 	public function actionIndex() {
-		return $this->render( 'index' );
+
+		$report = [];
+		$all_orders = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->asArray()->all();
+
+		foreach ($all_orders as $val) {
+			$report['total_sum'] += json_decode($val["total_price"])->total;
+		}
+
+		$report['all_orders'] = count($all_orders);
+
+		$report['active'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]])->asArray()->all());
+		$report['payed'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['payed' => 1])->asArray()->all());
+		$report['unpaid'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['payed' => 0])->asArray()->all());
+		$report['complete'] = count(Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10])->asArray()->all());
+		//$report['total_sum'] = 1000;
+
+
+
+		return $this->render( 'index', ['report' => $report] );
 	}
 
 
 	public function actionOrdersStatus() {
-		return $this->render( 'orders-status' );
+
 	}
 
 	public function actionOrdersComplete() {
@@ -50,23 +73,14 @@ class CustomerController extends DefaultController {
 	}
 
 	public function actionInfo() {
-
-
-
-
-
-		$model = $this->findModel( Yii::$app->user->identity->id );
+		$model           = $this->findModel( Yii::$app->user->identity->id );
 		$model->scenario = 'client';
-
-
-		if($model->load( Yii::$app->request->post())) {
-
-			if ( Yii::$app->request->isAjax) {
+		if ( $model->load( Yii::$app->request->post() ) ) {
+			if ( Yii::$app->request->isAjax ) {
 				Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
 				return ActiveForm::validate( $model );
 			}
-
-
 			//var_dump($model); die();
 			$model->setPassword( $model->new_password );
 			$model->generateAuthKey();
@@ -76,10 +90,9 @@ class CustomerController extends DefaultController {
 		//
 		//var_dump(Yii::$app->user->identity->id);
 		//die();
-
 		return $this->render( 'info', [
 			'model' => $model,
-		]  );
+		] );
 	}
 
 
@@ -97,6 +110,66 @@ class CustomerController extends DefaultController {
 		} else {
 			throw new NotFoundHttpException( 'The requested page does not exist.' );
 		}
+	}
+
+
+	public function actionOrders($id = 'active') {
+
+		if($id == 'active') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => [1,5]])->orderBy(['id' => SORT_DESC]);
+		} elseif($id == 'complete') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 10])->orderBy(['id' => SORT_DESC]);
+		} elseif($id == 'canceled') {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->andWhere(['status' => 100])->orderBy(['id' => SORT_DESC]);
+		} else {
+			$query = Orders::find()->where(['user_id' => Yii::$app->user->identity->id])->orderBy(['id' => SORT_DESC]);
+		}
+
+		$status_colors = [
+			1 => [
+				'color-status' => 'accepted',
+				'text-status' => 'Активне',
+			],
+			5 => [
+				'color-status' => 'accepted',
+				'text-status' => 'Активне',
+			],
+			10 => [
+				'color-status' => 'completed',
+				'text-status' => 'Завершено',
+			],
+			100 => [
+				'color-status' => 'cenceled',
+				'text-status' => 'Відмінено',
+			]
+		];
+
+
+
+
+		$countQuery = clone $query;
+		$pages = new Pagination([
+			'totalCount' => $countQuery->count(),
+			'pageSize' => 15
+		]);
+
+		$orders = $query->offset($pages->offset)
+		                ->limit($pages->limit)
+		                ->all();
+		$products = ProductInfo::find()->joinWith( 'category' )->asArray()->all();
+		$products = ArrayHelper::index( $products, 'id' );
+		$colors = Gallery::find()->joinWith('galleries')->where(['gallery_type' => 2])->asArray()->all();
+		$colors = ArrayHelper::index( $colors, 'id' );
+
+		$orders = [
+			'orders' => $orders,
+			'products' => $products,
+			'colors' => $colors,
+			'pages' => $pages,
+		    'status' => $id,
+		    'status_colors' => $status_colors
+		];
+		return $this->render( 'orders-status', $orders);
 	}
 
 
@@ -149,8 +222,8 @@ class CustomerController extends DefaultController {
 	 */
 	public function actionLogin() {
 		$this->layout = '@app/views/layouts/main.php';
-		$model    = new LoginForm();
-		$register = new SignupCustomerForm();
+		$model        = new LoginForm();
+		$register     = new SignupCustomerForm();
 		//$post = Yii::$app->request->post();
 		if ( ! \Yii::$app->user->isGuest ) {
 			return $this->goHome();

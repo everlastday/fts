@@ -91,7 +91,7 @@ $this->title = 'Авторизація для клієна';
 				<div class="captcha-separator">
 					<span>Введіть число з картинки</span>
 					<?=$register_form->field($users, 'captcha', ['enableAjaxValidation' => true])->label('')->widget(Captcha::className(), array(
-						'captchaAction' => '/customer/customer/captcha',
+						'captchaAction' => '/customer/captcha',
 						'options' => array('class' => 'input-medium',
 					)))?>
 				</div>

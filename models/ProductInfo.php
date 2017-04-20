@@ -189,7 +189,6 @@ class ProductInfo extends \yii\db\ActiveRecord {
 
 	public function deleteAllImages($image, $path) {
 
-
 			$point_position = strrpos($image, '.', -1);
 			$fileNameWithoutExtension = substr($image, 0, $point_position);
 
@@ -210,10 +209,5 @@ class ProductInfo extends \yii\db\ActiveRecord {
 					}
 				}
 			}
-
-
 	}
-
-
-
 }
